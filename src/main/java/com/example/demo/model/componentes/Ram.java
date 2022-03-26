@@ -8,32 +8,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.model.AbsArticulo;
+
 @Entity
 @Table(name="ram")
-public class Ram {
+public class Ram extends AbsArticulo{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    private String nombre;
     private String tipo; // DDR4 DDR3 ...
     private String formato; //DIMM o SO-DIMM
     private String capacidad;
     private String kit;
-    private double precio;
     
 	public Ram() {
 		super();
 	}
 
-	public Ram(String nombre, String tipo, String formato, String capacidad, String kit, double precio) {
-		super();
-		this.nombre = nombre;
+	public Ram(String nombre, String imagenes, String descripcion, int cantidad, double precio, String tipo, String formato, String capacidad, String kit) {
+		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.tipo = tipo;
 		this.formato = formato;
 		this.capacidad = capacidad;
 		this.kit = kit;
-		this.precio = precio;
 	}
 
 	public Long getId() {
@@ -42,14 +40,6 @@ public class Ram {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getTipo() {
@@ -75,7 +65,7 @@ public class Ram {
 	public void setCapacidad(String capacidad) {
 		this.capacidad = capacidad;
 	}
-	
+
 	public String getKit() {
 		return kit;
 	}
@@ -83,26 +73,20 @@ public class Ram {
 	public void setKit(String kit) {
 		this.kit = kit;
 	}
-	
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(id);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -112,8 +96,9 @@ public class Ram {
 
 	@Override
 	public String toString() {
-		return "Ram [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", formato=" + formato + ", capacidad="
-				+ capacidad + ", kit=" + kit + ", precio=" + precio + "]";
+		return "Ram [id=" + id + ", tipo=" + tipo + ", formato=" + formato + ", capacidad=" + capacidad + ", kit=" + kit
+				+ ", nombre=" + nombre + ", imagenes=" + imagenes + ", descripcion=" + descripcion + ", cantidad="
+				+ cantidad + ", precio=" + precio + "]";
 	}
 
 }

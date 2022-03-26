@@ -8,30 +8,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.model.AbsArticulo;
+
 @Entity
 @Table(name="procesador")
-public class Procesador {
+public class Procesador extends AbsArticulo{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    private String nombre;
     private String marca;
     private String modelo;
     private String socket;
-    private double precio;
     
 	public Procesador() {
 		super();
 	}
 
-	public Procesador(String nombre, String marca, String modelo, String socket, double precio) {
-		super();
-		this.nombre = nombre;
+	public Procesador(String nombre, String imagenes, String descripcion, int cantidad, double precio ,String marca, String modelo, String socket) {
+		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.marca = marca;
 		this.modelo = modelo;
 		this.socket = socket;
-		this.precio = precio;
 	}
 
 	public Long getId() {
@@ -40,14 +38,6 @@ public class Procesador {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getMarca() {
@@ -74,24 +64,19 @@ public class Procesador {
 		this.socket = socket;
 	}
 
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(id);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -101,8 +86,13 @@ public class Procesador {
 
 	@Override
 	public String toString() {
-		return "Procesador [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", modelo=" + modelo + ", socket="
-				+ socket + ", precio=" + precio + "]";
-	}    
+		return "Procesador [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", socket=" + socket + ", nombre="
+				+ nombre + ", imagenes=" + imagenes + ", descripcion=" + descripcion + ", cantidad=" + cantidad
+				+ ", precio=" + precio + "]";
+	}
+	
+	
+
+	
 
 }

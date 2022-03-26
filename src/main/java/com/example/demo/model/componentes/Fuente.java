@@ -24,8 +24,8 @@ public class Fuente extends AbsArticulo{
 		super();
 	}
 
-	public Fuente(String nombre, String imagenes, String descripcion, double precio,Long id, String certificacion, String potencia) {
-		super(nombre, imagenes, descripcion, precio);
+	public Fuente(String nombre, String imagenes, String descripcion, int cantidad, double precio,Long id, String certificacion, String potencia) {
+		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.id = id;
 		this.certificacion = certificacion;
 		this.potencia = potencia;
@@ -78,9 +78,10 @@ public class Fuente extends AbsArticulo{
 	@Override
 	public String toString() {
 		return "Fuente [id=" + id + ", certificacion=" + certificacion + ", potencia=" + potencia + ", nombre=" + nombre
-				+ ", imagenes=" + imagenes + ", descripcion=" + descripcion + ", precio=" + precio + ", listapedidos="
-				+ listapedidos + "]";
+				+ ", imagenes=" + imagenes + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio="
+				+ precio + "]";
 	}
+
 	
 	
 

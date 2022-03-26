@@ -1,22 +1,16 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="articulo")
-public abstract class AbsArticulo {
+public class AbsArticulo {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +18,8 @@ public abstract class AbsArticulo {
 	protected String nombre;
 	protected String imagenes;
 	protected String descripcion;
+	protected int cantidad;
 	protected double precio;
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER)
-	protected List<Opiniones> listapedidos=new ArrayList<>();
 	
 	public AbsArticulo() {
 		super();
@@ -36,11 +28,14 @@ public abstract class AbsArticulo {
 	public AbsArticulo(Long id){
 		super();}
 
-	public AbsArticulo(String nombre, String imagenes, String descripcion, double precio) {
+
+
+	public AbsArticulo(String nombre, String imagenes, String descripcion, int cantidad, double precio) {
 		super();
 		this.nombre = nombre;
 		this.imagenes = imagenes;
 		this.descripcion = descripcion;
+		this.cantidad = cantidad;
 		this.precio = precio;
 	}
 
@@ -84,12 +79,12 @@ public abstract class AbsArticulo {
 		this.precio = precio;
 	}
 
-	public List<Opiniones> getListapedidos() {
-		return listapedidos;
+	public int getCantidad() {
+		return cantidad;
 	}
 
-	public void setListapedidos(List<Opiniones> listapedidos) {
-		this.listapedidos = listapedidos;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	@Override
@@ -112,13 +107,7 @@ public abstract class AbsArticulo {
 	@Override
 	public String toString() {
 		return "AbsArticulo [id=" + id + ", nombre=" + nombre + ", imagenes=" + imagenes + ", descripcion="
-				+ descripcion + ", precio=" + precio + ", listapedidos=" + listapedidos + "]";
+				+ descripcion + ", cantidad=" + cantidad + ", precio=" + precio + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }

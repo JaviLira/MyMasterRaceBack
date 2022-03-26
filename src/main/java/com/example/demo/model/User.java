@@ -29,9 +29,11 @@ public class User {
 	private String codigotarjeta;
 	private String tarjeta;
 	private String dueniotarjeta;
+	private String caducidadTarjeta;
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Pedido> listapedidos=new ArrayList<>();
+
 	
 	public User() {
 		super();
@@ -52,10 +54,8 @@ public class User {
 		this.password = password;
 	}
 	
-	
-
 	public User(String name, String email, String calle, String telefono, String password, String tipopado,
-			String codigotarjeta, String tarjeta, String dueniotarjeta) {
+			String codigotarjeta, String tarjeta, String dueniotarjeta, String caducidadTarjeta) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -66,6 +66,7 @@ public class User {
 		this.codigotarjeta = codigotarjeta;
 		this.tarjeta = tarjeta;
 		this.dueniotarjeta = dueniotarjeta;
+		this.caducidadTarjeta = caducidadTarjeta;
 	}
 
 	public String getName() {
@@ -148,6 +149,15 @@ public class User {
 		this.listapedidos = listapedidos;
 	}
 
+	public String getCaducidadTarjeta() {
+		return caducidadTarjeta;
+	}
+
+	public void setCaducidadTarjeta(String caducidadTarjeta) {
+		this.caducidadTarjeta = caducidadTarjeta;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);
@@ -167,13 +177,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Usuario [name=" + name + ", email=" + email + ", calle=" + calle + ", telefono=" + telefono
-				+ ", password=" + password + ", tipopado=" + tipopado + ", codigotarjeta=" + codigotarjeta
-				+ ", tarjeta=" + tarjeta + ", dueniotarjeta=" + dueniotarjeta + ", fechanacimiento="
-				+ "]";
-	}
-	
-	
-	
-	
+		return "User [name=" + name + ", email=" + email + ", calle=" + calle + ", telefono=" + telefono + ", password="
+				+ password + ", tipopado=" + tipopado + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta
+				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listapedidos="
+				+ listapedidos +  "]";
+	}	
 }

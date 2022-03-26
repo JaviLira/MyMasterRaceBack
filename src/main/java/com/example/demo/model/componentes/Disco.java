@@ -8,28 +8,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.model.AbsArticulo;
+
 @Entity
 @Table(name="disco")
-public class Disco {
+public class Disco extends AbsArticulo{
 	
-    @Id
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-    private String nombre;
+	protected Long id;
     private String tipo;
     private String capacidad;
-    private double precio;
     
 	public Disco() {
 		super();
 	}
-
-	public Disco(String nombre, String tipo, String capacidad, double precio) {
-		super();
-		this.nombre = nombre;
+	
+	public Disco(String nombre, String imagenes, String descripcion, double precio, String tipo, String capacidad) {
+		super(nombre, imagenes, descripcion, precio);
 		this.tipo = tipo;
 		this.capacidad = capacidad;
-		this.precio = precio;
 	}
 
 	public Long getId() {
@@ -38,14 +37,6 @@ public class Disco {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getTipo() {
@@ -64,36 +55,36 @@ public class Disco {
 		this.capacidad = capacidad;
 	}
 	
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-	@Override
-	public String toString() {
-		return "Disco [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", capacidad=" + capacidad + ", precio="
-				+ precio + "]";
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(id);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Disco other = (Disco) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return "Disco [id=" + id + ", tipo=" + tipo + ", capacidad=" + capacidad + ", nombre=" + nombre + ", imagenes="
+				+ imagenes + ", descripcion=" + descripcion + ", precio=" + precio + ", listapedidos=" + listapedidos
+				+ "]";
+	}
+
+
+
+	
 	
 	
     

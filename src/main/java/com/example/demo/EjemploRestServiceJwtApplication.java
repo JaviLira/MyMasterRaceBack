@@ -53,12 +53,12 @@ public class EjemploRestServiceJwtApplication {
 	@Autowired
 	private GraficaService serviceGrafica;
 	
-	@Bean
+	/*@Bean
 	CommandLineRunner iniUsuarios(UserRepo repoUsuario) {
 		return (arg)-> {
 			repoUsuario.save(new User("javi", "javi@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez"));
 		};
-	}
+	}*/
 	/*
 	@Bean
 	CommandLineRunner iniRam(RamRepo repoRam) {

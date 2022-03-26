@@ -84,13 +84,8 @@ public class AuthController {
         }
     }
     
-    /**
-     * debuelve el email del usuario 
-     * solo lo uso para verificar que tengo un token valido
-     * @return
-     */
     
-    @GetMapping("/validarToken")
+   /* @GetMapping("/validarToken")
     public ResponseEntity<User> validarToken() {
     	try {
     		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -111,7 +106,7 @@ public class AuthController {
 			throw new UserNotFoundExeption(email);
 		}
     	
-    }
+    }*/
     
     
     

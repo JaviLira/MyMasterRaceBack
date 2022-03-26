@@ -8,28 +8,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.model.AbsArticulo;
+
 @Entity
 @Table(name="fuente")
-public class Fuente {
+public class Fuente extends AbsArticulo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    private String nombre;
 	private String certificacion;
 	private String potencia;
-	private double precio;
 	
 	public Fuente() {
 		super();
 	}
-	
-	public Fuente(String nombre, String certificacion, String potencia, double precio) {
-		super();
-		this.nombre = nombre;
+
+	public Fuente(String nombre, String imagenes, String descripcion, double precio,Long id, String certificacion, String potencia) {
+		super(nombre, imagenes, descripcion, precio);
+		this.id = id;
 		this.certificacion = certificacion;
 		this.potencia = potencia;
-		this.precio = precio;
 	}
 
 	public Long getId() {
@@ -55,33 +54,20 @@ public class Fuente {
 	public void setPotencia(String potencia) {
 		this.potencia = potencia;
 	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(id);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -91,9 +77,12 @@ public class Fuente {
 
 	@Override
 	public String toString() {
-		return "Fuente [id=" + id + ", nombre=" + nombre + ", certificacion=" + certificacion + ", potencia=" + potencia
-				+ ", precio=" + precio + "]";
+		return "Fuente [id=" + id + ", certificacion=" + certificacion + ", potencia=" + potencia + ", nombre=" + nombre
+				+ ", imagenes=" + imagenes + ", descripcion=" + descripcion + ", precio=" + precio + ", listapedidos="
+				+ listapedidos + "]";
 	}
+	
+	
 
 	
 

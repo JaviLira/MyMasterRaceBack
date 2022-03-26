@@ -9,12 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.demo.model.componentes.Disco;
-import com.example.demo.model.componentes.Fuente;
-import com.example.demo.model.componentes.Grafica;
-import com.example.demo.model.componentes.Procesador;
-import com.example.demo.model.componentes.Ram;
-
 @Entity
 @Table(name="lineapedido")
 public class LineaPedido {
@@ -23,106 +17,17 @@ public class LineaPedido {
 	private Long id;
     private int cantidad;
     @ManyToOne
-    private OrdenadorVendido ordenador;
-    @ManyToOne
-    private Procesador procesador;
-    @ManyToOne
-    private Grafica grafica;
-    @ManyToOne
-    private Disco dicoDuro;
-    @ManyToOne
-    private Fuente fuente;
-    @ManyToOne
-    private Ram ram;
+    private AbsArticulo articulo;
+
     
 	public LineaPedido() {
 		super();
 	}
 	
-	public LineaPedido(int cantidad, OrdenadorVendido ordenador, Procesador procesador, Grafica grafica, Disco dicoDuro,
-			Fuente fuente, Ram ram) {
+	public LineaPedido(int cantidad, AbsArticulo articulo) {
 		super();
 		this.cantidad = cantidad;
-		this.ordenador = ordenador;
-		this.procesador = procesador;
-		this.grafica = grafica;
-		this.dicoDuro = dicoDuro;
-		this.fuente = fuente;
-		this.ram = ram;
-	}
-	
-	public LineaPedido(Long id) {
-		super();
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	public OrdenadorVendido getOrdenador() {
-		return ordenador;
-	}
-
-	public void setOrdenador(OrdenadorVendido ordenador) {
-		this.ordenador = ordenador;
-	}
-
-	public Procesador getProcesador() {
-		return procesador;
-	}
-
-	public void setProcesador(Procesador procesador) {
-		this.procesador = procesador;
-	}
-
-	public Grafica getGrafica() {
-		return grafica;
-	}
-
-	public void setGrafica(Grafica grafica) {
-		this.grafica = grafica;
-	}
-
-	public Disco getDicoDuro() {
-		return dicoDuro;
-	}
-
-	public void setDicoDuro(Disco dicoDuro) {
-		this.dicoDuro = dicoDuro;
-	}
-
-	public Fuente getFuente() {
-		return fuente;
-	}
-
-	public void setFuente(Fuente fuente) {
-		this.fuente = fuente;
-	}
-
-	public Ram getRam() {
-		return ram;
-	}
-
-	public void setRam(Ram ram) {
-		this.ram = ram;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+		this.articulo = articulo;
 	}
 
 	@Override
@@ -139,13 +44,7 @@ public class LineaPedido {
 
 	@Override
 	public String toString() {
-		return "LineaPedido [id=" + id + ", cantidad=" + cantidad + ", ordenador=" + ordenador + ", procesador="
-				+ procesador + ", grafica=" + grafica + ", dicoDuro=" + dicoDuro + ", fuente=" + fuente + ", ram=" + ram
-				+ "]";
+		return "LineaPedido [id=" + id + ", cantidad=" + cantidad + ", articulo=" + articulo + "]";
 	}
-    
-	
-    
-	
 	
 }

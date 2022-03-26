@@ -31,6 +31,9 @@ public class User {
 	private String dueniotarjeta;
 	private String caducidadTarjeta;
 	@JsonIgnore
+	@OneToMany
+	private List<Opiniones> listaOpiniones=new ArrayList<>();
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Pedido> listapedidos=new ArrayList<>();
 
@@ -157,6 +160,13 @@ public class User {
 		this.caducidadTarjeta = caducidadTarjeta;
 	}
 
+	public List<Opiniones> getListaOpiniones() {
+		return listaOpiniones;
+	}
+
+	public void setListaOpiniones(List<Opiniones> listaOpiniones) {
+		this.listaOpiniones = listaOpiniones;
+	}
 
 	@Override
 	public int hashCode() {
@@ -179,7 +189,9 @@ public class User {
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", calle=" + calle + ", telefono=" + telefono + ", password="
 				+ password + ", tipopado=" + tipopado + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta
-				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listapedidos="
-				+ listapedidos +  "]";
-	}	
+				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listaOpiniones="
+				+ listaOpiniones + ", listapedidos=" + listapedidos + "]";
+	}
+
+
 }

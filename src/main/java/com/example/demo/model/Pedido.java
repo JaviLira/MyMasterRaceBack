@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,9 +30,6 @@ public class Pedido {
 	private String dueniotarjeta;
 	private boolean entregado;
 	private boolean enCamino;
-	@ManyToOne
-	@JsonBackReference
-	private User usuario;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -142,14 +138,6 @@ public class Pedido {
 		this.enCamino = enCamino;
 	}
 
-	public User getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -188,7 +176,7 @@ public class Pedido {
 		return "Pedido [fechaPackInicio=" + fechaPackInicio + ", fechaPackEntrega=" + fechaPackEntrega + ", direccion="
 				+ direccion + ", telefono=" + telefono + ", tipopago="
 				+ tipopago + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta + ", dueniotarjeta="
-				+ dueniotarjeta + ", entregado=" + entregado + ", enCamino=" + enCamino + ", usuario=" + usuario
+				+ dueniotarjeta + ", entregado=" + entregado + ", enCamino=" + enCamino
 				+ ", id=" + id + ", listaLineaPedido=" + listaLineaPedido + "]";
 	}
 	

@@ -15,5 +15,13 @@ public class GraficaService {
 	@Autowired
 	private GraficaRepo repoGrafica;
 	
+	public Grafica buscarGrafica(Long id) {
+		return repoGrafica.findById(id).orElse(null);
+	}
+	
+	public List<Grafica> findAll() {
+		return repoGrafica.findAll();
+	}
+	
 	
 }

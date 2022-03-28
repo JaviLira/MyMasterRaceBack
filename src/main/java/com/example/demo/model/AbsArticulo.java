@@ -18,7 +18,7 @@ public class AbsArticulo {
 	protected String nombre;
 	protected String imagenes;
 	protected String descripcion;
-	protected int cantidad;
+	protected Integer cantidad;
 	protected double precio;
 	
 	public AbsArticulo() {
@@ -30,7 +30,7 @@ public class AbsArticulo {
 
 
 
-	public AbsArticulo(String nombre, String imagenes, String descripcion, int cantidad, double precio) {
+	public AbsArticulo(String nombre, String imagenes, String descripcion, Integer cantidad, double precio) {
 		super();
 		this.nombre = nombre;
 		this.imagenes = imagenes;
@@ -83,7 +83,7 @@ public class AbsArticulo {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 

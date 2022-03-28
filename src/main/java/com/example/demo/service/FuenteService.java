@@ -16,4 +16,13 @@ public class FuenteService {
 	private FuenteRepo repoFuente;
 	
 
+	public Fuente buscarFuente(Long id) {
+		return repoFuente.findById(id).orElse(null);
+	}
+	
+	public List<Fuente> findAll() {
+		return repoFuente.findAll();
+	}
+	
+	
 }

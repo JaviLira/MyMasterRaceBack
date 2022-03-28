@@ -15,5 +15,27 @@ public class RamService {
 	@Autowired
 	private RamRepo repoRam;
 	
+	public List<Ram> findAll() {
+		return repoRam.findAll();
+	}
+	
+	public Ram buscarRam(Long id) {
+		return repoRam.findById(id).orElse(null);
+	}
+	
+	public List<Ram> listarRamsCompatibles(Long id){
+		
+		Ram referencia=buscarRam(id);
+		List<Ram> listaRams=new ArrayList<>();
+		for (Ram ram : repoRam.findAll()) {
+			if (referencia.getTipo().equals(ram.getTipo())) {
+				if (referencia.getFormato().equals(ram.getFormato())) {
+					listaRams.add(ram);
+				}
+			}
+		}
+		
+		return listaRams;
+	}
 
 }

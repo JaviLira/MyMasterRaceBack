@@ -14,5 +14,13 @@ public class DiscoService {
 	
 	@Autowired
 	private DiscoRepo repoDisco;
+	
+	public Disco buscarDisco(Long id) {
+		return repoDisco.findById(id).orElse(null);
+	}
+	
+	public List<Disco> findAll() {
+		return repoDisco.findAll();
+	}
 
 }

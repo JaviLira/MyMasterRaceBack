@@ -11,14 +11,14 @@ public class Ram extends AbsArticulo{
 	
     private String tipo; // DDR4 DDR3 ...
     private String formato; //DIMM o SO-DIMM
-    private String capacidad;
+    private int capacidad;
     private String kit;
     
 	public Ram() {
 		super();
 	}
 
-	public Ram(String nombre, String imagenes, String descripcion, int cantidad, double precio, String tipo, String formato, String capacidad, String kit) {
+	public Ram(String nombre, String imagenes, String descripcion, int cantidad, double precio, String tipo, String formato, int capacidad, String kit) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.tipo = tipo;
 		this.formato = formato;
@@ -42,11 +42,11 @@ public class Ram extends AbsArticulo{
 		this.formato = formato;
 	}
 
-	public String getCapacidad() {
+	public int getCapacidad() {
 		return capacidad;
 	}
 
-	public void setCapacidad(String capacidad) {
+	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
 

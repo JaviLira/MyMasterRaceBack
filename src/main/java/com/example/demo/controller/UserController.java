@@ -82,6 +82,30 @@ public class UserController {
 	@Autowired
 	private PedidoService servicePedido;
 	
+	@GetMapping("articulo/ram")
+	public ResponseEntity<List<Ram>> listaRam() {
+    	return ResponseEntity.ok(serviceRam.findAll());
+    }
+	
+	@GetMapping("articulo/procesador")
+	public ResponseEntity<List<Procesador>> listarProcesadores() {
+    	return ResponseEntity.ok(serviceProcesador.findAll());
+    }
+	
+	@GetMapping("articulo/fuente")
+	public ResponseEntity<List<Fuente>> listarFuentes() {
+    	return ResponseEntity.ok(serviceFuente.findAll());
+    }
+	
+	@GetMapping("articulo/grafica")
+	public ResponseEntity<List<Grafica>> listarGraficas() {
+    	return ResponseEntity.ok(serviceGrafica.findAll());
+    }
+	
+	@GetMapping("articulo/disco")
+	public ResponseEntity<List<Disco>> listarDiscos() {
+    	return ResponseEntity.ok(serviceDisco.findAll());
+    }
 	
     
 }

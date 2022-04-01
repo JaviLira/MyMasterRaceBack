@@ -107,5 +107,117 @@ public class UserController {
     	return ResponseEntity.ok(serviceDisco.findAll());
     }
 	
+	@GetMapping("articulo/ordenador")
+	public ResponseEntity<List<Ordenador>> listarOrdenadores() {
+    	return ResponseEntity.ok(serviceOrdenador.findAll());
+    }
+	
+	@GetMapping("articulo/ordenador/{id}")
+	public ResponseEntity<Ordenador> sacarOrdenador(@PathVariable Long id) {
+		Ordenador result=serviceOrdenador.buscarOrdenador(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(serviceOrdenador.buscarOrdenador(id));
+		}
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    @ExceptionHandler(OrdenadorInexistenteNotFoundExeption.class)
+    public ResponseEntity<ApiError> OrdenadorError(OrdenadorInexistenteNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     
 }

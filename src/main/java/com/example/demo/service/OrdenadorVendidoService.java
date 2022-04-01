@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
-import com.example.demo.model.Pedido;
 import com.example.demo.repository.OrdenadorVendidoRepo;
 import com.example.demo.repository.OrdenadoresRepo;
 import com.example.demo.repository.PedidoRepo;
@@ -39,6 +39,12 @@ public class OrdenadorVendidoService {
 	@Autowired
 	private GraficaService serviceGrafica;
 	
-
+	public OrdenadorVendido buscarOrdenadorVendido(Long id) {
+		return repoOrdenadorVendido.findById(id).orElse(null);
+	}
+	
+	public List<OrdenadorVendido> findAll() {
+		return repoOrdenadorVendido.findAll();
+	}
 
 }

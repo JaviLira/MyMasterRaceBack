@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Ordenador;
+import com.example.demo.model.componentes.Disco;
+import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
+import com.example.demo.model.componentes.Procesador;
+import com.example.demo.model.componentes.Ram;
 import com.example.demo.repository.OrdenadoresRepo;
 
 @Service("ordenadorService")
@@ -39,4 +43,29 @@ public class OrdenadorService {
 		return repoOrdenador.findAll();
 	}
 
+	public Procesador sacarProcesador(Long id) {
+		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
+		return ordenador.getProcesador();
+	}
+	
+	public Ram sacarRam(Long id) {
+		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
+		return ordenador.getRam();
+	}
+	
+	public Disco sacarDisco(Long id) {
+		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
+		return ordenador.getDiscoduro();
+	}
+	
+	public Grafica sacarGrafica(Long id) {
+		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
+		return ordenador.getGrafica();
+	}
+	
+	public Fuente sacarFuente(Long id) {
+		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
+		return ordenador.getFuente();
+	}
+	
 }

@@ -7,40 +7,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApiError;
-import com.example.demo.error.DiscoNotFoundExeption;
-import com.example.demo.error.FuenteNotFoundExeption;
-import com.example.demo.error.GraficaNotFoundExeption;
-import com.example.demo.error.ListaPedidosNotFoundExeption;
-import com.example.demo.error.OrdenadorIncompletoFoundExeption;
+import com.example.demo.error.ArticuloNotFoundExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
-import com.example.demo.error.PedidoNotFoundExeption;
-import com.example.demo.error.PedidoReferenceNotFoundExeption;
-import com.example.demo.error.PedidoUsuarioNotFoundExeption;
-import com.example.demo.error.ProcesadorNotFoundExeption;
-import com.example.demo.error.RamNotFoundExeption;
-import com.example.demo.error.SocketNotFoundExeption;
-import com.example.demo.error.UserNotFoundExeption;
+import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Ordenador;
-import com.example.demo.model.OrdenadorVendido;
-import com.example.demo.model.Pedido;
-import com.example.demo.model.PedidoDTO;
-import com.example.demo.model.User;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
 import com.example.demo.model.componentes.Procesador;
 import com.example.demo.model.componentes.Ram;
+import com.example.demo.service.ArticuloService;
 import com.example.demo.service.DiscoService;
 import com.example.demo.service.FuenteService;
 import com.example.demo.service.GraficaService;
@@ -82,6 +64,14 @@ public class UserController {
 	@Autowired
 	private PedidoService servicePedido;
 	
+	@Autowired
+	private ArticuloService serviceArticulo;
+	
+	@GetMapping("articulo")
+	public ResponseEntity<List<AbsArticulo>> listaArticulos() {
+    	return ResponseEntity.ok(serviceArticulo.findAll());
+    }
+	
 	@GetMapping("articulo/ram")
 	public ResponseEntity<List<Ram>> listaRam() {
     	return ResponseEntity.ok(serviceRam.findAll());
@@ -119,6 +109,136 @@ public class UserController {
 			throw new OrdenadorInexistenteNotFoundExeption(id);
 		}else {
 	    	return ResponseEntity.ok(serviceOrdenador.buscarOrdenador(id));
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/RAMsCompatibles")
+	public ResponseEntity<List<Ram>> sacarRamsCompatibles(@PathVariable Long id) {
+		Ordenador ordenador=serviceOrdenador.buscarOrdenador(id);
+		if (ordenador==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+			List<Ram> listaRams=serviceRam.listarRamsCompatibles(ordenador.getRam().getId());
+			if(listaRams==null) {
+				throw new OrdenadorInexistenteNotFoundExeption(id);
+			}else {
+		    	return ResponseEntity.ok(listaRams);
+			}
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/ProcesadoresCompatibles")
+	public ResponseEntity<List<Procesador>> sacarProcesadoresCompatibles(@PathVariable Long id) {
+		Ordenador ordenador=serviceOrdenador.buscarOrdenador(id);
+		if (ordenador==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+			List<Procesador> listaProcesadors=serviceProcesador.listarProcesadoresCompatibles(ordenador.getProcesador().getId());
+			if(listaProcesadors==null) {
+				throw new OrdenadorInexistenteNotFoundExeption(id);
+			}else {
+		    	return ResponseEntity.ok(listaProcesadors);
+			}
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/Procesador")
+	public ResponseEntity<Procesador> sacarProcesadorOrdenador(@PathVariable Long id) {
+		Procesador result=serviceOrdenador.sacarProcesador(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/Grafica")
+	public ResponseEntity<Grafica> sacarGraficaOrdenador(@PathVariable Long id) {
+		Grafica result=serviceOrdenador.sacarGrafica(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/Ram")
+	public ResponseEntity<Ram> sacarRamOrdenador(@PathVariable Long id) {
+		Ram result=serviceOrdenador.sacarRam(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/Disco")
+	public ResponseEntity<Disco> sacarDiscoOrenador(@PathVariable Long id) {
+		Disco result=serviceOrdenador.sacarDisco(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/ordenador/{id}/Fuente")
+	public ResponseEntity<Fuente> sacarFuenteOrdenador(@PathVariable Long id) {
+		Fuente result=serviceOrdenador.sacarFuente(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/ram/{id}")
+	public ResponseEntity<Ram> sacarRam(@PathVariable Long id) {
+		Ram result=serviceRam.buscarRam(id);
+		if (result==null) {
+			throw new ArticuloNotFoundExeption("RAM", id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/procesador/{id}")
+	public ResponseEntity<Procesador> sacarProcesadores(@PathVariable Long id) {
+		Procesador result=serviceProcesador.buscarProcesador(id);
+		if (result==null) {
+			throw new ArticuloNotFoundExeption("RAM", id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/fuente/{id}")
+	public ResponseEntity<Fuente> sacarFuentes(@PathVariable Long id) {
+		Fuente result=serviceFuente.buscarFuente(id);
+		if (result==null) {
+			throw new ArticuloNotFoundExeption("RAM", id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/grafica/{id}")
+	public ResponseEntity<Grafica> sacarGraficas(@PathVariable Long id) {
+		Grafica result=serviceGrafica.buscarGrafica(id);
+		if (result==null) {
+			throw new ArticuloNotFoundExeption("RAM", id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
+    }
+	
+	@GetMapping("articulo/disco/{id}")
+	public ResponseEntity<Disco> sacarDiscos(@PathVariable Long id) {
+		Disco result=serviceDisco.buscarDisco(id);
+		if (result==null) {
+			throw new ArticuloNotFoundExeption("RAM", id);
+		}else {
+	    	return ResponseEntity.ok(result);
 		}
     }
 	
@@ -191,11 +311,18 @@ public class UserController {
 	
 	
 	
-	
-	
-	
     @ExceptionHandler(OrdenadorInexistenteNotFoundExeption.class)
     public ResponseEntity<ApiError> OrdenadorError(OrdenadorInexistenteNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
+    
+    @ExceptionHandler(ArticuloNotFoundExeption.class)
+    public ResponseEntity<ApiError> articuloError(ArticuloNotFoundExeption ex) throws Exception {
     	ApiError e = new ApiError();
     	e.setEstado(HttpStatus.NOT_FOUND);
     	e.setMensaje(ex.getMessage());

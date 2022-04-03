@@ -24,17 +24,13 @@ public class RamService {
 	}
 	
 	public List<Ram> listarRamsCompatibles(Long id){
-		
 		Ram referencia=buscarRam(id);
 		List<Ram> listaRams=new ArrayList<>();
 		for (Ram ram : repoRam.findAll()) {
-			if (referencia.getTipo().equals(ram.getTipo())) {
-				if (referencia.getFormato().equals(ram.getFormato())) {
-					listaRams.add(ram);
-				}
+			if (referencia.getTipo().equals(ram.getTipo()) && referencia.getFormato().equals(ram.getFormato())) {
+				listaRams.add(ram);
 			}
 		}
-		
 		return listaRams;
 	}
 

@@ -10,6 +10,7 @@ import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
 import com.example.demo.model.componentes.Procesador;
 import com.example.demo.model.componentes.Ram;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ordenadorvendido")

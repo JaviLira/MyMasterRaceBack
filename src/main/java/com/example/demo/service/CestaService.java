@@ -9,10 +9,11 @@ import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.User;
 import com.example.demo.repository.ArticuloRepo;
+import com.example.demo.repository.CestaRepo;
 import com.example.demo.repository.UserRepo;
 
-@Service("usuario")
-public class UsuarioService {
+@Service("cesta")
+public class CestaService {
 
 	@Autowired
 	private UserRepo repoUsuario;
@@ -21,14 +22,14 @@ public class UsuarioService {
 	private ArticuloRepo repoArticulo;
 	
 	@Autowired
-	private PedidoService servicePedido;
+	private CestaRepo repoCesta;
 	
-	public User buscarUsuario(String email) {
-		return repoUsuario.findByEmail(email).orElse(null);
+	public Cesta buscarCesta(Long id) {
+		return repoCesta.findById(id).orElse(null);
 	}
 	
-	public List<User> findAll() {
-		return repoUsuario.findAll();
+	public List<Cesta> findAll() {
+		return repoCesta.findAll();
 	}
 	
 //	public AbsArticulo addCarrito(String email,AbsArticulo articulo) {
@@ -49,13 +50,13 @@ public class UsuarioService {
 //			return articuloBase;
 //		}
 //	}
-//	public List<Cesta> getCarrito(String email){
+//	public List<AbsArticulo> getCarrito(String email){
 //		User usuario=buscarUsuario(email);
 //		
-//		if (usuario.getCestaUsuario().size()>=0) {
+//		if (usuario.getCestaDeCompra().size()>=0) {
 //			return null;
 //		}else {
-//			return usuario.getCestaUsuario();
+//			return usuario.getCestaDeCompra();
 //		}
 //	}
 //	

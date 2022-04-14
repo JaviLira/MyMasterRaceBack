@@ -10,7 +10,9 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +38,8 @@ public class User {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Pedido> listapedidos=new ArrayList<>();
+	@OneToMany 
+	private List <Cesta> listaCesta= new ArrayList<>();
 
 	
 	public User() {
@@ -166,6 +170,14 @@ public class User {
 
 	public void setListaOpiniones(List<Opiniones> listaOpiniones) {
 		this.listaOpiniones = listaOpiniones;
+	}
+
+	public List<Cesta> getCestaUsuario() {
+		return listaCesta;
+	}
+
+	public void setCestaUsuario(List<Cesta> cestaUsuario) {
+		this.listaCesta = cestaUsuario;
 	}
 
 	@Override

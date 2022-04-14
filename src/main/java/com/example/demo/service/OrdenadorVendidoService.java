@@ -46,5 +46,29 @@ public class OrdenadorVendidoService {
 	public List<OrdenadorVendido> findAll() {
 		return repoOrdenadorVendido.findAll();
 	}
+	
+	public OrdenadorVendido addOrdenadorVendido(OrdenadorVendido ordenadorV) {
+		OrdenadorVendido ordenadorNuevo=new OrdenadorVendido();
+		
+		ordenadorNuevo.setRam(serviceRam.buscarRam(ordenadorV.getRam().getId()));
+		ordenadorNuevo.setProcesador(serviceProcesador.buscarProcesador(ordenadorV.getProcesador().getId()));
+		ordenadorNuevo.setPrecio(ordenadorV.getPrecio());
+		ordenadorNuevo.setNombre(ordenadorV.getNombre());
+		ordenadorNuevo.setImagenes(ordenadorV.getImagenes());
+		ordenadorNuevo.setGrafica(serviceGrafica.buscarGrafica(ordenadorV.getGrafica().getId()));
+		ordenadorNuevo.setFuente(serviceFuente.buscarFuente(ordenadorV.getFuente().getId()));
+		ordenadorNuevo.setDiscoduro(serviceDisco.buscarDisco(ordenadorV.getDiscoduro().getId()));
+		ordenadorNuevo.setDescripcion(ordenadorV.getDescripcion());
+		
+		
+		return ordenadorNuevo;
+		
+	}
+	
+	public OrdenadorVendido deleteOrdenadorVendido(Long ordenadorV) {
+		OrdenadorVendido ordenador=repoOrdenadorVendido.findById(ordenadorV).orElse(null);
+		repoOrdenadorVendido.deleteById(ordenadorV);
+		return ordenador;
+	}
 
 }

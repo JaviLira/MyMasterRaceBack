@@ -7,16 +7,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApiError;
 import com.example.demo.error.ArticuloNotFoundExeption;
+import com.example.demo.error.ArticuloNullExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Ordenador;
+import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
@@ -242,6 +248,61 @@ public class UserController {
 		}
     }
 	
+//    @PostMapping("/carrito")
+//    public ResponseEntity<AbsArticulo> postCarrito(@RequestBody AbsArticulo p) {
+//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+//        
+//        
+//        if(p==null) {
+//        	throw new ArticuloNullExeption();
+//        }else {
+//        	return ResponseEntity.ok(serviceUsuario.addCarrito(email, p));
+//        }
+//    }
+//    
+//    @DeleteMapping("/carrito")
+//    public ResponseEntity<AbsArticulo> DeleteCarrito(@RequestBody AbsArticulo p) {
+//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+//        
+//        
+//        if(p==null) {
+//        	throw new ArticuloNullExeption();
+//        }else {
+//        	return ResponseEntity.ok(serviceUsuario.deleteCarrito(email, p));
+//        }
+//    }
+//    
+//    @GetMapping("/carrito")
+//    public ResponseEntity <List<AbsArticulo>> getCarrito() {
+//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+//        List<AbsArticulo> result=serviceUsuario.getCarrito(email);
+//        
+//        if(result==null) {
+//        	throw new ArticuloNullExeption();
+//        }else {
+//        	return ResponseEntity.ok(result);
+//        }
+//    }
+    
+    @PostMapping("/articulo/ordenadorVendido")
+    public ResponseEntity<OrdenadorVendido> postOrdenadorVendido(@RequestBody OrdenadorVendido p) {
+        OrdenadorVendido ordenadorV=serviceOrdenadorvendido.addOrdenadorVendido(p);
+        if(p==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(ordenadorV);
+        }
+    }
+    
+    @DeleteMapping("/articulo/ordenadorVendido/{id}")
+    public ResponseEntity<OrdenadorVendido> deleteOrdenadorVendido(@PathVariable Long id) {
+        OrdenadorVendido ordenadorV=serviceOrdenadorvendido.deleteOrdenadorVendido(id);
+        if(ordenadorV==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(ordenadorV);
+        }
+    }
 	
 	
 	
@@ -310,6 +371,16 @@ public class UserController {
 	
 	
 	
+	
+    @ExceptionHandler(ArticuloNullExeption.class)
+    public ResponseEntity<ApiError> ArticuloNullExeption(ArticuloNullExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
 	
     @ExceptionHandler(OrdenadorInexistenteNotFoundExeption.class)
     public ResponseEntity<ApiError> OrdenadorError(OrdenadorInexistenteNotFoundExeption ex) throws Exception {

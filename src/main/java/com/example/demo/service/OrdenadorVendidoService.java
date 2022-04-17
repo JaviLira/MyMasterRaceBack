@@ -2,11 +2,11 @@ package com.example.demo.service;
 
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.repository.OrdenadorVendidoRepo;
 import com.example.demo.repository.OrdenadoresRepo;
@@ -48,27 +48,56 @@ public class OrdenadorVendidoService {
 	}
 	
 	public OrdenadorVendido addOrdenadorVendido(OrdenadorVendido ordenadorV) {
-		OrdenadorVendido ordenadorNuevo=new OrdenadorVendido();
+		OrdenadorVendido confirmar=confirmarExistencia(ordenadorV);
 		
-		ordenadorNuevo.setRam(serviceRam.buscarRam(ordenadorV.getRam().getId()));
-		ordenadorNuevo.setProcesador(serviceProcesador.buscarProcesador(ordenadorV.getProcesador().getId()));
-		ordenadorNuevo.setPrecio(ordenadorV.getPrecio());
-		ordenadorNuevo.setNombre(ordenadorV.getNombre());
-		ordenadorNuevo.setImagenes(ordenadorV.getImagenes());
-		ordenadorNuevo.setGrafica(serviceGrafica.buscarGrafica(ordenadorV.getGrafica().getId()));
-		ordenadorNuevo.setFuente(serviceFuente.buscarFuente(ordenadorV.getFuente().getId()));
-		ordenadorNuevo.setDiscoduro(serviceDisco.buscarDisco(ordenadorV.getDiscoduro().getId()));
-		ordenadorNuevo.setDescripcion(ordenadorV.getDescripcion());
-		
-		
-		return ordenadorNuevo;
-		
+		if (confirmar!=null) {
+			return confirmar;
+		}else {
+			OrdenadorVendido ordenadorNuevo=new OrdenadorVendido();
+			
+			ordenadorNuevo.setRam(serviceRam.buscarRam(ordenadorV.getRam().getId()));
+			ordenadorNuevo.setProcesador(serviceProcesador.buscarProcesador(ordenadorV.getProcesador().getId()));
+			ordenadorNuevo.setPrecio(ordenadorV.getPrecio());
+			ordenadorNuevo.setNombre(ordenadorV.getNombre());
+			ordenadorNuevo.setImagenes(ordenadorV.getImagenes());
+			ordenadorNuevo.setGrafica(serviceGrafica.buscarGrafica(ordenadorV.getGrafica().getId()));
+			ordenadorNuevo.setFuente(serviceFuente.buscarFuente(ordenadorV.getFuente().getId()));
+			ordenadorNuevo.setDiscoduro(serviceDisco.buscarDisco(ordenadorV.getDiscoduro().getId()));
+			ordenadorNuevo.setDescripcion(ordenadorV.getDescripcion());
+			ordenadorNuevo.setCantidad(2);
+			
+			return repoOrdenadorVendido.save(ordenadorNuevo);
+		}
 	}
 	
 	public OrdenadorVendido deleteOrdenadorVendido(Long ordenadorV) {
 		OrdenadorVendido ordenador=repoOrdenadorVendido.findById(ordenadorV).orElse(null);
 		repoOrdenadorVendido.deleteById(ordenadorV);
 		return ordenador;
+	}
+	
+	public OrdenadorVendido confirmarExistencia(OrdenadorVendido ordenador) {
+		List<OrdenadorVendido> listaOrdenadoresCreados=repoOrdenadorVendido.findAll();
+		OrdenadorVendido ordenadorExiste=null;
+		
+		for (OrdenadorVendido laPc : listaOrdenadoresCreados) {
+			if(Objects.equals(laPc.getNombre(), ordenador.getNombre()) &&
+					laPc.getDiscoduro().getId()==ordenador.getDiscoduro().getId() &&
+					laPc.getFuente().getId()==ordenador.getFuente().getId() &&
+					laPc.getGrafica().getId()==ordenador.getGrafica().getId() &&
+					laPc.getProcesador().getId()==ordenador.getProcesador().getId() &&
+					laPc.getRam().getId()==ordenador.getRam().getId()) {
+				ordenadorExiste=laPc;
+				}
+		}
+		
+		if (ordenadorExiste!=null) {
+			return ordenadorExiste;
+		}else {
+			return null;
+		}
+		
+		
 	}
 
 }

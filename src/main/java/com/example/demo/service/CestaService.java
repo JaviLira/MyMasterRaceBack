@@ -32,56 +32,67 @@ public class CestaService {
 		return repoCesta.findAll();
 	}
 	
-//	public AbsArticulo addCarrito(String email,AbsArticulo articulo) {
-//		User usuario=buscarUsuario(email);
-//		AbsArticulo articuloBase=repoArticulo.findById(articulo.getId()).orElse(null);
-//		boolean existe=false;
-//		
-//		for (AbsArticulo articuloX : usuario.getCestaDeCompra()) {
-//			if (articuloX.getId()==articuloBase.getId()) {
-//				existe=true;
-//			}
-//		}
-//		if (existe) {
-//			return null;
-//		}else {
-//			usuario.getCestaDeCompra().add(articuloBase);
-//			repoUsuario.save(usuario);
-//			return articuloBase;
-//		}
-//	}
-//	public List<AbsArticulo> getCarrito(String email){
-//		User usuario=buscarUsuario(email);
-//		
-//		if (usuario.getCestaDeCompra().size()>=0) {
-//			return null;
-//		}else {
-//			return usuario.getCestaDeCompra();
-//		}
-//	}
-//	
-//	public AbsArticulo deleteCarrito(String email,AbsArticulo articulo) {
-//		User usuario=buscarUsuario(email);
-//		AbsArticulo articuloBase=repoArticulo.findById(articulo.getId()).orElse(null);
-//		
-//		boolean existe=false;
-//		
-//		for (AbsArticulo articuloX : usuario.getCestaDeCompra()) {
-//			if (articuloX.getId()==articuloBase.getId()) {
-//				existe=true;
-//			}
-//		}
-//		
-//		if (existe) {
-//			usuario.getCestaDeCompra().remove(articuloBase);
-//			repoUsuario.save(usuario);
-//			return articuloBase;
-//		}else {
-//			return null;
-//		}
-//		
-//		
-//	}
+	public AbsArticulo addCarrito(String email,AbsArticulo articulo) {
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		AbsArticulo articuloBase=repoArticulo.findById(articulo.getId()).orElse(null);
+		Long existe=(long) 0;
+		
+		for (Cesta cestita : usuario.getListaCesta()) {
+			if (cestita.getArticulo().getId()==articuloBase.getId()) {
+				existe=cestita.getId();
+			}
+		}
+		if (existe!=0) {
+			Cesta cestaInterior=repoCesta.findById(existe).orElse(null);
+			int cantidad=cestaInterior.getCantidad();
+			cantidad+=1;
+			cestaInterior.setCantidad(cantidad);
+			repoCesta.save(cestaInterior);
+			
+			return articuloBase;
+		}else {
+			Cesta cestaNueva=new Cesta();
+			cestaNueva.setArticulo(articuloBase);
+			cestaNueva.setCantidad(1);
+			repoCesta.save(cestaNueva);
+			usuario.getListaCesta().add(cestaNueva);
+			repoUsuario.save(usuario);
+			return articuloBase;
+		}
+	}
+	public List<Cesta> getCarrito(String email){
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		
+		if (usuario.getListaCesta().size()==0 || usuario.getListaCesta()==null) {
+			return null;
+		}else {
+			return usuario.getListaCesta();
+		}
+	}
+	
+	public Cesta deleteCarrito(String email,Long id) {
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		Cesta cestaBase=repoCesta.findById(id).orElse(null);
+		
+		boolean existe=false;
+		
+		for (Cesta cestita : usuario.getListaCesta()) {
+			if (cestita.getId()==cestaBase.getId()) {
+				existe=true;
+			}
+		}
+		
+		if (existe) {
+			usuario.getListaCesta().remove(cestaBase);
+			repoUsuario.save(usuario);
+			repoCesta.delete(cestaBase);
+			return cestaBase;
+		}else {
+			return null;
+		}
+		
+		
+	}
 	
 	
 }

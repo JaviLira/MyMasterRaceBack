@@ -172,12 +172,12 @@ public class User {
 		this.listaOpiniones = listaOpiniones;
 	}
 
-	public List<Cesta> getCestaUsuario() {
+	public List<Cesta> getListaCesta() {
 		return listaCesta;
 	}
 
-	public void setCestaUsuario(List<Cesta> cestaUsuario) {
-		this.listaCesta = cestaUsuario;
+	public void setListaCesta(List<Cesta> listaCesta) {
+		this.listaCesta = listaCesta;
 	}
 
 	@Override

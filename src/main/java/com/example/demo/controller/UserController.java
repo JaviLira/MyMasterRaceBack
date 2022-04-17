@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApiError;
 import com.example.demo.error.ArticuloNotFoundExeption;
 import com.example.demo.error.ArticuloNullExeption;
+import com.example.demo.error.CarritoNullExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
 import com.example.demo.model.AbsArticulo;
+import com.example.demo.model.Cesta;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.componentes.Disco;
@@ -29,6 +32,7 @@ import com.example.demo.model.componentes.Grafica;
 import com.example.demo.model.componentes.Procesador;
 import com.example.demo.model.componentes.Ram;
 import com.example.demo.service.ArticuloService;
+import com.example.demo.service.CestaService;
 import com.example.demo.service.DiscoService;
 import com.example.demo.service.FuenteService;
 import com.example.demo.service.GraficaService;
@@ -69,6 +73,9 @@ public class UserController {
 	
 	@Autowired
 	private PedidoService servicePedido;
+	
+	@Autowired
+	private CestaService serviceCesta;
 	
 	@Autowired
 	private ArticuloService serviceArticulo;
@@ -248,46 +255,59 @@ public class UserController {
 		}
     }
 	
-//    @PostMapping("/carrito")
-//    public ResponseEntity<AbsArticulo> postCarrito(@RequestBody AbsArticulo p) {
-//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-//        
-//        
-//        if(p==null) {
-//        	throw new ArticuloNullExeption();
-//        }else {
-//        	return ResponseEntity.ok(serviceUsuario.addCarrito(email, p));
-//        }
-//    }
-//    
-//    @DeleteMapping("/carrito")
-//    public ResponseEntity<AbsArticulo> DeleteCarrito(@RequestBody AbsArticulo p) {
-//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-//        
-//        
-//        if(p==null) {
-//        	throw new ArticuloNullExeption();
-//        }else {
-//        	return ResponseEntity.ok(serviceUsuario.deleteCarrito(email, p));
-//        }
-//    }
-//    
-//    @GetMapping("/carrito")
-//    public ResponseEntity <List<AbsArticulo>> getCarrito() {
-//        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-//        List<AbsArticulo> result=serviceUsuario.getCarrito(email);
-//        
-//        if(result==null) {
-//        	throw new ArticuloNullExeption();
-//        }else {
-//        	return ResponseEntity.ok(result);
-//        }
-//    }
+    @PostMapping("/carrito")
+    public ResponseEntity<AbsArticulo> postCarrito(@RequestBody AbsArticulo p) {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        
+        
+        if(serviceArticulo.buscarArticulo(p.getId())==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(serviceCesta.addCarrito(email, p));
+        }
+    }
+    
+    //hacer
+    @PutMapping("/carrito")
+    public ResponseEntity<AbsArticulo> putCarrito(@RequestBody AbsArticulo p) {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        
+        
+        if(serviceArticulo.buscarArticulo(p.getId())==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(serviceCesta.addCarrito(email, p));
+        }
+    }
+    
+    @DeleteMapping("/carrito/{id}")
+    public ResponseEntity<Cesta> deleteCarrito(@PathVariable Long id) {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        Cesta result=serviceCesta.deleteCarrito(email, id);
+        
+        if(result==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(result);
+        }
+    }
+    
+    @GetMapping("/carrito")
+    public ResponseEntity <List<Cesta>> getCarrito() {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        List<Cesta> result=serviceCesta.getCarrito(email);
+        
+        if(result==null) {
+        	throw new CarritoNullExeption();
+        }else {
+        	return ResponseEntity.ok(result);
+        }
+    }
     
     @PostMapping("/articulo/ordenadorVendido")
     public ResponseEntity<OrdenadorVendido> postOrdenadorVendido(@RequestBody OrdenadorVendido p) {
         OrdenadorVendido ordenadorV=serviceOrdenadorvendido.addOrdenadorVendido(p);
-        if(p==null) {
+        if(ordenadorV==null) {
         	throw new ArticuloNullExeption();
         }else {
         	return ResponseEntity.ok(ordenadorV);
@@ -368,9 +388,17 @@ public class UserController {
 	
 	
 	
+    
 	
-	
-	
+    @ExceptionHandler(CarritoNullExeption.class)
+    public ResponseEntity<ApiError> CarritoNullExeption(CarritoNullExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
 	
     @ExceptionHandler(ArticuloNullExeption.class)
     public ResponseEntity<ApiError> ArticuloNullExeption(ArticuloNullExeption ex) throws Exception {

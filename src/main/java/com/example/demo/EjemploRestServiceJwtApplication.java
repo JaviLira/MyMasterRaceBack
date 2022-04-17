@@ -63,7 +63,7 @@ public class EjemploRestServiceJwtApplication {
 	@Bean
 	CommandLineRunner iniRam(RamRepo repoRam) {
 		return (arg)-> {
-			repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX","img","Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
+			repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX","","Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
 					new Ram("Kingston HyperX","","",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
 					new Ram("Kingston HyperX","","",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
 					new Ram("Kingston FURY","","",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),

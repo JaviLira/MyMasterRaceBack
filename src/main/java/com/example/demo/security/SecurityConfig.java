@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/validarToken").hasRole("USER")
                 .antMatchers("/carrito").hasRole("USER")
+                .antMatchers("/carrito/**").hasRole("USER")
                 .antMatchers("/articulo").permitAll()
                 .antMatchers("/articulo/**").permitAll()
                 .antMatchers("/articulo/**/**").permitAll()

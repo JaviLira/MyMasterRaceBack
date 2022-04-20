@@ -26,6 +26,8 @@ import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
+import com.example.demo.model.Pedido;
+import com.example.demo.model.User;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
@@ -83,6 +85,16 @@ public class UserController {
 	@GetMapping("articulo")
 	public ResponseEntity<List<AbsArticulo>> listaArticulos() {
     	return ResponseEntity.ok(serviceArticulo.findAll());
+    }
+	
+	@GetMapping("articulo/{id}")
+	public ResponseEntity<AbsArticulo> articulos(@PathVariable Long id) {
+		AbsArticulo result=serviceArticulo.buscarArticulo(id);
+		if (result==null) {
+			throw new OrdenadorInexistenteNotFoundExeption(id);
+		}else {
+	    	return ResponseEntity.ok(result);
+		}
     }
 	
 	@GetMapping("articulo/ram")
@@ -324,9 +336,22 @@ public class UserController {
         }
     }
 	
+    @PostMapping("/pedido")
+    public ResponseEntity<Pedido> realizarPedido(@RequestBody Pedido p) {
+    	Pedido pedido=new Pedido();
+        if(pedido==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(pedido);
+        }
+    }
 	
-	
-	
+    @GetMapping("/usuario")
+    public ResponseEntity <User> getUsuario() {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+		return ResponseEntity.ok(serviceUsuario.buscarUsuario(email));
+    }
 	
 	
 	

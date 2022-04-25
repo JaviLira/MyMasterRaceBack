@@ -30,6 +30,30 @@ public class LineaPedido {
 		this.articulo = articulo;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public AbsArticulo getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(AbsArticulo articulo) {
+		this.articulo = articulo;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

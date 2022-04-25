@@ -28,6 +28,7 @@ public class Pedido {
 	private String codigotarjeta;
 	private String tarjeta;
 	private String dueniotarjeta;
+	private String caducidadTarjeta;
 	private boolean entregado;
 	private boolean enCamino;
     @Id
@@ -42,16 +43,16 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public Pedido(String direccion, String telefono, String tipopado, String codigotarjeta,
-			String tarjeta, String dueniotarjeta) {
+	public Pedido(String direccion, String telefono, String tipopago, String codigotarjeta, String tarjeta,
+			String dueniotarjeta, String caducidadTarjeta) {
 		super();
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.tipopago = tipopado;
+		this.tipopago = tipopago;
 		this.codigotarjeta = codigotarjeta;
 		this.tarjeta = tarjeta;
 		this.dueniotarjeta = dueniotarjeta;
-		this.enCamino=false;
+		this.caducidadTarjeta = caducidadTarjeta;
 	}
 
 	public Pedido() {
@@ -154,6 +155,14 @@ public class Pedido {
 		this.listaLineaPedido = listaLineaPedido;
 	}
 
+	public String getCaducidadTarjeta() {
+		return caducidadTarjeta;
+	}
+
+	public void setCaducidadTarjeta(String caducidadTarjeta) {
+		this.caducidadTarjeta = caducidadTarjeta;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -174,11 +183,13 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "Pedido [fechaPackInicio=" + fechaPackInicio + ", fechaPackEntrega=" + fechaPackEntrega + ", direccion="
-				+ direccion + ", telefono=" + telefono + ", tipopago="
-				+ tipopago + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta + ", dueniotarjeta="
-				+ dueniotarjeta + ", entregado=" + entregado + ", enCamino=" + enCamino
-				+ ", id=" + id + ", listaLineaPedido=" + listaLineaPedido + "]";
+				+ direccion + ", telefono=" + telefono + ", tipopago=" + tipopago + ", codigotarjeta=" + codigotarjeta
+				+ ", tarjeta=" + tarjeta + ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta
+				+ ", entregado=" + entregado + ", enCamino=" + enCamino + ", id=" + id + ", listaLineaPedido="
+				+ listaLineaPedido + "]";
 	}
+
+
 	
 	
 	

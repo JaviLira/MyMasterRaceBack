@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
+import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
 import com.example.demo.repository.ArticuloRepo;
 import com.example.demo.repository.UserRepo;
@@ -81,6 +82,40 @@ public class UsuarioService {
 //		
 //		
 //	}
+	
+	/**
+	 * Comprueba si el usuario tiene ese pedido en concreto para no darle un pedido de otro usuario
+	 * @param email
+	 * @param id
+	 * @return
+	 */
+	
+	public boolean usuarioTienePedido(String email,Long id) {
+		User usuario= buscarUsuario(email);
+		boolean respuesta = false;
+		for (Pedido pedido : usuario.getListapedidos()) {
+			if (pedido.getId()==id) {
+				respuesta=true;
+			}
+		}
+		return respuesta;
+	}
+	
+	/**
+	 * comprueba que el usuario tiene productos en el carrito para poder realizar la compra
+	 * @param email
+	 * @param id
+	 * @return
+	 */
+	
+	public boolean usuarioTieneArticulosEnCarrito(String email) {
+		User usuario= buscarUsuario(email);
+		boolean respuesta = false;
+		if (usuario.getListaCesta().size()>=1) {
+			respuesta=true;
+		}
+		return respuesta;
+	}
 	
 	
 }

@@ -85,12 +85,45 @@ public class CestaService {
 		if (existe) {
 			usuario.getListaCesta().remove(cestaBase);
 			repoUsuario.save(usuario);
-			repoCesta.delete(cestaBase);
+			repoCesta.deleteById(id);
+			return cestaBase;
+		}else {
+			return null;
+		}	
+	}
+	
+	public Cesta putCesta(String email,Long id, Cesta cesta) {
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		Cesta cestaBase=repoCesta.findById(id).orElse(null);
+		boolean existe=false;
+		
+		for (Cesta cestitas : usuario.getListaCesta()) {
+			if (cestitas.getId()==cestaBase.getId()) {
+				existe=true;
+			}
+		}
+		
+		if (existe) {
+			cestaBase.setCantidad(cesta.getCantidad());
+			repoCesta.save(cestaBase);
 			return cestaBase;
 		}else {
 			return null;
 		}
-		
+	}
+	
+	public void vaciarCestaUsuario(String email) {
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		List<Cesta> listaCesta=usuario.getListaCesta();
+		if (listaCesta.size()==1) {
+			deleteCarrito(email, listaCesta.get(0).getId());
+		}else {
+			int cont=0;
+			for (int i = 0; i < listaCesta.size(); i++) {
+				deleteCarrito(email, listaCesta.get(cont).getId());
+				cont++;
+			}
+		}
 		
 	}
 	

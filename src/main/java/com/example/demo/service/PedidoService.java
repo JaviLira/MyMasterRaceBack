@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Pedido;
+import com.example.demo.model.User;
 import com.example.demo.repository.PedidoRepo;
 import com.example.demo.repository.UserRepo;
 
@@ -28,6 +29,53 @@ public class PedidoService {
 	public List<Pedido> findAll() {
 		return repoPedido.findAll();
 	}
+	
+	public Pedido crearPedido(String email,Pedido pedido) {
+		if(comprobarPedido(pedido)) {
+			User usuario=repoUsuario.findByEmail(email).orElse(null);
+			if(usuario!=null) {
+				Pedido pedidoNuevo= new Pedido();
+				repoPedido.save(pedidoNuevo);
+				
+				pedidoNuevo.setCaducidadTarjeta(pedido.getCaducidadTarjeta());
+				pedidoNuevo.setDireccion(pedido.getDireccion());
+				pedidoNuevo.setCodigotarjeta(pedido.getCodigotarjeta());
+				pedidoNuevo.setTarjeta(pedido.getTarjeta());
+				pedidoNuevo.setDueniotarjeta(pedido.getDueniotarjeta());
+				pedidoNuevo.setTelefono(pedido.getTelefono());
+				pedidoNuevo.setTipopago(pedido.getTipopago());
+				
+				usuario.getListapedidos().add(pedidoNuevo);
+				repoPedido.save(pedidoNuevo);
+				repoUsuario.save(usuario);
+				
+				
+				return pedidoNuevo;
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+		}
+	}
 
+	public boolean comprobarPedido(Pedido p1) {
+		if(		p1.getDireccion()==null || 
+				p1.getTelefono()==null || 
+				p1.getCodigotarjeta()==null || 
+				p1.getTarjeta()==null || 
+				p1.getDueniotarjeta()==null || 
+				p1.getTipopago() ==null || 
+				p1.getCaducidadTarjeta() ==null || 
+				p1.getDireccion().equals("") || p1.getCaducidadTarjeta().equals("") ||
+				p1.getCodigotarjeta().equals("") || p1.getTarjeta().equals("") || 
+				p1.getTelefono().equals("") || p1.getTipopago().equals("")
+				|| p1.getDueniotarjeta().equals("")
+				)	{
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 }

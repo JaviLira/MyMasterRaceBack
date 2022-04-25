@@ -22,8 +22,13 @@ import com.example.demo.error.ArticuloNotFoundExeption;
 import com.example.demo.error.ArticuloNullExeption;
 import com.example.demo.error.CarritoNullExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
+import com.example.demo.error.PedidoFormatNotFoundExeption;
+import com.example.demo.error.PedidoNotFoundExeption2;
+import com.example.demo.error.UsuarioNoContieneArticulosEnElCarritoExeption;
+import com.example.demo.error.UsuarioTieneEsePedidoExeption;
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
+import com.example.demo.model.LineaPedido;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.Pedido;
@@ -38,6 +43,7 @@ import com.example.demo.service.CestaService;
 import com.example.demo.service.DiscoService;
 import com.example.demo.service.FuenteService;
 import com.example.demo.service.GraficaService;
+import com.example.demo.service.LineaPedidoService;
 import com.example.demo.service.OrdenadorService;
 import com.example.demo.service.OrdenadorVendidoService;
 import com.example.demo.service.PedidoService;
@@ -63,6 +69,9 @@ public class UserController {
 	
 	@Autowired
 	private ProcesadorService serviceProcesador;
+	
+	@Autowired
+	private LineaPedidoService serviceLineaPedido;
 	
 	@Autowired
 	private RamService serviceRam;
@@ -292,6 +301,18 @@ public class UserController {
         }
     }
     
+    @PutMapping("/carrito/{id}")
+    public ResponseEntity<Cesta> putCarritoConId(@PathVariable Long id,@RequestBody Cesta cesta) {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        Cesta result=serviceCesta.putCesta(email,id,cesta);
+        
+        if(result==null) {
+        	throw new ArticuloNullExeption();
+        }else {
+        	return ResponseEntity.ok(result);
+        }
+    }
+    
     @DeleteMapping("/carrito/{id}")
     public ResponseEntity<Cesta> deleteCarrito(@PathVariable Long id) {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
@@ -338,12 +359,52 @@ public class UserController {
 	
     @PostMapping("/pedido")
     public ResponseEntity<Pedido> realizarPedido(@RequestBody Pedido p) {
-    	Pedido pedido=new Pedido();
-        if(pedido==null) {
-        	throw new ArticuloNullExeption();
-        }else {
-        	return ResponseEntity.ok(pedido);
-        }
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	Pedido result=servicePedido.crearPedido(email,p);
+    	if (serviceUsuario.usuarioTieneArticulosEnCarrito(email)) {
+            if(result==null) {
+            	throw new PedidoFormatNotFoundExeption();
+            }else {
+            	result=serviceLineaPedido.asignarLineasDePedidoA_Pedido(email, result.getId());
+            	serviceCesta.vaciarCestaUsuario(email);
+            	return ResponseEntity.ok(result);
+            }
+		}else {
+			throw new UsuarioNoContieneArticulosEnElCarritoExeption(email);
+		}
+
+    }
+    
+    @GetMapping("/pedido/{id}")
+    public ResponseEntity<Pedido> getPedido(@PathVariable Long id) {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	Pedido result=servicePedido.buscarPedido(id);
+    	if (serviceUsuario.usuarioTienePedido(email, id)) {
+			if(result==null) {
+				throw new PedidoNotFoundExeption2(id);
+	        }else {
+	        	return ResponseEntity.ok(result);
+	        }
+		}else {
+			throw new UsuarioTieneEsePedidoExeption(email,id);
+		}
+        
+    }
+    
+    @GetMapping("/pedido/{id}/lineaPedido")
+    public ResponseEntity <List<LineaPedido>> getLineaPedido(@PathVariable Long id) {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	List<LineaPedido> result=serviceLineaPedido.lineasPedidoDelPedido(id);
+    	if (serviceUsuario.usuarioTienePedido(email, id)) {
+			if(result==null) {
+				throw new PedidoNotFoundExeption2(id);
+	        }else {
+	        	return ResponseEntity.ok(result);
+	        }
+		}else {
+			throw new UsuarioTieneEsePedidoExeption(email,id);
+		}
+        
     }
 	
     @GetMapping("/usuario")
@@ -409,11 +470,102 @@ public class UserController {
 	
 	
 	
-	
-	
-	
-	
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @ExceptionHandler(UsuarioNoContieneArticulosEnElCarritoExeption.class)
+    public ResponseEntity<ApiError> UsuarioNoContieneArticulosEnElCarritoExeption(UsuarioNoContieneArticulosEnElCarritoExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.LOCKED);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.LOCKED).body(e);
+	}
+    
+    @ExceptionHandler(UsuarioTieneEsePedidoExeption.class)
+    public ResponseEntity<ApiError> UsuarioNoContieneEsePedido(UsuarioTieneEsePedidoExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
+	
+	
+    @ExceptionHandler(PedidoNotFoundExeption2.class)
+    public ResponseEntity<ApiError> PedidoNotFoundExeption(PedidoNotFoundExeption2 ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
+	
+	
+    @ExceptionHandler(PedidoFormatNotFoundExeption.class)
+    public ResponseEntity<ApiError> PedidoFormatExeption(PedidoFormatNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
 	
     @ExceptionHandler(CarritoNullExeption.class)
     public ResponseEntity<ApiError> CarritoNullExeption(CarritoNullExeption ex) throws Exception {

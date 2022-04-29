@@ -10,9 +10,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +25,7 @@ public class User {
 	private String telefono;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
-	private String tipopado;
+	private String tipopago;
 	private String codigotarjeta;
 	private String tarjeta;
 	private String dueniotarjeta;
@@ -69,7 +67,7 @@ public class User {
 		this.calle = calle;
 		this.telefono = telefono;
 		this.password = password;
-		this.tipopado = tipopado;
+		this.tipopago = tipopado;
 		this.codigotarjeta = codigotarjeta;
 		this.tarjeta = tarjeta;
 		this.dueniotarjeta = dueniotarjeta;
@@ -116,12 +114,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getTipopado() {
-		return tipopado;
+	public String getTipopago() {
+		return tipopago;
 	}
 
-	public void setTipopado(String tipopado) {
-		this.tipopado = tipopado;
+	public void setTipopago(String tipopado) {
+		this.tipopago = tipopado;
 	}
 
 	public String getCodigotarjeta() {
@@ -200,7 +198,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", calle=" + calle + ", telefono=" + telefono + ", password="
-				+ password + ", tipopado=" + tipopado + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta
+				+ password + ", tipopago=" + tipopago + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta
 				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listaOpiniones="
 				+ listaOpiniones + ", listapedidos=" + listapedidos + "]";
 	}

@@ -19,9 +19,6 @@ public class PedidoService {
 	@Autowired
 	private UserRepo repoUsuario;
 	
-	@Autowired
-	private OrdenadorVendidoService serviceOrdenadorVendido;
-	
 	public Pedido buscarPedido(Long id) {
 		return repoPedido.findById(id).orElse(null);
 	}

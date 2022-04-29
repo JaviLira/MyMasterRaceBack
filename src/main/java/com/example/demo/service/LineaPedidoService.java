@@ -10,7 +10,6 @@ import com.example.demo.model.Cesta;
 import com.example.demo.model.LineaPedido;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
-import com.example.demo.repository.CestaRepo;
 import com.example.demo.repository.LineaPedidoRepo;
 import com.example.demo.repository.PedidoRepo;
 import com.example.demo.repository.UserRepo;
@@ -26,12 +25,6 @@ public class LineaPedidoService {
 	
 	@Autowired
 	private LineaPedidoRepo repoLienaPedido;
-	
-	@Autowired
-	private CestaRepo repoCarrito;
-	
-	@Autowired
-	private OrdenadorVendidoService serviceOrdenadorVendido;
 	
 	public LineaPedido buscarLineaPedido(Long id) {
 		return repoLienaPedido.findById(id).orElse(null);

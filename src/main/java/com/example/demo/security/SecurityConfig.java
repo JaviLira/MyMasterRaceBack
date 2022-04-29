@@ -14,13 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.demo.repository.UserRepo;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired private UserRepo userRepo;
     @Autowired private JWTFilter filter;
     @Autowired private MyUserDetailsService uds;
 
@@ -43,6 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/articulo/**").permitAll()
                 .antMatchers("/articulo/**/**").permitAll()
                 .antMatchers("/articulo/**/**/**").permitAll()
+                .antMatchers("/usuario/pedido").hasRole("USER")
+                .antMatchers("/usuario/**/pedido").hasRole("USER")
+                .antMatchers("/usuario/**/pedido/**").hasRole("USER")
+                .antMatchers("/usuario/**").hasRole("USER")
                 .and()
                 .userDetailsService(uds)
                 .exceptionHandling()

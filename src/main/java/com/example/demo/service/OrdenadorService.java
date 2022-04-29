@@ -20,21 +20,6 @@ public class OrdenadorService {
 	@Autowired
 	private OrdenadoresRepo repoOrdenador;
 	
-	@Autowired
-	private DiscoService serviceDisco;
-	
-	@Autowired
-	private FuenteService serviceFuente;
-	
-	@Autowired
-	private ProcesadorService serviceProcesador;
-	
-	@Autowired
-	private RamService serviceRam;
-	
-	@Autowired
-	private GraficaService serviceGrafica;
-	
 	public Ordenador buscarOrdenador(Long id) {
 		return repoOrdenador.findById(id).orElse(null);
 	}

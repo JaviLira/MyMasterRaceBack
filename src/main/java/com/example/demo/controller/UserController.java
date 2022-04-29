@@ -24,6 +24,7 @@ import com.example.demo.error.CarritoNullExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
 import com.example.demo.error.PedidoFormatNotFoundExeption;
 import com.example.demo.error.PedidoNotFoundExeption2;
+import com.example.demo.error.UserNotFoundExeption;
 import com.example.demo.error.UsuarioNoContieneArticulosEnElCarritoExeption;
 import com.example.demo.error.UsuarioTieneEsePedidoExeption;
 import com.example.demo.model.AbsArticulo;
@@ -33,6 +34,7 @@ import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
+import com.example.demo.model.UserODT;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
@@ -406,12 +408,62 @@ public class UserController {
 		}
         
     }
+    
+    @GetMapping("/usuario/{id}/pedido")
+    public ResponseEntity <User> getPedidosUsuarioId(@PathVariable String id) {
+    	User result=serviceUsuario.buscarUsuario(id);
+    	if (result==null) {
+    		throw new UserNotFoundExeption(id);
+		}else {
+			return ResponseEntity.ok(serviceUsuario.buscarUsuario(id));
+		}
+    }
+    
+    @GetMapping("/usuario/pedido")
+    public ResponseEntity <List<Pedido>> getPedidosUsuario() {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	List<Pedido> result=serviceUsuario.buscarUsuario(email).getListapedidos();
+    	if (result==null) {
+    		throw new UserNotFoundExeption(email);
+		}else {
+			return ResponseEntity.ok(result);
+		}
+        
+		
+    }
+    
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity <User> getUsuarioId(@PathVariable String id) {
+    	User result=serviceUsuario.buscarUsuario(id);
+    	if (result==null) {
+    		throw new UserNotFoundExeption(id);
+		}else {
+			return ResponseEntity.ok(serviceUsuario.buscarUsuario(id));
+		}
+        
+		
+    }
+	
 	
     @GetMapping("/usuario")
     public ResponseEntity <User> getUsuario() {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
 		return ResponseEntity.ok(serviceUsuario.buscarUsuario(email));
+    }
+	
+    @PutMapping("/usuario")
+    public ResponseEntity <User> putUsuario(@RequestBody UserODT usuario) {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	User result=serviceUsuario.modificarUsuario(email, usuario);
+    	
+    	if (result==null) {
+    		throw new UserNotFoundExeption(email);
+		}else {
+			return ResponseEntity.ok(serviceUsuario.buscarUsuario(email));
+		}
+    	
+        
     }
 	
 	
@@ -468,8 +520,6 @@ public class UserController {
 	
 	
 	
-	
-	
     
     
     
@@ -523,7 +573,15 @@ public class UserController {
     
     
     
-    
+    @ExceptionHandler(UserNotFoundExeption.class)
+    public ResponseEntity<ApiError> UserNotFoundExeption(UserNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
     
     @ExceptionHandler(UsuarioNoContieneArticulosEnElCarritoExeption.class)
     public ResponseEntity<ApiError> UsuarioNoContieneArticulosEnElCarritoExeption(UsuarioNoContieneArticulosEnElCarritoExeption ex) throws Exception {

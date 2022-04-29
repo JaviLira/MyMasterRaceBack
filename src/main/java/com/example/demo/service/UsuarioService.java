@@ -1,15 +1,14 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.AbsArticulo;
-import com.example.demo.model.Cesta;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
-import com.example.demo.repository.ArticuloRepo;
+import com.example.demo.model.UserODT;
 import com.example.demo.repository.UserRepo;
 
 @Service("usuario")
@@ -17,12 +16,6 @@ public class UsuarioService {
 
 	@Autowired
 	private UserRepo repoUsuario;
-	
-	@Autowired
-	private ArticuloRepo repoArticulo;
-	
-	@Autowired
-	private PedidoService servicePedido;
 	
 	public User buscarUsuario(String email) {
 		return repoUsuario.findByEmail(email).orElse(null);
@@ -32,56 +25,52 @@ public class UsuarioService {
 		return repoUsuario.findAll();
 	}
 	
-//	public AbsArticulo addCarrito(String email,AbsArticulo articulo) {
-//		User usuario=buscarUsuario(email);
-//		AbsArticulo articuloBase=repoArticulo.findById(articulo.getId()).orElse(null);
-//		boolean existe=false;
-//		
-//		for (AbsArticulo articuloX : usuario.getCestaDeCompra()) {
-//			if (articuloX.getId()==articuloBase.getId()) {
-//				existe=true;
-//			}
-//		}
-//		if (existe) {
-//			return null;
-//		}else {
-//			usuario.getCestaDeCompra().add(articuloBase);
-//			repoUsuario.save(usuario);
-//			return articuloBase;
-//		}
-//	}
-//	public List<Cesta> getCarrito(String email){
-//		User usuario=buscarUsuario(email);
-//		
-//		if (usuario.getCestaUsuario().size()>=0) {
-//			return null;
-//		}else {
-//			return usuario.getCestaUsuario();
-//		}
-//	}
-//	
-//	public AbsArticulo deleteCarrito(String email,AbsArticulo articulo) {
-//		User usuario=buscarUsuario(email);
-//		AbsArticulo articuloBase=repoArticulo.findById(articulo.getId()).orElse(null);
-//		
-//		boolean existe=false;
-//		
-//		for (AbsArticulo articuloX : usuario.getCestaDeCompra()) {
-//			if (articuloX.getId()==articuloBase.getId()) {
-//				existe=true;
-//			}
-//		}
-//		
-//		if (existe) {
-//			usuario.getCestaDeCompra().remove(articuloBase);
-//			repoUsuario.save(usuario);
-//			return articuloBase;
-//		}else {
-//			return null;
-//		}
-//		
-//		
-//	}
+	public User modificarUsuario(String email, UserODT usuario) {
+		User modificado=repoUsuario.findById(email).orElse(null);
+		if (Objects.equals(modificado.getEmail(), email)) {
+			if (modificado!=null) {
+				if (!"".equals(usuario.getCalle()) && usuario.getCalle()!=null) {
+					modificado.setCalle(usuario.getCalle());
+				}
+				if (!"".equals(usuario.getCaducidadTarjeta()) && usuario.getCaducidadTarjeta()!=null) {
+					modificado.setCaducidadTarjeta(usuario.getCaducidadTarjeta());
+				}
+				if (!"".equals(usuario.getCodigoseguridad()) && usuario.getCodigoseguridad()!=null) {
+					modificado.setCodigotarjeta(usuario.getCodigoseguridad());
+				}
+				if (!"".equals(usuario.getDueniotarjeta()) && usuario.getDueniotarjeta()!=null) {
+					modificado.setDueniotarjeta(usuario.getDueniotarjeta());
+				}
+				if (!"".equals(usuario.getName()) && usuario.getName()!=null) {
+					modificado.setName(usuario.getName());
+				}
+				if (!"".equals(usuario.getTarjeta()) && usuario.getTarjeta()!=null) {
+					modificado.setTarjeta(usuario.getTarjeta());
+				}
+				if (!"".equals(usuario.getTelefono()) && usuario.getTelefono()!=null) {
+					modificado.setTelefono(usuario.getTelefono());
+				}
+				if (!"".equals(usuario.getTipopago()) && usuario.getTipopago()!=null) {
+					modificado.setTipopago(usuario.getTipopago());
+				}
+				return modificado;
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+
 	
 	/**
 	 * Comprueba si el usuario tiene ese pedido en concreto para no darle un pedido de otro usuario

@@ -25,38 +25,37 @@ public class UsuarioService {
 		return repoUsuario.findAll();
 	}
 	
-	public User modificarUsuario(String email, UserODT usuario) {
+	public User modificarUsuario(String email, User usuario) {
 		User modificado=repoUsuario.findById(email).orElse(null);
 		if (Objects.equals(modificado.getEmail(), email)) {
-			if (modificado!=null) {
-				if (!"".equals(usuario.getCalle()) && usuario.getCalle()!=null) {
-					modificado.setCalle(usuario.getCalle());
-				}
-				if (!"".equals(usuario.getCaducidadTarjeta()) && usuario.getCaducidadTarjeta()!=null) {
-					modificado.setCaducidadTarjeta(usuario.getCaducidadTarjeta());
-				}
-				if (!"".equals(usuario.getCodigoseguridad()) && usuario.getCodigoseguridad()!=null) {
-					modificado.setCodigotarjeta(usuario.getCodigoseguridad());
-				}
-				if (!"".equals(usuario.getDueniotarjeta()) && usuario.getDueniotarjeta()!=null) {
-					modificado.setDueniotarjeta(usuario.getDueniotarjeta());
-				}
-				if (!"".equals(usuario.getName()) && usuario.getName()!=null) {
-					modificado.setName(usuario.getName());
-				}
-				if (!"".equals(usuario.getTarjeta()) && usuario.getTarjeta()!=null) {
-					modificado.setTarjeta(usuario.getTarjeta());
-				}
-				if (!"".equals(usuario.getTelefono()) && usuario.getTelefono()!=null) {
-					modificado.setTelefono(usuario.getTelefono());
-				}
-				if (!"".equals(usuario.getTipopago()) && usuario.getTipopago()!=null) {
-					modificado.setTipopago(usuario.getTipopago());
-				}
-				return modificado;
-			}else {
-				return null;
+			
+			if (!"".equals(usuario.getCalle()) && usuario.getCalle()!=null) {
+				modificado.setCalle(usuario.getCalle());
 			}
+			if (!"".equals(usuario.getCaducidadTarjeta()) && usuario.getCaducidadTarjeta()!=null) {
+				modificado.setCaducidadTarjeta(usuario.getCaducidadTarjeta());
+			}
+			if (!"".equals(usuario.getCodigotarjeta()) && usuario.getCodigotarjeta()!=null) {
+				modificado.setCodigotarjeta(usuario.getCodigotarjeta());
+			}
+			if (!"".equals(usuario.getDueniotarjeta()) && usuario.getDueniotarjeta()!=null) {
+				modificado.setDueniotarjeta(usuario.getDueniotarjeta());
+			}
+			if (!"".equals(usuario.getName()) && usuario.getName()!=null) {
+				modificado.setName(usuario.getName());
+			}
+			if (!"".equals(usuario.getTarjeta()) && usuario.getTarjeta()!=null) {
+				modificado.setTarjeta(usuario.getTarjeta());
+			}
+			if (!"".equals(usuario.getTelefono()) && usuario.getTelefono()!=null) {
+				modificado.setTelefono(usuario.getTelefono());
+			}
+			if (!"".equals(usuario.getTipopago()) && usuario.getTipopago()!=null) {
+				modificado.setTipopago(usuario.getTipopago());
+			}
+			repoUsuario.save(modificado);
+			return modificado;
+
 		}else {
 			return null;
 		}

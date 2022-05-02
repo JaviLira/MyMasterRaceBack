@@ -27,6 +27,16 @@ public class PedidoService {
 		return repoPedido.findAll();
 	}
 	
+	public List<Pedido> listaPedidosUsuario(String email) {
+		User usuario= repoUsuario.findByEmail(email).orElse(null);
+		if (usuario!=null && usuario.getListapedidos().size()>=1) {
+			return usuario.getListapedidos();
+		}else {
+			return null;
+		}
+
+	}
+	
 	public Pedido crearPedido(String email,Pedido pedido) {
 		if(comprobarPedido(pedido)) {
 			User usuario=repoUsuario.findByEmail(email).orElse(null);

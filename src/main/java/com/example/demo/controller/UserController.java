@@ -24,6 +24,7 @@ import com.example.demo.error.CarritoNullExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
 import com.example.demo.error.PedidoFormatNotFoundExeption;
 import com.example.demo.error.PedidoNotFoundExeption2;
+import com.example.demo.error.PedidoNotFoundExeption;
 import com.example.demo.error.UserNotFoundExeption;
 import com.example.demo.error.UsuarioNoContieneArticulosEnElCarritoExeption;
 import com.example.demo.error.UsuarioTieneEsePedidoExeption;
@@ -377,6 +378,19 @@ public class UserController {
 
     }
     
+    @GetMapping("/pedido")
+    public ResponseEntity<List<Pedido>> getPedido() {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	List<Pedido> result=servicePedido.listaPedidosUsuario(email);
+
+        if(result==null) {
+        	throw new PedidoNotFoundExeption();
+        }else {
+        	return ResponseEntity.ok(result);
+        }
+
+    }
+    
     @GetMapping("/pedido/{id}")
     public ResponseEntity<Pedido> getPedido(@PathVariable Long id) {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -453,7 +467,7 @@ public class UserController {
     }
 	
     @PutMapping("/usuario")
-    public ResponseEntity <User> putUsuario(@RequestBody UserODT usuario) {
+    public ResponseEntity <User> putUsuario(@RequestBody User usuario) {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	User result=serviceUsuario.modificarUsuario(email, usuario);
     	
@@ -571,7 +585,15 @@ public class UserController {
     
     
     
-    
+    @ExceptionHandler(PedidoNotFoundExeption.class)
+    public ResponseEntity<ApiError> PedidoNotFoundExeption(PedidoNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
     
     @ExceptionHandler(UserNotFoundExeption.class)
     public ResponseEntity<ApiError> UserNotFoundExeption(UserNotFoundExeption ex) throws Exception {

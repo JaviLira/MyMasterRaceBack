@@ -31,11 +31,11 @@ import com.example.demo.error.UsuarioTieneEsePedidoExeption;
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.LineaPedido;
+import com.example.demo.model.Opiniones;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
-import com.example.demo.model.UserODT;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
 import com.example.demo.model.componentes.Grafica;
@@ -47,6 +47,7 @@ import com.example.demo.service.DiscoService;
 import com.example.demo.service.FuenteService;
 import com.example.demo.service.GraficaService;
 import com.example.demo.service.LineaPedidoService;
+import com.example.demo.service.OpinionesService;
 import com.example.demo.service.OrdenadorService;
 import com.example.demo.service.OrdenadorVendidoService;
 import com.example.demo.service.PedidoService;
@@ -93,6 +94,13 @@ public class UserController {
 	
 	@Autowired
 	private ArticuloService serviceArticulo;
+	
+	@Autowired
+	private OpinionesService serviceOpinion;
+	
+	
+	
+	
 	
 	@GetMapping("articulo")
 	public ResponseEntity<List<AbsArticulo>> listaArticulos() {
@@ -476,11 +484,19 @@ public class UserController {
 		}else {
 			return ResponseEntity.ok(serviceUsuario.buscarUsuario(email));
 		}
-    	
-        
     }
 	
-	
+    @PostMapping("/articulo/{id}/comentario")
+    public ResponseEntity <Opiniones> postComentario(@PathVariable Long id,@RequestBody Opiniones opinion) {
+    	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	Opiniones result=serviceOpinion.crearOpinion(opinion,id,email);
+    	
+    	if (result==null) {
+    		throw new UserNotFoundExeption(email);
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
 	
 	
 	

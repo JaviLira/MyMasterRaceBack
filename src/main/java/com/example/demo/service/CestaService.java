@@ -118,13 +118,10 @@ public class CestaService {
 		if (listaCesta.size()==1) {
 			deleteCarrito(email, listaCesta.get(0).getId());
 		}else {
-			int cont=0;
-			for (int i = 0; i < listaCesta.size(); i++) {
-				deleteCarrito(email, listaCesta.get(cont).getId());
-				cont++;
+			for (int i = 0; i < listaCesta.size()+2; i++) {
+				deleteCarrito(email, listaCesta.get(0).getId());
 			}
 		}
-		
 	}
 	
 	

@@ -21,4 +21,13 @@ public class ArticuloService {
 	public AbsArticulo buscarArticulo(Long id) {
 		return repoArticulo.findById(id).orElse(null);
 	}
+	
+	public boolean comprobarCantidad(Long id) {
+		boolean result=false;
+		AbsArticulo articulo=repoArticulo.findById(id).orElse(null);
+		if (articulo.getCantidad()>=1) {
+			result=true;
+		}
+		return result;
+	}
 }

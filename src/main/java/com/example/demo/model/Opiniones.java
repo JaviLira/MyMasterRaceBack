@@ -24,11 +24,15 @@ public class Opiniones {
 	private AbsArticulo articulo;
 	private int valoracion;
 
-	public Opiniones(String comentario, AbsArticulo articulo, int valoracion) {
+	@OneToOne
+	private User usuario;
+
+	public Opiniones(String comentario, AbsArticulo articulo, int valoracion, User usuario) {
 		super();
 		this.comentario = comentario;
 		this.articulo = articulo;
 		this.valoracion = valoracion;
+		this.usuario = usuario;
 	}
 
 	public Opiniones() {
@@ -65,6 +69,14 @@ public class Opiniones {
 
 	public void setValoracion(int valoracion) {
 		this.valoracion = valoracion;
+	}
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

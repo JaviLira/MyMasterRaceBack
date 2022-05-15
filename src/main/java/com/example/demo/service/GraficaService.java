@@ -22,5 +22,29 @@ public class GraficaService {
 		return repoGrafica.findAll();
 	}
 	
+	public Grafica crearGrafica(Grafica grafica) {
+		if (grafica.getCantidad()>=1 
+				&& !"".equals(grafica.getDescripcion()) && grafica.getDescripcion()!=null
+				&& !"".equals(grafica.getMarca()) && grafica.getMarca()!=null
+				&& !"".equals(grafica.getModelo()) && grafica.getModelo()!=null
+				&& !"".equals(grafica.getNombre()) && grafica.getNombre()!=null
+				&& grafica.getPrecio()>=1) {
+			Grafica newGrafica=new Grafica();
+			newGrafica.setCantidad(grafica.getCantidad());
+			newGrafica.setDescripcion(grafica.getDescripcion());
+			newGrafica.setImagenes(grafica.getImagenes());
+			newGrafica.setMarca(grafica.getMarca());
+			newGrafica.setModelo(grafica.getModelo());
+			newGrafica.setNombre(grafica.getNombre());
+			newGrafica.setPrecio(grafica.getPrecio());		
+			repoGrafica.save(newGrafica);
+			return newGrafica;
+		}else {
+			return null;
+		}
+		
+		
+	}
+	
 	
 }

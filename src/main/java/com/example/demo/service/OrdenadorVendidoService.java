@@ -56,7 +56,7 @@ public class OrdenadorVendidoService {
 			ordenadorNuevo.setFuente(serviceFuente.buscarFuente(ordenadorV.getFuente().getId()));
 			ordenadorNuevo.setDiscoduro(serviceDisco.buscarDisco(ordenadorV.getDiscoduro().getId()));
 			ordenadorNuevo.setDescripcion(ordenadorV.getDescripcion());
-			ordenadorNuevo.setCantidad(2);
+			ordenadorNuevo.setCantidad(6);
 			
 			return repoOrdenadorVendido.save(ordenadorNuevo);
 		}

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.error.ApiError;
 import com.example.demo.error.ContrasenaNotFoundExeption;
 import com.example.demo.error.ExisteUsuarioNotFoundExeption;
+import com.example.demo.error.RolAdministradorExeption;
 import com.example.demo.error.TokenNoValidoExeption;
 import com.example.demo.error.UserNotFoundExeption;
 import com.example.demo.model.LoginCredentials;
@@ -95,6 +96,18 @@ public class AuthController {
 			throw new TokenNoValidoExeption();
 		}
     }
+  
+  @GetMapping("/validarRolAdministrador")
+  public ResponseEntity<User> validarRolAdministrador() {
+  	try {
+  		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  		User result=serviceUsuario.comprobarRolAdministrador(email);
+		return ResponseEntity.ok(result);
+		
+  	}catch (Exception e) {
+			throw new TokenNoValidoExeption();
+		}
+  }
     
     @GetMapping("/auth/email/{email}")
     public ResponseEntity<User> comprobarEmail(@PathVariable String email) {
@@ -113,6 +126,16 @@ public class AuthController {
     
     
     
+    
+    @ExceptionHandler(RolAdministradorExeption.class)
+    public ResponseEntity<ApiError> RolAdministradorExeption(RolAdministradorExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	} 
     
     @ExceptionHandler(ExisteUsuarioNotFoundExeption.class)
     public ResponseEntity<ApiError> registrarError(ExisteUsuarioNotFoundExeption ex) throws Exception {

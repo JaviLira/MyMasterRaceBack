@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.vote.AbstractAccessDecisionManager;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.LineaPedido;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
+import com.example.demo.repository.ArticuloRepo;
 import com.example.demo.repository.LineaPedidoRepo;
 import com.example.demo.repository.PedidoRepo;
 import com.example.demo.repository.UserRepo;
@@ -25,6 +28,9 @@ public class LineaPedidoService {
 	
 	@Autowired
 	private LineaPedidoRepo repoLienaPedido;
+	
+	@Autowired
+	private ArticuloRepo repoArticulo;
 	
 	public LineaPedido buscarLineaPedido(Long id) {
 		return repoLienaPedido.findById(id).orElse(null);
@@ -46,6 +52,10 @@ public class LineaPedidoService {
 			linea.setCantidad(cesta.getCantidad());
 			repoLienaPedido.save(linea);
 			listaLIneaPedido.add(linea);
+			
+			AbsArticulo articulo=cesta.getArticulo();
+			articulo.setCantidad(articulo.getCantidad()-cesta.getCantidad());
+			repoArticulo.save(articulo);
 		}
 		pedido.setListaLineaPedido(listaLIneaPedido);
 		repoPedido.save(pedido);

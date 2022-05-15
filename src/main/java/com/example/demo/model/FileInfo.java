@@ -21,7 +21,7 @@ public class FileInfo {
   @Lob		
   private byte[] data;
   
-  private static int COUNT = 0;  
+  //private static int COUNT = 0;  
   
   public FileInfo() {}
   

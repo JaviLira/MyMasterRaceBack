@@ -25,14 +25,12 @@ public class User {
 	private String telefono;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	private Roles rol;
 	private String tipopago;
 	private String codigotarjeta;
 	private String tarjeta;
 	private String dueniotarjeta;
 	private String caducidadTarjeta;
-	@JsonIgnore
-	@OneToMany
-	private List<Opiniones> listaOpiniones=new ArrayList<>();
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Pedido> listapedidos=new ArrayList<>();
@@ -42,12 +40,14 @@ public class User {
 	
 	public User() {
 		super();
+		this.rol=Roles.ROLE_USER;
 	}
 
 	public User(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
+		this.rol=Roles.ROLE_USER;
 	}
 	
 	public User(String name, String email, String calle, String telefono, String password) {
@@ -57,6 +57,7 @@ public class User {
 		this.calle = calle;
 		this.telefono = telefono;
 		this.password = password;
+		this.rol=Roles.ROLE_USER;
 	}
 	
 	public User(String name, String email, String calle, String telefono, String password, String tipopado,
@@ -72,6 +73,7 @@ public class User {
 		this.tarjeta = tarjeta;
 		this.dueniotarjeta = dueniotarjeta;
 		this.caducidadTarjeta = caducidadTarjeta;
+		this.rol=Roles.ROLE_USER;
 	}
 
 	public String getName() {
@@ -162,20 +164,20 @@ public class User {
 		this.caducidadTarjeta = caducidadTarjeta;
 	}
 
-	public List<Opiniones> getListaOpiniones() {
-		return listaOpiniones;
-	}
-
-	public void setListaOpiniones(List<Opiniones> listaOpiniones) {
-		this.listaOpiniones = listaOpiniones;
-	}
-
 	public List<Cesta> getListaCesta() {
 		return listaCesta;
 	}
 
 	public void setListaCesta(List<Cesta> listaCesta) {
 		this.listaCesta = listaCesta;
+	}
+
+	public Roles getRol() {
+		return rol;
+	}
+
+	public void setRol(Roles rol) {
+		this.rol = rol;
 	}
 
 	@Override
@@ -199,8 +201,7 @@ public class User {
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", calle=" + calle + ", telefono=" + telefono + ", password="
 				+ password + ", tipopago=" + tipopago + ", codigotarjeta=" + codigotarjeta + ", tarjeta=" + tarjeta
-				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listaOpiniones="
-				+ listaOpiniones + ", listapedidos=" + listapedidos + "]";
+				+ ", dueniotarjeta=" + dueniotarjeta + ", caducidadTarjeta=" + caducidadTarjeta + ", listapedidos=" + listapedidos + "]";
 	}
 
 

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.model.Ordenador;
+import com.example.demo.model.Roles;
 import com.example.demo.model.User;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
@@ -57,6 +58,9 @@ public class EjemploRestServiceJwtApplication {
 	CommandLineRunner iniUsuarios(UserRepo repoUsuario) {
 		return (arg)-> {
 			repoUsuario.save(new User("javi", "javi@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"));
+			User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
+			usuario.setRol(Roles.ROLE_ADMIN);
+			repoUsuario.save(usuario);
 		};
 	}
 	

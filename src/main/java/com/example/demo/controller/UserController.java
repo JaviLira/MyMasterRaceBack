@@ -4,6 +4,8 @@ package com.example.demo.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.error.ApiError;
 import com.example.demo.error.ArticuloNotFoundExeption;
 import com.example.demo.error.ArticuloNullExeption;
+import com.example.demo.error.ArticuloVacioExeption;
+import com.example.demo.error.CantidadExeption;
 import com.example.demo.error.CarritoNullExeption;
+import com.example.demo.error.ComentarioExeption;
 import com.example.demo.error.OrdenadorInexistenteNotFoundExeption;
 import com.example.demo.error.PedidoFormatNotFoundExeption;
 import com.example.demo.error.PedidoNotFoundExeption2;
 import com.example.demo.error.PedidoNotFoundExeption;
 import com.example.demo.error.UserNotFoundExeption;
 import com.example.demo.error.UsuarioNoContieneArticulosEnElCarritoExeption;
+import com.example.demo.error.UsuarioNoHaCompradoEseArticuloExeption;
 import com.example.demo.error.UsuarioTieneEsePedidoExeption;
+import com.example.demo.error.UsuarioYaAComentadoExeption;
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.LineaPedido;
+import com.example.demo.model.Mensaje;
 import com.example.demo.model.Opiniones;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
@@ -53,6 +61,7 @@ import com.example.demo.service.OrdenadorVendidoService;
 import com.example.demo.service.PedidoService;
 import com.example.demo.service.ProcesadorService;
 import com.example.demo.service.RamService;
+import com.example.demo.service.SmtpMailSender;
 import com.example.demo.service.UsuarioService;
 
 
@@ -98,7 +107,8 @@ public class UserController {
 	@Autowired
 	private OpinionesService serviceOpinion;
 	
-	
+	@Autowired
+	private SmtpMailSender smtpMailSender;
 	
 	
 	
@@ -122,9 +132,29 @@ public class UserController {
     	return ResponseEntity.ok(serviceRam.findAll());
     }
 	
+	@PostMapping("articulo/ram")
+	public ResponseEntity<Ram> postRam(@RequestBody Ram ram) {
+		Ram result= serviceRam.crearRam(ram);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	@GetMapping("articulo/procesador")
 	public ResponseEntity<List<Procesador>> listarProcesadores() {
     	return ResponseEntity.ok(serviceProcesador.findAll());
+    }
+	
+	@PostMapping("articulo/procesador")
+	public ResponseEntity<Procesador> postProcesador(@RequestBody Procesador procesador) {
+		Procesador result= serviceProcesador.crearProcesador(procesador);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
     }
 	
 	@GetMapping("articulo/fuente")
@@ -132,14 +162,54 @@ public class UserController {
     	return ResponseEntity.ok(serviceFuente.findAll());
     }
 	
+	@PostMapping("articulo/fuente")
+	public ResponseEntity<Fuente> postFuentes(@RequestBody Fuente fuente) {
+		Fuente result= serviceFuente.crearFuente(fuente);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	@GetMapping("articulo/grafica")
 	public ResponseEntity<List<Grafica>> listarGraficas() {
     	return ResponseEntity.ok(serviceGrafica.findAll());
     }
 	
+	@PostMapping("articulo/grafica")
+	public ResponseEntity<Grafica> postGrafica(@RequestBody Grafica grafica) {
+		Grafica result= serviceGrafica.crearGrafica(grafica);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	@GetMapping("articulo/disco")
 	public ResponseEntity<List<Disco>> listarDiscos() {
     	return ResponseEntity.ok(serviceDisco.findAll());
+    }
+	
+	@PostMapping("articulo/disco")
+	public ResponseEntity<Disco> postDisco(@RequestBody Disco disco) {
+		Disco result= serviceDisco.crearDisco(disco);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
+	@PutMapping("articulo/disco/{id}")
+	public ResponseEntity<Disco> putDisco(@PathVariable Long id,@RequestBody Disco disco) {
+		Disco result= serviceDisco.editDisco(id,disco);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
     }
 	
 	@GetMapping("articulo/ordenador")
@@ -295,7 +365,17 @@ public class UserController {
         if(serviceArticulo.buscarArticulo(p.getId())==null) {
         	throw new ArticuloNullExeption();
         }else {
-        	return ResponseEntity.ok(serviceCesta.addCarrito(email, p));
+        	if (serviceArticulo.comprobarCantidad(p.getId())) {
+        		AbsArticulo result=serviceCesta.addCarrito(email, p);
+        		if(result==null) {
+        			throw new CantidadExeption();
+        		}else {
+        			return ResponseEntity.ok(result);
+        		}
+			}else {
+				throw new CantidadExeption();
+			}
+        	
         }
     }
     
@@ -369,7 +449,7 @@ public class UserController {
     }
 	
     @PostMapping("/pedido")
-    public ResponseEntity<Pedido> realizarPedido(@RequestBody Pedido p) {
+    public ResponseEntity<Pedido> postPedido(@RequestBody Pedido p) {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Pedido result=servicePedido.crearPedido(email,p);
     	if (serviceUsuario.usuarioTieneArticulosEnCarrito(email)) {
@@ -489,16 +569,45 @@ public class UserController {
     @PostMapping("/articulo/{id}/comentario")
     public ResponseEntity <Opiniones> postComentario(@PathVariable Long id,@RequestBody Opiniones opinion) {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Opiniones result=serviceOpinion.crearOpinion(opinion,id,email);
+    	
+    	if (serviceUsuario.usuarioTieneArticuloComprado(email, id)) {
+			if (!serviceOpinion.usuarioYaComentadoArticulo(id, email)) {
+				Opiniones result=serviceOpinion.crearOpinion(opinion,id,email);
+	    	
+		    	if (result==null) {
+		    		throw new ComentarioExeption();
+				}else {
+					return ResponseEntity.ok(result);
+				}
+			}else {
+				throw new UsuarioYaAComentadoExeption();
+			}
+		}else {
+			throw new UsuarioNoHaCompradoEseArticuloExeption();
+		}
+    	
+
+    	
+
+    }
+    
+    @GetMapping("/articulo/{id}/comentario")
+    public ResponseEntity <List<Opiniones>> GetComentariosDeUnArticulo(@PathVariable Long id) {
+    	List<Opiniones> result=serviceOpinion.listaDeComentariosDeUnArticulo(id);
     	
     	if (result==null) {
-    		throw new UserNotFoundExeption(email);
+    		throw new ComentarioExeption();
 		}else {
 			return ResponseEntity.ok(result);
 		}
     }
 	
-	
+	@PostMapping("/mail")
+	public void sendEmail(@RequestBody Mensaje datos) throws MessagingException {
+		datos.setToUser("javilirasanchez20011812@gmail.com");
+
+		smtpMailSender.send(datos.getToUser(), datos.getSubject(), datos.getText(), datos.getFromUser());
+	}
 	
 	
 	
@@ -584,22 +693,55 @@ public class UserController {
     
     
     
+    @ExceptionHandler(ArticuloVacioExeption.class)
+    public ResponseEntity<ApiError> ArticuloVacioExeption(ArticuloVacioExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
+   
+    @ExceptionHandler(CantidadExeption.class)
+    public ResponseEntity<ApiError> CantidadExeption(CantidadExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
     
+    @ExceptionHandler(UsuarioNoHaCompradoEseArticuloExeption.class)
+    public ResponseEntity<ApiError> UsuarioNoHaCompradoEseArticuloExeption(UsuarioNoHaCompradoEseArticuloExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
     
+    @ExceptionHandler(UsuarioYaAComentadoExeption.class)
+    public ResponseEntity<ApiError> UsuarioYaAComentadoExeption(UsuarioYaAComentadoExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    @ExceptionHandler(ComentarioExeption.class)
+    public ResponseEntity<ApiError> ComentarioExeption(ComentarioExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.NOT_FOUND);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	}
     
     @ExceptionHandler(PedidoNotFoundExeption.class)
     public ResponseEntity<ApiError> PedidoNotFoundExeption(PedidoNotFoundExeption ex) throws Exception {

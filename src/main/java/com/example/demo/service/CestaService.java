@@ -47,9 +47,14 @@ public class CestaService {
 			int cantidad=cestaInterior.getCantidad();
 			cantidad+=1;
 			cestaInterior.setCantidad(cantidad);
+			if (cestaInterior.getCantidad()>articuloBase.getCantidad()) {
+				return null;
+			}else {
 			repoCesta.save(cestaInterior);
 			
 			return articuloBase;
+			}
+
 		}else {
 			Cesta cestaNueva=new Cesta();
 			cestaNueva.setArticulo(articuloBase);

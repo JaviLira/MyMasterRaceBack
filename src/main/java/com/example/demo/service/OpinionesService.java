@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,28 +39,59 @@ public class OpinionesService {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
 		AbsArticulo articuloBase=repoArticulo.findById(idArticulo).orElse(null);
 		if (usuario!=null && articuloBase!=null) {
+			Opiniones nuevaOpinion=new Opiniones();
+			nuevaOpinion.setArticulo(articuloBase);
+			nuevaOpinion.setComentario(opinion.getComentario());
+			nuevaOpinion.setValoracion(opinion.getValoracion());
+			nuevaOpinion.setUsuario(usuario);
+		
+			repoOpiniones.save(nuevaOpinion);
 			
-		}
+			return nuevaOpinion;
 		
-		Opiniones nuevaOpinion=new Opiniones();
-		nuevaOpinion.setArticulo(articuloBase);
-		nuevaOpinion.setComentario(opinion.getComentario());
-		nuevaOpinion.setValoracion(opinion.getValoracion());
-		
-		repoOpiniones.save(nuevaOpinion);
-		if (usuario.getListaOpiniones().size()<=0) {
-			List<Opiniones> listaOp=new ArrayList<Opiniones>();
-			listaOp.add(nuevaOpinion);
-			usuario.setListaOpiniones(listaOp);
-			repoUsuario.save(usuario);
 		}else {
-			usuario.getListaOpiniones().add(nuevaOpinion);
-			repoUsuario.save(usuario);
+			return null;
 		}
 		
-		return nuevaOpinion;
+
 	}
 
+	public List<Opiniones> listaDeComentariosDeUnArticulo(Long id){
+		List<Opiniones> listaOpiniones=repoOpiniones.findAll();
+		List<Opiniones> listaOpinionesDelArticulo=new ArrayList<Opiniones>();
+		if (listaOpiniones.size()>=1) {
+			for (Opiniones opinion : listaOpiniones) {
+				if (opinion.getArticulo().getId()==id) {
+					listaOpinionesDelArticulo.add(opinion);
+				}
+			}
+			return listaOpinionesDelArticulo;
+		}else {
+			
+			return null;
+		}
+		
+	}
+	
+	public boolean usuarioYaComentadoArticulo(Long idArticulo,String email) {
+		List<Opiniones> listaOpiniones=repoOpiniones.findAll();
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		boolean respuesta=false;
+		
+		for (Opiniones opiniones : listaOpiniones) {
+			if (Objects.equals(opiniones.getArticulo().getId(), idArticulo) && Objects.equals(opiniones.getUsuario().getEmail(), usuario.getEmail())) {
+				respuesta= true;
+			}
+		}
+		
+		
+		
+		return respuesta;
+	}
+	
+	
+	
+	
 	
 	
 }

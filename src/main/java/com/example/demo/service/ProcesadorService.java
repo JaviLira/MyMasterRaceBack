@@ -34,5 +34,34 @@ public class ProcesadorService {
 		return listaProcesadores;
 	}
 	
+	public Procesador crearProcesador(Procesador procesador) {
+		
+		if (procesador.getCantidad()>=1 
+				&& !"".equals(procesador.getDescripcion()) && procesador.getDescripcion()!=null
+				&& !"".equals(procesador.getMarca()) && procesador.getMarca()!=null
+				&& !"".equals(procesador.getModelo()) && procesador.getModelo()!=null
+				&& !"".equals(procesador.getNombre()) && procesador.getNombre()!=null
+				&& !"".equals(procesador.getSocket()) && procesador.getSocket()!=null
+				&& procesador.getPrecio()>=1) {
+			Procesador newProcesador=new Procesador();
+			
+			newProcesador.setCantidad(procesador.getCantidad());
+			newProcesador.setDescripcion(procesador.getDescripcion());
+			newProcesador.setImagenes(procesador.getImagenes());
+			newProcesador.setMarca(procesador.getMarca());
+			newProcesador.setModelo(procesador.getModelo());
+			newProcesador.setNombre(procesador.getNombre());
+			newProcesador.setPrecio(procesador.getPrecio());	
+			newProcesador.setSocket(procesador.getSocket());	
+			repoProcesador.save(newProcesador);
+			
+			return newProcesador;
+		} else {
+			return null;
+		}
+		
+		
+	}
+	
 	
 }

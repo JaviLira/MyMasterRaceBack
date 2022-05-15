@@ -23,5 +23,27 @@ public class FuenteService {
 		return repoFuente.findAll();
 	}
 	
+	public Fuente crearFuente(Fuente fuente) {
+		if (fuente.getCantidad()>=1 && fuente.getPotencia()>=1 
+			&& fuente.getPrecio()>=1
+			&& !"".equals(fuente.getDescripcion()) && fuente.getDescripcion()!=null
+			&& !"".equals(fuente.getNombre()) && fuente.getNombre()!=null) {
+			Fuente newFuente = new Fuente();
+			newFuente.setCantidad(fuente.getCantidad());
+			newFuente.setCertificacion(fuente.getCertificacion());
+			newFuente.setDescripcion(fuente.getDescripcion());
+			newFuente.setImagenes(fuente.getImagenes());
+			newFuente.setNombre(fuente.getNombre());
+			newFuente.setPotencia(fuente.getPotencia());
+			newFuente.setPrecio(fuente.getPrecio());
+			repoFuente.save(newFuente);
+			
+			return newFuente;
+		}else {
+			return null;
+		}
+		
+	}
+	
 	
 }

@@ -6,9 +6,9 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.LineaPedido;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
-import com.example.demo.model.UserODT;
 import com.example.demo.repository.UserRepo;
 
 @Service("usuario")
@@ -20,6 +20,17 @@ public class UsuarioService {
 	public User buscarUsuario(String email) {
 		return repoUsuario.findByEmail(email).orElse(null);
 	}
+	
+	public User comprobarRolAdministrador(String email) {
+		User result = repoUsuario.findByEmail(email).orElse(null);
+		if ("ADMIN".equals(result.getRol())) {
+			return result;
+		} else {
+			return null;
+		}
+	}
+	
+	
 	
 	public List<User> findAll() {
 		return repoUsuario.findAll();
@@ -102,6 +113,26 @@ public class UsuarioService {
 		if (usuario.getListaCesta().size()>=1) {
 			respuesta=true;
 		}
+		return respuesta;
+	}
+	
+	public boolean usuarioTieneArticuloComprado(String email,Long idArticulo) {
+		boolean respuesta = false;
+		User usuario=repoUsuario.findByEmail(email).orElse(null);
+		for (Pedido pedido : usuario.getListapedidos()) {
+			for (LineaPedido linea : pedido.getListaLineaPedido()) {
+				if (Objects.equals(linea.getArticulo().getId(), idArticulo)) {
+					respuesta=true;
+				}
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
 		return respuesta;
 	}
 	

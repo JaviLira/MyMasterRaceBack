@@ -33,5 +33,32 @@ public class RamService {
 		}
 		return listaRams;
 	}
+	
+	public Ram crearRam(Ram ram) {
+		if (ram.getCantidad()>=1 
+				&& !"".equals(ram.getDescripcion()) && ram.getDescripcion()!=null
+				&& ram.getCapacidad()>=1
+				&& !"".equals(ram.getFormato()) && ram.getFormato()!=null
+				&& !"".equals(ram.getNombre()) && ram.getNombre()!=null
+				&& !"".equals(ram.getKit()) && ram.getKit()!=null
+				&& !"".equals(ram.getTipo()) && ram.getTipo()!=null
+				&& ram.getPrecio()>=1) {
+			Ram newRam=new Ram();
+			
+			newRam.setCantidad(ram.getCantidad());
+			newRam.setDescripcion(ram.getDescripcion());
+			newRam.setImagenes(ram.getImagenes());
+			newRam.setCapacidad(ram.getCantidad());
+			newRam.setFormato(ram.getFormato());
+			newRam.setNombre(ram.getNombre());
+			newRam.setPrecio(ram.getPrecio());	
+			newRam.setTipo(ram.getTipo());	
+			repoRam.save(newRam);
+			
+			return newRam;
+		} else {
+			return null;
+		}
+	}
 
 }

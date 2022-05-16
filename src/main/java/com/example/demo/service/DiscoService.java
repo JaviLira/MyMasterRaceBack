@@ -69,9 +69,9 @@ public class DiscoService {
 			if (disco.getTipo()!=null && !"".equals(disco.getTipo())) {
 				discoEdit.setTipo(disco.getTipo());
 			}
-			if(disco.getImagenes()!=null) {
-				discoEdit.setImagenes(disco.getImagenes());
-			}
+//			if(disco.getImagenes()!=null) {
+//				discoEdit.setImagenes(disco.getImagenes());
+//			}
 			repoDisco.save(discoEdit);
 			
 			return discoEdit;

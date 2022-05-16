@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +17,8 @@ public class AbsArticulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	protected String nombre;
-	protected String imagenes;
+	@Lob
+	protected byte[] imagenes;
 	protected String descripcion;
 	protected Integer cantidad;
 	protected double precio;
@@ -30,7 +32,7 @@ public class AbsArticulo {
 
 
 
-	public AbsArticulo(String nombre, String imagenes, String descripcion, Integer cantidad, double precio) {
+	public AbsArticulo(String nombre, byte[] imagenes, String descripcion, Integer cantidad, double precio) {
 		super();
 		this.nombre = nombre;
 		this.imagenes = imagenes;
@@ -55,11 +57,11 @@ public class AbsArticulo {
 		this.nombre = nombre;
 	}
 
-	public String getImagenes() {
+	public byte[] getImagenes() {
 		return imagenes;
 	}
 
-	public void setImagenes(String imagenes) {
+	public void setImagenes(byte[] imagenes) {
 		this.imagenes = imagenes;
 	}
 

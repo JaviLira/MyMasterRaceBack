@@ -18,7 +18,7 @@ public class Ram extends AbsArticulo{
 		super();
 	}
 
-	public Ram(String nombre, String imagenes, String descripcion, int cantidad, double precio, String tipo, String formato, int capacidad, String kit) {
+	public Ram(String nombre, byte[] imagenes, String descripcion, int cantidad, double precio, String tipo, String formato, int capacidad, String kit) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.tipo = tipo;
 		this.formato = formato;

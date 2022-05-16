@@ -54,6 +54,8 @@ public class EjemploRestServiceJwtApplication {
 	@Autowired
 	private GraficaService serviceGrafica;
 	
+	byte[] imagen=null;
+	
 	@Bean
 	CommandLineRunner iniUsuarios(UserRepo repoUsuario) {
 		return (arg)-> {
@@ -67,68 +69,74 @@ public class EjemploRestServiceJwtApplication {
 	@Bean
 	CommandLineRunner iniRam(RamRepo repoRam) {
 		return (arg)-> {
-			repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX","","Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
-					new Ram("Kingston HyperX","","",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
-					new Ram("Kingston HyperX","","",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
-					new Ram("Kingston FURY","","",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
-					new Ram("Kingston FURY","","",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
-					new Ram("Kingston FURY","","",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
+			repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
+					new Ram("Kingston HyperX",imagen,"",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
+					new Ram("Kingston HyperX",imagen,"",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
+					new Ram("Kingston FURY",imagen,"",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
+					new Ram("Kingston FURY",imagen,"",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
+					new Ram("Kingston FURY",imagen,"",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniDisco(DiscoRepo repoDisco) {
 		return (arg)-> {
-			repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda","","",6, 45.65, "HDD", 1000,"sata3"),
-					new Disco("Seagate BarraCuda","","",6, 60.65, "HDD", 2000,"sata3"),
-					new Disco("Kingston A400","","",6, 42.32, "SSD", 480,"sata3"),
-					new Disco("Kingston A400","","",6, 80.90, "SSD", 1000,"sata3"),
-					new Disco("Kingston A400","","",6, 140.60, "SSD", 2000,"sata3")));
+			repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
+					new Disco("Seagate BarraCuda",imagen,"",6, 60.65, "HDD", 2000,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 42.32, "SSD", 480,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 80.90, "SSD", 1000,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 140.60, "SSD", 2000,"sata3")));
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniFuente(FuenteRepo repoFuente) {
 		return (arg)-> {
-			repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta","","",6, 75.90, "80 Plus Gold", 650),
-					new Fuente("Nfortec Sagitta","","",6, 89.90, "80 Plus Silver",850),
-					new Fuente("Nfortec Sagitta","","",6, 105.90, "80 Plus Gold", 1050),
-					new Fuente("Corsair RM750","","",6, 90.90, "80 Plus Gold", 750),
-					new Fuente("Corsair RM850","","",6, 120.90, "80 Plus Gold", 850),
-					new Fuente("Be Quiet! Dark Power Pro 12","","",6 , 500.90, "80 Plus Titanium", 1500)));
+			repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"",6, 75.90, "80 Plus Gold", 650),
+					new Fuente("Nfortec Sagitta",imagen,"",6, 89.90, "80 Plus Silver",850),
+					new Fuente("Nfortec Sagitta",imagen,"",6, 105.90, "80 Plus Gold", 1050),
+					new Fuente("Corsair RM750",imagen,"",6, 90.90, "80 Plus Gold", 750),
+					new Fuente("Corsair RM850",imagen,"",6, 120.90, "80 Plus Gold", 850),
+					new Fuente("Be Quiet! Dark Power Pro 12",imagen,"",6 , 500.90, "80 Plus Titanium", 1500)));
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniGrafica(GraficaRepo repoGrafica) {
 		return (arg)-> {
-			repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC","","",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Asus Dual OC EVO","","",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Sapphire PULSE","","",6 , 490.90, "AMD", "RX 6600"),
-					new Grafica("PowerColor FIGHTER","","",6 , 480.90, "AMD", "RX 6600")));
+			repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Asus Dual OC EVO",imagen,"",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Sapphire PULSE",imagen,"",6 , 490.90, "AMD", "RX 6600"),
+					new Grafica("PowerColor FIGHTER",imagen,"",6 , 480.90, "AMD", "RX 6600")));
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniProcesador(ProcesadorRepo repoProcesador) {
 		return (arg)-> {
-			repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G","","",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
-					new Procesador("AMD Ryzen 7 5700G","","",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
-					new Procesador("Intel Core i7-12700K","","",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
-					new Procesador("Intel Core i5-12400F","","",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
-					new Procesador("Intel Core i7-11700K","","",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
-					new Procesador("Intel Core 5-10400","","",6 , 160.80, "Intel", "Core 5-10400", "1200")));
+			repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
+					new Procesador("AMD Ryzen 7 5700G",imagen,"",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
+					new Procesador("Intel Core i7-12700K",imagen,"",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
+					new Procesador("Intel Core i5-12400F",imagen,"",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
+					new Procesador("Intel Core i7-11700K",imagen,"",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
+					new Procesador("Intel Core 5-10400",imagen,"",6 , 160.80, "Intel", "Core 5-10400", "1200")));
 		};
 	}
 	
 	
 	@Bean
 	CommandLineRunner iniOrdenador(OrdenadoresRepo repoOedenador) {
-		String enlace1="https://i.ibb.co/GpLydf4/1.png";
-		String enlace2="https://static.carrefour.es/hd_510x_/imagenes/products/84254/02437/728/8425402437728/imagenGrande1.jpg";
-		String enlace3="https://d10mhq06fikmnr.cloudfront.net/catalog/product/h/u/hunter_rev2_main_rgb-min_4.png";
-		String enlace4="https://www.info-computer.com/65105-large_default/-pc-gaming-i5-9400-29-ghz-8gb-ddr4-ssd-480-gb-w10-home-oferta.jpg";
-		String enlace5="https://www.info-computer.com/78122-large_default/pc-gaming-amd-ryzen-9-5900x-32-gb-ddr4-2-tb-1-tb-ssd-m2-rtx-3080-ti-12-gb-ddr6x-w10-home-64.jpg";
+//		String enlace1="https://i.ibb.co/GpLydf4/1.png";
+//		String enlace2="https://static.carrefour.es/hd_510x_/imagenes/products/84254/02437/728/8425402437728/imagenGrande1.jpg";
+//		String enlace3="https://d10mhq06fikmnr.cloudfront.net/catalog/product/h/u/hunter_rev2_main_rgb-min_4.png";
+//		String enlace4="https://www.info-computer.com/65105-large_default/-pc-gaming-i5-9400-29-ghz-8gb-ddr4-ssd-480-gb-w10-home-oferta.jpg";
+//		String enlace5="https://www.info-computer.com/78122-large_default/pc-gaming-amd-ryzen-9-5900x-32-gb-ddr4-2-tb-1-tb-ssd-m2-rtx-3080-ti-12-gb-ddr6x-w10-home-64.jpg";
+//		
+		byte[] enlace1=imagen;
+		byte[] enlace2=imagen;
+		byte[] enlace3=imagen;
+		byte[] enlace4=imagen;
+		byte[] enlace5=imagen;
 		
 		return (arg)-> {
 			serviceDisco.buscarDisco((long) 2);

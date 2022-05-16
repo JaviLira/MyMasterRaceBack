@@ -30,4 +30,13 @@ public class ArticuloService {
 		}
 		return result;
 	}
+	
+	public AbsArticulo actualizarArticulo(Long id, AbsArticulo articulo) {
+		
+		if (repoArticulo.findById(id).orElse(null)!=null) {
+			return repoArticulo.save(articulo);
+		}else {
+			return null;
+		}
+	}
 }

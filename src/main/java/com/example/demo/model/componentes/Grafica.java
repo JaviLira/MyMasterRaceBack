@@ -16,7 +16,7 @@ public class Grafica extends AbsArticulo{
 		super();
 	}
 
-	public Grafica(String nombre, String imagenes, String descripcion, int cantidad, double precio,String marca, String modelo) {
+	public Grafica(String nombre, byte[] imagenes, String descripcion, int cantidad, double precio,String marca, String modelo) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.marca = marca;
 		this.modelo = modelo;

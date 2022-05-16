@@ -17,7 +17,7 @@ public class Procesador extends AbsArticulo{
 		super();
 	}
 
-	public Procesador(String nombre, String imagenes, String descripcion, int cantidad, double precio ,String marca, String modelo, String socket) {
+	public Procesador(String nombre, byte[] imagenes, String descripcion, int cantidad, double precio ,String marca, String modelo, String socket) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.marca = marca;
 		this.modelo = modelo;

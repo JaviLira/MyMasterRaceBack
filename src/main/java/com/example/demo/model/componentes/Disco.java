@@ -17,7 +17,7 @@ public class Disco extends AbsArticulo{
 		super();
 	}
 	
-	public Disco(String nombre, String imagenes, String descripcion, int cantidad, double precio, String tipo, double capacidad, String conexion) {
+	public Disco(String nombre, byte[] imagenes, String descripcion, int cantidad, double precio, String tipo, double capacidad, String conexion) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.tipo = tipo;
 		this.capacidad = capacidad;

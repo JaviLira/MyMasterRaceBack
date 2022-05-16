@@ -17,7 +17,7 @@ public class Fuente extends AbsArticulo{
 		super();
 	}
 
-	public Fuente(String nombre, String imagenes, String descripcion, int cantidad, double precio, String certificacion, int potencia) {
+	public Fuente(String nombre, byte[] imagenes, String descripcion, int cantidad, double precio, String certificacion, int potencia) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.certificacion = certificacion;
 		this.potencia = potencia;

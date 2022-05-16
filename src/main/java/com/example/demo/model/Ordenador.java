@@ -29,7 +29,7 @@ public class Ordenador extends AbsArticulo{
 		super();
 	}
 
-	public Ordenador(String nombre,Ram ram, Procesador procesador, Disco discoduro, Grafica grafica, Fuente fuente, String imagenes, String descripcion, int cantidad, double precio) {
+	public Ordenador(String nombre,Ram ram, Procesador procesador, Disco discoduro, Grafica grafica, Fuente fuente, byte[] imagenes, String descripcion, int cantidad, double precio) {
 		super(nombre, imagenes, descripcion, cantidad, precio);
 		this.ram = ram;
 		this.procesador = procesador;

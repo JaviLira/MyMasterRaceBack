@@ -62,6 +62,19 @@ public class EjemploRestServiceJwtApplication {
 			repoUsuario.save(new User("javi", "javi@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"));
 			User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
 			usuario.setRol(Roles.ROLE_ADMIN);
+			
+			repoUsuario.saveAll(Arrays.asList(new User("pepe", "pepe@gmail.com", "C/guadalpalo33", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("juan", "juan@gmail.com", "C/guadalpalo", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("pepe", "pepe@gmail.com", "C/guadalpalo", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("antonio", "antonio@gmail.com", "C/guadalpalo", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("angustin", "angustin@gmail.com", "C/guadalpalo", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("alba", "alba@gmail.com", "C/guadalpalo", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("isa", "isa@gmail.com", "C/guadalpalo", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("marrueco", "marrueco@gmail.com", "C/guadalpalo", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("morito", "morito@gmail.com", "C/guadalpalo", "222444777", codificador.encode("morito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("negrito", "negrito@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("cosas", "cosas@gmail.com", "C/guadalpalo", "222444777", codificador.encode("cosas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("cositas", "pecositase@gmail.com", "C/guadalpalo", "222444777", codificador.encode("cositas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25")));
 			repoUsuario.save(usuario);
 		};
 	}

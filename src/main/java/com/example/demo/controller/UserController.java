@@ -609,6 +609,18 @@ public class UserController {
 		smtpMailSender.send(datos.getToUser(), datos.getSubject(), datos.getText(), datos.getFromUser());
 	}
 	
+	/**
+	 * Muestra todos los usuarios en la base de datos
+	 * @param id
+	 * @return
+	 */
+	
+    @GetMapping("/usuarios")
+    public ResponseEntity <List<User>> getUsuarios() {
+    	List<User> result=serviceUsuario.findAll();
+		return ResponseEntity.ok(result);
+		
+    }
 	
 	
 	

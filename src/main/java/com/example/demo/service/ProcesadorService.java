@@ -34,6 +34,12 @@ public class ProcesadorService {
 		return listaProcesadores;
 	}
 	
+	/**
+	 * Crea un procesador
+	 * @param procesador
+	 * @return
+	 */
+	
 	public Procesador crearProcesador(Procesador procesador) {
 		
 		if (procesador.getCantidad()>=1 
@@ -59,8 +65,46 @@ public class ProcesadorService {
 		} else {
 			return null;
 		}
-		
-		
+	}
+	
+	
+	/**
+	 * Edita una procesador, si algun dato esta vacio no lo cambia
+	 * @param id
+	 * @param disco
+	 * @return
+	 */
+	
+	public Procesador editProcesador(Long id,Procesador procesador) {
+		Procesador procesadorEdit=repoProcesador.findById(id).orElse(null);
+		if (procesadorEdit!=null) {
+			if (!"".equals(procesador.getMarca()) && procesador.getMarca()!=null) {
+				procesadorEdit.setMarca(procesador.getMarca());
+			}
+			if (!"".equals(procesador.getSocket()) && procesador.getSocket()!=null) {
+				procesadorEdit.setSocket(procesador.getSocket());
+			}
+			if (!"".equals(procesador.getModelo()) && procesador.getModelo()!=null) {
+				procesadorEdit.setModelo(procesador.getModelo());
+			}
+			if (procesador.getCantidad()>=1) {
+				procesadorEdit.setCantidad(procesador.getCantidad());
+			}
+			if (procesador.getDescripcion()!=null && !"".equals(procesador.getDescripcion())) {
+				procesadorEdit.setDescripcion(procesador.getDescripcion());
+			}
+			if (procesador.getNombre()!=null && !"".equals(procesador.getNombre())) {
+				procesadorEdit.setNombre(procesador.getNombre());
+			}
+			if (procesador.getPrecio()>=1) {
+				procesadorEdit.setPrecio(procesador.getPrecio());
+			}
+			repoProcesador.save(procesadorEdit);
+			
+			return procesadorEdit;
+		}else {
+			return null;
+		}
 	}
 	
 	

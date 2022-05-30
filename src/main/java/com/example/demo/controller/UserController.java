@@ -142,6 +142,16 @@ public class UserController {
 		}
     }
 	
+	@PutMapping("articulo/ram/{id}")
+	public ResponseEntity<Ram> putFuente(@PathVariable Long id,@RequestBody Ram ram) {
+		Ram result= serviceRam.editRam(id,ram);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	@GetMapping("articulo/procesador")
 	public ResponseEntity<List<Procesador>> listarProcesadores() {
     	return ResponseEntity.ok(serviceProcesador.findAll());
@@ -150,6 +160,16 @@ public class UserController {
 	@PostMapping("articulo/procesador")
 	public ResponseEntity<Procesador> postProcesador(@RequestBody Procesador procesador) {
 		Procesador result= serviceProcesador.crearProcesador(procesador);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
+	@PutMapping("articulo/procesador/{id}")
+	public ResponseEntity<Procesador> putFuente(@PathVariable Long id,@RequestBody Procesador procesador) {
+		Procesador result= serviceProcesador.editProcesador(id,procesador);
 		if (result==null) {
 			throw new ArticuloVacioExeption();
 		}else {
@@ -172,6 +192,16 @@ public class UserController {
 		}
     }
 	
+	@PutMapping("articulo/fuente/{id}")
+	public ResponseEntity<Fuente> putFuente(@PathVariable Long id,@RequestBody Fuente fuente) {
+		Fuente result= serviceFuente.editFuente(id,fuente);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	@GetMapping("articulo/grafica")
 	public ResponseEntity<List<Grafica>> listarGraficas() {
     	return ResponseEntity.ok(serviceGrafica.findAll());
@@ -180,6 +210,16 @@ public class UserController {
 	@PostMapping("articulo/grafica")
 	public ResponseEntity<Grafica> postGrafica(@RequestBody Grafica grafica) {
 		Grafica result= serviceGrafica.crearGrafica(grafica);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
+	@PutMapping("articulo/grafica/{id}")
+	public ResponseEntity<Grafica> putGrafica(@PathVariable Long id,@RequestBody Grafica grafica) {
+		Grafica result= serviceGrafica.editGrafica(id,grafica);
 		if (result==null) {
 			throw new ArticuloVacioExeption();
 		}else {
@@ -604,7 +644,7 @@ public class UserController {
 	
 	@PostMapping("/mail")
 	public void sendEmail(@RequestBody Mensaje datos) throws MessagingException {
-		datos.setToUser("javilirasanchez20011812@gmail.com");
+		datos.setToUser("hermanosliratest@gmail.com");
 
 		smtpMailSender.send(datos.getToUser(), datos.getSubject(), datos.getText(), datos.getFromUser());
 	}

@@ -34,6 +34,12 @@ public class RamService {
 		return listaRams;
 	}
 	
+	/**
+	 * Crea una ram
+	 * @param ram
+	 * @return
+	 */
+	
 	public Ram crearRam(Ram ram) {
 		if (ram.getCantidad()>=1 
 				&& !"".equals(ram.getDescripcion()) && ram.getDescripcion()!=null
@@ -53,10 +59,54 @@ public class RamService {
 			newRam.setNombre(ram.getNombre());
 			newRam.setPrecio(ram.getPrecio());	
 			newRam.setTipo(ram.getTipo());	
+			newRam.setKit(ram.getKit());	
 			repoRam.save(newRam);
 			
 			return newRam;
 		} else {
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * Edita una ram, si algun dato esta vacio no lo cambia
+	 * @param id
+	 * @param disco
+	 * @return
+	 */
+	
+	public Ram editRam(Long id,Ram ram) {
+		Ram ramEdit=repoRam.findById(id).orElse(null);
+		if (ramEdit!=null) {
+			if (!"".equals(ram.getFormato()) && ram.getFormato()!=null) {
+				ramEdit.setFormato(ram.getFormato());
+			}
+			if (!"".equals(ram.getTipo()) && ram.getTipo()!=null) {
+				ramEdit.setTipo(ram.getTipo());
+			}
+			if (ram.getCapacidad()>=1) {
+				ramEdit.setCapacidad(ram.getCapacidad());
+			}
+			if (!"".equals(ram.getKit()) && ram.getKit()!=null) {
+				ramEdit.setKit(ram.getKit());
+			}
+			if (ram.getCantidad()>=1) {
+				ramEdit.setCantidad(ram.getCantidad());
+			}
+			if (ram.getDescripcion()!=null && !"".equals(ram.getDescripcion())) {
+				ramEdit.setDescripcion(ram.getDescripcion());
+			}
+			if (ram.getNombre()!=null && !"".equals(ram.getNombre())) {
+				ramEdit.setNombre(ram.getNombre());
+			}
+			if (ram.getPrecio()>=1) {
+				ramEdit.setPrecio(ram.getPrecio());
+			}
+			repoRam.save(ramEdit);
+			
+			return ramEdit;
+		}else {
 			return null;
 		}
 	}

@@ -59,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //                .antMatchers(HttpMethod.GET, "/api/v1/initiatives/{idI}").permitAll() 
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }

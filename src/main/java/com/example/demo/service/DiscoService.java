@@ -22,6 +22,12 @@ public class DiscoService {
 		return repoDisco.findAll();
 	}
 	
+	/**
+	 * crea un disco con los dtos que le mandes
+	 * @param disco
+	 * @return
+	 */
+	
 	public Disco crearDisco(Disco disco) {
 		if (disco.getCapacidad()>=1 && disco.getConexion()!=null && !"".equals(disco.getConexion())
 				&& disco.getDescripcion()!=null && !"".equals(disco.getDescripcion())
@@ -45,6 +51,13 @@ public class DiscoService {
 		}
 	}
 	
+	/**
+	 * edita un disco, si algun dato esta vacio no lo cambia
+	 * @param id
+	 * @param disco
+	 * @return
+	 */
+	
 	public Disco editDisco(Long id,Disco disco) {
 		Disco discoEdit=repoDisco.findById(id).orElse(null);
 		if (discoEdit!=null) {
@@ -64,22 +77,17 @@ public class DiscoService {
 				discoEdit.setNombre(disco.getNombre());
 			}
 			if (disco.getPrecio()>=1) {
-				discoEdit.setTipo(disco.getTipo());
+				discoEdit.setPrecio(disco.getPrecio());
 			}
 			if (disco.getTipo()!=null && !"".equals(disco.getTipo())) {
 				discoEdit.setTipo(disco.getTipo());
 			}
-//			if(disco.getImagenes()!=null) {
-//				discoEdit.setImagenes(disco.getImagenes());
-//			}
 			repoDisco.save(discoEdit);
 			
 			return discoEdit;
 		}else {
 			return null;
 		}
-		
-		
 	}
 	
 	

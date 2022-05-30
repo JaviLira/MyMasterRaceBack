@@ -22,6 +22,12 @@ public class GraficaService {
 		return repoGrafica.findAll();
 	}
 	
+	/**
+	 * crea una grafica
+	 * @param grafica
+	 * @return
+	 */
+	
 	public Grafica crearGrafica(Grafica grafica) {
 		if (grafica.getCantidad()>=1 
 				&& !"".equals(grafica.getDescripcion()) && grafica.getDescripcion()!=null
@@ -42,9 +48,45 @@ public class GraficaService {
 		}else {
 			return null;
 		}
-		
-		
 	}
+	
+	/**
+	 * Edita una grafica, si algun dato esta vacio no lo cambia
+	 * @param id
+	 * @param disco
+	 * @return
+	 */
+	
+	public Grafica editGrafica(Long id,Grafica grafica) {
+		Grafica graficaEdit=repoGrafica.findById(id).orElse(null);
+		if (graficaEdit!=null) {
+			if (!"".equals(grafica.getMarca()) && grafica.getMarca()!=null) {
+				graficaEdit.setMarca(grafica.getMarca());
+			}
+			if (!"".equals(grafica.getModelo()) && grafica.getModelo()!=null) {
+				graficaEdit.setModelo(grafica.getModelo());
+			}
+			if (grafica.getCantidad()>=1) {
+				graficaEdit.setCantidad(grafica.getCantidad());
+			}
+			if (grafica.getDescripcion()!=null && !"".equals(grafica.getDescripcion())) {
+				graficaEdit.setDescripcion(grafica.getDescripcion());
+			}
+			if (grafica.getNombre()!=null && !"".equals(grafica.getNombre())) {
+				graficaEdit.setNombre(grafica.getNombre());
+			}
+			if (grafica.getPrecio()>=1) {
+				graficaEdit.setPrecio(grafica.getPrecio());
+			}
+			repoGrafica.save(graficaEdit);
+			
+			return graficaEdit;
+		}else {
+			return null;
+		}
+	}
+	
+	
 	
 	
 }

@@ -115,16 +115,19 @@ public class CorsConfig implements WebMvcConfigurer {
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
 				registry.addMapping("/articulo/fuente/{id}").allowedOrigins(url)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 		        .allowedHeaders("GET", "POST", "OPTIONS", "PUT", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
 		                "Access-Control-Request-Headers","Authorization")
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
 				registry.addMapping("/articulo/procesador/{id}").allowedOrigins(url)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 		        .allowedHeaders("GET", "POST", "OPTIONS", "PUT", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
 		                "Access-Control-Request-Headers","Authorization")
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
 				registry.addMapping("/articulo/grafica/{id}").allowedOrigins(url)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 		        .allowedHeaders("GET", "POST", "OPTIONS", "PUT", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
 		                "Access-Control-Request-Headers","Authorization")
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
@@ -136,6 +139,7 @@ public class CorsConfig implements WebMvcConfigurer {
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
 				registry.addMapping("/articulo/ram/{id}").allowedOrigins(url)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 		        .allowedHeaders("GET", "POST", "OPTIONS", "PUT", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
 		                "Access-Control-Request-Headers","Authorization")
 		        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");

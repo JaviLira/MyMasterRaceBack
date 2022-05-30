@@ -63,18 +63,18 @@ public class EjemploRestServiceJwtApplication {
 			User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
 			usuario.setRol(Roles.ROLE_ADMIN);
 			
-			repoUsuario.saveAll(Arrays.asList(new User("pepe", "pepe@gmail.com", "C/guadalpalo33", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("juan", "juan@gmail.com", "C/guadalpalo", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("pepe", "pepe@gmail.com", "C/guadalpalo", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("antonio", "antonio@gmail.com", "C/guadalpalo", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("angustin", "angustin@gmail.com", "C/guadalpalo", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("alba", "alba@gmail.com", "C/guadalpalo", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("isa", "isa@gmail.com", "C/guadalpalo", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("marrueco", "marrueco@gmail.com", "C/guadalpalo", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("morito", "morito@gmail.com", "C/guadalpalo", "222444777", codificador.encode("morito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("negrito", "negrito@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("cosas", "cosas@gmail.com", "C/guadalpalo", "222444777", codificador.encode("cosas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("cositas", "pecositase@gmail.com", "C/guadalpalo", "222444777", codificador.encode("cositas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25")));
+			repoUsuario.saveAll(Arrays.asList(new User("pepito", "pepito@gmail.com", "C/pepi Nº3", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("juan", "juan@gmail.com", "C/juan Nº30 1ºA", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("pepe", "pepe@gmail.com", "C/pepe", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("antonio", "antonio@gmail.com", "C/antonio", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("angustin", "angustin@gmail.com", "C/agustin", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("alba", "alba@gmail.com", "C/alba", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("isa", "isa@gmail.com", "C/isa", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("marrueco", "marrueco@gmail.com", "C/marruecos", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("morito", "morito@gmail.com", "C/morito", "222444777", codificador.encode("morito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("negrito", "negrito@gmail.com", "C/negrito", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("cosas", "cosas@gmail.com", "C/cosas", "222444777", codificador.encode("cosas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					new User("cositas", "cositas@gmail.com", "C/cositas", "222444777", codificador.encode("cositas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25")));
 			repoUsuario.save(usuario);
 		};
 	}
@@ -154,7 +154,7 @@ public class EjemploRestServiceJwtApplication {
 		return (arg)-> {
 			serviceDisco.buscarDisco((long) 2);
 			repoOedenador.saveAll(Arrays.asList(
-					new Ordenador("Huawei MateStation B515", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 240),
+					new Ordenador("Huawei MateStation B515", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace1, "Encontraras los ordenadores preparados con las mejores caracteristicas para todos los sectores" , 3, 240),
 					new Ordenador("MSI MAG Codex 5 11TG-814EU", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)17), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 562),
 					new Ordenador("Lenovo IdeaCentre 5 14IOB6", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)13), enlace1,"Pc con tales características preparado para usar en x sectores" , 3, 223),
 					new Ordenador("MasterBronze", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 245),

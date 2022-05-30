@@ -110,5 +110,9 @@ public class RamService {
 			return null;
 		}
 	}
+	
+	public Ram deleteRam(Long id) {
+		return repoRam.findById(id).orElse(null);
+	}
 
 }

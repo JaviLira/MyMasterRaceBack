@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApiError;
@@ -661,6 +662,11 @@ public class UserController {
 		return ResponseEntity.ok(result);
 		
     }
+    
+    @PutMapping("/articulo/{id}")
+    public ResponseEntity<AbsArticulo> putArticulo(@PathVariable Long id,@RequestParam(required=false) String estado,@RequestBody AbsArticulo articulo) {
+    	return ResponseEntity.ok(serviceArticulo.descartivarArticulo(id, estado));
+    } 
 	
 	
 	

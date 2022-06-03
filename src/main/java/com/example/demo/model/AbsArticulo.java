@@ -22,6 +22,7 @@ public class AbsArticulo {
 	protected String descripcion;
 	protected Integer cantidad;
 	protected double precio;
+	protected boolean activo=true;
 	
 	public AbsArticulo() {
 		super();
@@ -87,6 +88,14 @@ public class AbsArticulo {
 
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	@Override

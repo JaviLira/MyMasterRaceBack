@@ -106,8 +106,50 @@ public class OrdenadorService {
 				throw new ComponenteNotFoundExeption();
 			} 
 		}
-		
-		
+		return null;
+	}
+	
+	public Ordenador modificarOrdenador(Long id, Ordenador ordenador) {
+		Ordenador ordenadorEdit= repoOrdenador.findById(id).orElse(null);
+		if (ordenadorEdit != null) {
+			Ram ram = repoRam.findById(ordenador.getRam().getId()).orElse(null);
+			Procesador procesador = repoProcesador.findById(ordenador.getProcesador().getId()).orElse(null);
+			Disco disco = repoDisco.findById(ordenador.getDiscoduro().getId()).orElse(null);
+			Fuente fuente = repoFuente.findById(ordenador.getFuente().getId()).orElse(null);
+			Grafica grafica = repoGrafica.findById(ordenador.getGrafica().getId()).orElse(null);
+			
+			if (ordenador.getCantidad()>=1) {
+				ordenadorEdit.setCantidad(ordenador.getCantidad());
+			}
+			if (ordenador.getDescripcion()!=null && !"".equals(ordenador.getDescripcion())) {
+				ordenadorEdit.setDescripcion(ordenador.getDescripcion());
+			}
+			if (ordenador.getNombre()!=null && !"".equals(ordenador.getNombre())) {
+				ordenadorEdit.setNombre(ordenador.getNombre());
+			}
+			if (ordenador.getPrecio()>=1) {
+				ordenadorEdit.setPrecio(ordenador.getPrecio());
+			}
+			if (ram!=null && ordenadorEdit.getRam()!=ram) {
+				ordenadorEdit.setRam(ram);
+			}
+			if (procesador!=null && ordenadorEdit.getProcesador()!=procesador) {
+				ordenadorEdit.setProcesador(procesador);
+			}
+			if (disco!=null && ordenadorEdit.getDiscoduro()!=disco) {
+				ordenadorEdit.setDiscoduro(disco);
+			}
+			if (fuente!=null && ordenadorEdit.getFuente()!=fuente) {
+				ordenadorEdit.setFuente(fuente);
+			}
+			if (grafica!=null && ordenadorEdit.getGrafica()!=grafica) {
+				ordenadorEdit.setGrafica(grafica);
+			}
+			
+			
+		}else {
+			return null;
+		}
 		return null;
 	}
 	

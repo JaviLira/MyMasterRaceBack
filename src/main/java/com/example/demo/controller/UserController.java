@@ -258,6 +258,16 @@ public class UserController {
     	return ResponseEntity.ok(serviceOrdenador.findAll());
     }
 	
+	@PostMapping("articulo/ordenador")
+	public Ordenador crearOrdenador(@RequestBody Ordenador ordenador) {
+		Ordenador result= serviceOrdenador.crearOrdenador(ordenador);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return result;
+		}
+    }
+	
 	@GetMapping("articulo/ordenador/{id}")
 	public ResponseEntity<Ordenador> sacarOrdenador(@PathVariable Long id) {
 		Ordenador result=serviceOrdenador.buscarOrdenador(id);

@@ -105,10 +105,6 @@ public class OrdenadorService {
 			}else {
 				throw new ComponenteNotFoundExeption();
 			} 
-			
-
-			
-
 		}
 		
 		

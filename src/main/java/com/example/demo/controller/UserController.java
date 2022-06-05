@@ -259,14 +259,25 @@ public class UserController {
     }
 	
 	@PostMapping("articulo/ordenador")
-	public Ordenador crearOrdenador(@RequestBody Ordenador ordenador) {
+	public ResponseEntity<Ordenador> crearOrdenador(@RequestBody Ordenador ordenador) {
 		Ordenador result= serviceOrdenador.crearOrdenador(ordenador);
 		if (result==null) {
 			throw new ArticuloVacioExeption();
 		}else {
-			return result;
+			return ResponseEntity.ok(result);
 		}
     }
+	
+	@PutMapping("articulo/ordenador/{id}")
+	public ResponseEntity<Ordenador> putOrdenador(@PathVariable Long id,@RequestBody Ordenador ordenador) {
+		Ordenador result= serviceOrdenador.editOrdenador(id,ordenador);
+		if (result==null) {
+			throw new ArticuloVacioExeption();
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+	
 	
 	@GetMapping("articulo/ordenador/{id}")
 	public ResponseEntity<Ordenador> sacarOrdenador(@PathVariable Long id) {

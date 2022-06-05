@@ -109,7 +109,7 @@ public class OrdenadorService {
 		return null;
 	}
 	
-	public Ordenador modificarOrdenador(Long id, Ordenador ordenador) {
+	public Ordenador editOrdenador(Long id, Ordenador ordenador) {
 		Ordenador ordenadorEdit= repoOrdenador.findById(id).orElse(null);
 		if (ordenadorEdit != null) {
 			Ram ram = repoRam.findById(ordenador.getRam().getId()).orElse(null);
@@ -146,11 +146,14 @@ public class OrdenadorService {
 				ordenadorEdit.setGrafica(grafica);
 			}
 			
+			repoOrdenador.save(ordenadorEdit);
+			
+			return ordenadorEdit;
+			
 			
 		}else {
 			return null;
 		}
-		return null;
 	}
 	
 }

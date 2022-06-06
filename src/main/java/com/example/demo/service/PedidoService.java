@@ -85,4 +85,13 @@ public class PedidoService {
 		}
 	}
 	
+	public Pedido modificarPedido(Pedido pedido, String name,Long idPedido) {
+		User usuario=repoUsuario.findByName(name);
+		Pedido pedidoEdit=repoPedido.findById(idPedido).orElse(null);
+		
+		
+		
+		return pedidoEdit;
+	}
+	
 }

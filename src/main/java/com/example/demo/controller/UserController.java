@@ -584,7 +584,7 @@ public class UserController {
     }
     
     @PutMapping("/usuario/{id}/pedido/{idP}")
-    public ResponseEntity <User> putPedidosUsuarioId(@PathVariable String id,@PathVariable int idP) {
+    public ResponseEntity <User> putPedidosUsuarioId(@PathVariable String id,@PathVariable Long idP) {
     	User result=serviceUsuario.buscarUsuario(id);
     	if (result==null) {
     		throw new UserNotFoundExeption(id);

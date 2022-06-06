@@ -29,6 +29,7 @@ public class Pedido {
 	private String tarjeta;
 	private String dueniotarjeta;
 	private String caducidadTarjeta;
+	private String estado="En almacen";
 	private boolean entregado;
 	private boolean enCamino;
     @Id
@@ -161,6 +162,14 @@ public class Pedido {
 
 	public void setCaducidadTarjeta(String caducidadTarjeta) {
 		this.caducidadTarjeta = caducidadTarjeta;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

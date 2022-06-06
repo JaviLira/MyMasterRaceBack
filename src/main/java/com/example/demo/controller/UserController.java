@@ -583,6 +583,16 @@ public class UserController {
 		}
     }
     
+    @PutMapping("/usuario/{id}/pedido/{idP}")
+    public ResponseEntity <User> putPedidosUsuarioId(@PathVariable String id,@PathVariable int idP) {
+    	User result=serviceUsuario.buscarUsuario(id);
+    	if (result==null) {
+    		throw new UserNotFoundExeption(id);
+		}else {
+			return ResponseEntity.ok(serviceUsuario.buscarUsuario(id));
+		}
+    }
+    
     @GetMapping("/usuario/pedido")
     public ResponseEntity <List<Pedido>> getPedidosUsuario() {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -89,6 +89,10 @@ public class PedidoService {
 		User usuario=repoUsuario.findByName(name);
 		Pedido pedidoEdit=repoPedido.findById(idPedido).orElse(null);
 		
+		if (usuario.getListapedidos().contains(pedidoEdit)) {
+			
+		}
+		
 		
 		
 		return pedidoEdit;

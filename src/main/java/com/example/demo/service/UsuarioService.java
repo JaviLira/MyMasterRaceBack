@@ -21,6 +21,10 @@ public class UsuarioService {
 		return repoUsuario.findByEmail(email).orElse(null);
 	}
 	
+	public User buscarUsuarioByName(String name) {
+		return repoUsuario.findByName(name);
+	}
+	
 	public User comprobarRolAdministrador(String email) {
 		User result = repoUsuario.findByEmail(email).orElse(null);
 		if ("ADMIN".equals(result.getRol())) {

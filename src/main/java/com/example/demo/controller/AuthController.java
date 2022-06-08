@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApiError;
@@ -117,6 +118,19 @@ public class AuthController {
 			return ResponseEntity.ok(respuesta);
 		}else {
 			throw new UserNotFoundExeption(email);
+		}
+    	
+    }
+    
+    @GetMapping("/auth/email")
+    public User comprobarEmail(
+    		@RequestParam(required = false) String email,
+			@RequestParam(required = false) String username) {
+    			
+		if (username == null) {
+			return serviceUsuario.buscarUsuario(email);
+		} else {
+			return serviceUsuario.buscarUsuarioByName(username);
 		}
     	
     }

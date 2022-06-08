@@ -56,7 +56,7 @@ public class AuthController {
             String encodedPass = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPass);
             user = userRepo.save(user);
-            String token = jwtUtil.generateToken(user.getEmail());
+            String token = jwtUtil.generateToken(user.getEmail(),user.getRol().toString());
             return Collections.singletonMap("access_token", token);
 		}else {
 			throw new ExisteUsuarioNotFoundExeption();
@@ -77,7 +77,7 @@ public class AuthController {
 
             authManager.authenticate(authInputToken);
  
-            String token = jwtUtil.generateToken(body.getEmail());
+            String token = jwtUtil.generateToken(body.getEmail(),body.getRol().toString());
 
             return Collections.singletonMap("access_token", token);
         }catch (AuthenticationException authExc){

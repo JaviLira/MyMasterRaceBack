@@ -25,7 +25,7 @@ public class User {
 	private String telefono;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
-	private Roles rol;
+	private Roles rol=Roles.ROLE_USER;
 	private String tipopago;
 	private String codigotarjeta;
 	private String tarjeta;
@@ -40,14 +40,12 @@ public class User {
 	
 	public User() {
 		super();
-		this.rol=Roles.ROLE_USER;
 	}
 
 	public User(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
-		this.rol=Roles.ROLE_USER;
 	}
 	
 	public User(String name, String email, String calle, String telefono, String password) {
@@ -57,7 +55,6 @@ public class User {
 		this.calle = calle;
 		this.telefono = telefono;
 		this.password = password;
-		this.rol=Roles.ROLE_USER;
 	}
 	
 	public User(String name, String email, String calle, String telefono, String password, String tipopado,
@@ -73,7 +70,6 @@ public class User {
 		this.tarjeta = tarjeta;
 		this.dueniotarjeta = dueniotarjeta;
 		this.caducidadTarjeta = caducidadTarjeta;
-		this.rol=Roles.ROLE_USER;
 	}
 
 	public String getName() {

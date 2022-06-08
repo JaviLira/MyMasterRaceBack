@@ -44,6 +44,7 @@ import com.example.demo.model.Opiniones;
 import com.example.demo.model.Ordenador;
 import com.example.demo.model.OrdenadorVendido;
 import com.example.demo.model.Pedido;
+import com.example.demo.model.Roles;
 import com.example.demo.model.User;
 import com.example.demo.model.componentes.Disco;
 import com.example.demo.model.componentes.Fuente;
@@ -560,26 +561,32 @@ public class UserController {
     @GetMapping("/pedido/{id}/lineaPedido")
     public ResponseEntity <List<LineaPedido>> getLineaPedido(@PathVariable Long id) {
     	String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	User usuario=serviceUsuario.buscarUsuario(email);
     	List<LineaPedido> result=serviceLineaPedido.lineasPedidoDelPedido(id);
-    	if (serviceUsuario.usuarioTienePedido(email, id)) {
-			if(result==null) {
-				throw new PedidoNotFoundExeption2(id);
-	        }else {
+    	if(result==null) {
+			throw new PedidoNotFoundExeption2(id);
+        }
+    	
+    	if (usuario.getRol()==Roles.ROLE_ADMIN) {
 	        	return ResponseEntity.ok(result);
-	        }
 		}else {
-			throw new UsuarioTieneEsePedidoExeption(email,id);
+			if (serviceUsuario.usuarioTienePedido(email, id)) {
+		        	return ResponseEntity.ok(result);
+			}else {
+				throw new UsuarioTieneEsePedidoExeption(email,id);
+			}
 		}
+
         
     }
     
     @GetMapping("/usuario/{id}/pedido")
-    public ResponseEntity <User> getPedidosUsuarioId(@PathVariable String id) {
-    	User result=serviceUsuario.buscarUsuario(id);
+    public ResponseEntity <List<Pedido>> getPedidosUsuarioId(@PathVariable String id) {
+    	List<Pedido> result=servicePedido.listaPedidosUsuarioByName(id);
     	if (result==null) {
     		throw new UserNotFoundExeption(id);
 		}else {
-			return ResponseEntity.ok(serviceUsuario.buscarUsuario(id));
+			return ResponseEntity.ok(result);
 		}
     }
     

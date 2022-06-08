@@ -29,12 +29,20 @@ public class PedidoService {
 	
 	public List<Pedido> listaPedidosUsuario(String email) {
 		User usuario= repoUsuario.findByEmail(email).orElse(null);
-		if (usuario!=null && usuario.getListapedidos().size()>=1) {
+		if (usuario!=null) {
 			return usuario.getListapedidos();
 		}else {
 			return null;
 		}
-
+	}
+	
+	public List<Pedido> listaPedidosUsuarioByName(String name) {
+		User usuario= repoUsuario.findByName(name);
+		if (usuario!=null) {
+			return usuario.getListapedidos();
+		}else {
+			return null;
+		}
 	}
 	
 	public Pedido crearPedido(String email,Pedido pedido) {

@@ -6,6 +6,7 @@ public class LoginCredentials {
 
     private String email;
     private String password;
+	private Roles rol=Roles.ROLE_USER;
     
 	public LoginCredentials(String email, String password) {
 		super();
@@ -29,6 +30,14 @@ public class LoginCredentials {
 		this.password = password;
 	}
 	
+	public Roles getRol() {
+		return rol;
+	}
+
+	public void setRol(Roles rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(email);

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.error.PedidoNotFoundExeption2;
+import com.example.demo.error.UserNotFoundExeption;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.User;
 import com.example.demo.repository.PedidoRepo;
@@ -96,14 +98,20 @@ public class PedidoService {
 	public Pedido modificarPedido(Pedido pedido, String name,Long idPedido) {
 		User usuario=repoUsuario.findByName(name);
 		Pedido pedidoEdit=repoPedido.findById(idPedido).orElse(null);
-		
+		if (pedidoEdit==null) {
+			throw new PedidoNotFoundExeption2(idPedido);
+		}
 		if (usuario.getListapedidos().contains(pedidoEdit)) {
-			
+			pedidoEdit.setEstado(pedido.getEstado());
+			repoPedido.save(pedidoEdit);
+			return pedidoEdit;
+		}else {
+			throw new UserNotFoundExeption(name);
 		}
 		
 		
 		
-		return pedidoEdit;
+		
 	}
 	
 }

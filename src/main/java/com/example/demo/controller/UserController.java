@@ -591,13 +591,9 @@ public class UserController {
     }
     
     @PutMapping("/usuario/{id}/pedido/{idP}")
-    public ResponseEntity <User> putPedidosUsuarioId(@PathVariable String id,@PathVariable Long idP) {
-    	User result=serviceUsuario.buscarUsuario(id);
-    	if (result==null) {
-    		throw new UserNotFoundExeption(id);
-		}else {
-			return ResponseEntity.ok(serviceUsuario.buscarUsuario(id));
-		}
+    public ResponseEntity <Pedido> putPedidosUsuarioId(@PathVariable String id,@PathVariable Long idP,@RequestBody Pedido pedido) {
+    	Pedido result=servicePedido.modificarPedido(pedido,id,idP);
+		return ResponseEntity.ok(result);
     }
     
     @GetMapping("/usuario/pedido")

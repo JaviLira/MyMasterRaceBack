@@ -12,7 +12,7 @@ public class CorsConfig implements WebMvcConfigurer {
 	public WebMvcConfigurer corsConfigurer() {return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				String url="http://localhost:4200";
+				String url="https://mymasterrace.herokuapp.com";
 				//login
 				registry.addMapping("/auth/login").allowedOrigins(url)
 		        .allowedHeaders("GET", "POST", "OPTIONS", "PUT", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +99,11 @@ public class PedidoService {
 	}
 	
 	public Pedido modificarPedido(Pedido pedido, String name,Long idPedido) {
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+	    LocalDate localDate = LocalDate.now();
+	    Date date=Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+		
 		User usuario=repoUsuario.findByName(name);
 		Pedido pedidoEdit=repoPedido.findById(idPedido).orElse(null);
 		if (pedidoEdit==null) {
@@ -103,6 +111,11 @@ public class PedidoService {
 		}
 		if (usuario.getListapedidos().contains(pedidoEdit)) {
 			pedidoEdit.setEstado(pedido.getEstado());
+			
+			if ("Entregado".equals(pedido.getEstado())) {
+				pedidoEdit.setFechaPackEntrega(date);
+			}
+			
 			repoPedido.save(pedidoEdit);
 			return pedidoEdit;
 		}else {

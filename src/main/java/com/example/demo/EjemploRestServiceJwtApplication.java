@@ -59,92 +59,105 @@ public class EjemploRestServiceJwtApplication {
 	@Bean
 	CommandLineRunner iniUsuarios(UserRepo repoUsuario) {
 		return (arg)-> {
-			repoUsuario.save(new User("javi", "javi@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"));
-			User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
-			usuario.setRol(Roles.ROLE_ADMIN);
-			
-			repoUsuario.saveAll(Arrays.asList(new User("pepito", "pepito@gmail.com", "C/pepi Nº3", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("juan", "juan@gmail.com", "C/juan Nº30 1ºA", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("pepe", "pepe@gmail.com", "C/pepe", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("antonio", "antonio@gmail.com", "C/antonio", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("angustin", "angustin@gmail.com", "C/agustin", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("alba", "alba@gmail.com", "C/alba", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("isa", "isa@gmail.com", "C/isa", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("marrueco", "marrueco@gmail.com", "C/marruecos", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("morito", "morito@gmail.com", "C/morito", "222444777", codificador.encode("morito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("negrito", "negrito@gmail.com", "C/negrito", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("cosas", "cosas@gmail.com", "C/cosas", "222444777", codificador.encode("cosas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-					new User("cositas", "cositas@gmail.com", "C/cositas", "222444777", codificador.encode("cositas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25")));
-			repoUsuario.save(usuario);
+			if (repoUsuario.findAll().size()==0) {
+				repoUsuario.save(new User("javi", "javi@gmail.com", "C/guadalpalo", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"));
+					User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
+					usuario.setRol(Roles.ROLE_ADMIN);
+					
+					repoUsuario.saveAll(Arrays.asList(new User("pepito", "pepito@gmail.com", "C/pepi Nº3", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("juan", "juan@gmail.com", "C/juan Nº30 1ºA", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("pepe", "pepe@gmail.com", "C/pepe", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("antonio", "antonio@gmail.com", "C/antonio", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("angustin", "angustin@gmail.com", "C/agustin", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("alba", "alba@gmail.com", "C/alba", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("isa", "isa@gmail.com", "C/isa", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("marrueco", "marrueco@gmail.com", "C/marruecos", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("morito", "morito@gmail.com", "C/morito", "222444777", codificador.encode("morito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("negrito", "negrito@gmail.com", "C/negrito", "222444777", codificador.encode("javi"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("cosas", "cosas@gmail.com", "C/cosas", "222444777", codificador.encode("cosas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("cositas", "cositas@gmail.com", "C/cositas", "222444777", codificador.encode("cositas"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25")));
+					repoUsuario.save(usuario);
+			}
+
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniRam(RamRepo repoRam) {
 		return (arg)-> {
-			repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
+			if (repoRam.findAll().size()==0) {
+				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
 					new Ram("Kingston HyperX",imagen,"",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
 					new Ram("Kingston HyperX",imagen,"",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
 					new Ram("Kingston FURY",imagen,"",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
 					new Ram("Kingston FURY",imagen,"",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
 					new Ram("Kingston FURY",imagen,"",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
+			}
+
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniDisco(DiscoRepo repoDisco) {
 		return (arg)-> {
-			repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
+			if (repoDisco.findAll().size()==0) {
+				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
 					new Disco("Seagate BarraCuda",imagen,"",6, 60.65, "HDD", 2000,"sata3"),
 					new Disco("Kingston A400",imagen,"",6, 42.32, "SSD", 480,"sata3"),
 					new Disco("Kingston A400",imagen,"",6, 80.90, "SSD", 1000,"sata3"),
 					new Disco("Kingston A400",imagen,"",6, 140.60, "SSD", 2000,"sata3")));
+			}
+
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniFuente(FuenteRepo repoFuente) {
 		return (arg)-> {
-			repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"",6, 75.90, "80 Plus Gold", 650),
+			if (repoFuente.findAll().size()==0) {
+				repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"",6, 75.90, "80 Plus Gold", 650),
 					new Fuente("Nfortec Sagitta",imagen,"",6, 89.90, "80 Plus Silver",850),
 					new Fuente("Nfortec Sagitta",imagen,"",6, 105.90, "80 Plus Gold", 1050),
 					new Fuente("Corsair RM750",imagen,"",6, 90.90, "80 Plus Gold", 750),
 					new Fuente("Corsair RM850",imagen,"",6, 120.90, "80 Plus Gold", 850),
 					new Fuente("Be Quiet! Dark Power Pro 12",imagen,"",6 , 500.90, "80 Plus Titanium", 1500)));
+			}
+
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniGrafica(GraficaRepo repoGrafica) {
 		return (arg)-> {
-			repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
+			if (repoGrafica.findAll().size()==0) {
+				repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
 					new Grafica("Asus Dual OC EVO",imagen,"",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
 					new Grafica("Sapphire PULSE",imagen,"",6 , 490.90, "AMD", "RX 6600"),
 					new Grafica("PowerColor FIGHTER",imagen,"",6 , 480.90, "AMD", "RX 6600")));
+			}
+
 		};
 	}
 	
 	@Bean
 	CommandLineRunner iniProcesador(ProcesadorRepo repoProcesador) {
 		return (arg)-> {
-			repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
+			if (repoProcesador.findAll().size()==0) {
+				repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
 					new Procesador("AMD Ryzen 7 5700G",imagen,"",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
 					new Procesador("Intel Core i7-12700K",imagen,"",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
 					new Procesador("Intel Core i5-12400F",imagen,"",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
 					new Procesador("Intel Core i7-11700K",imagen,"",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
 					new Procesador("Intel Core 5-10400",imagen,"",6 , 160.80, "Intel", "Core 5-10400", "1200")));
+			}
+
 		};
 	}
 	
 	
 	@Bean
-	CommandLineRunner iniOrdenador(OrdenadoresRepo repoOedenador) {
-//		String enlace1="https://i.ibb.co/GpLydf4/1.png";
-//		String enlace2="https://static.carrefour.es/hd_510x_/imagenes/products/84254/02437/728/8425402437728/imagenGrande1.jpg";
-//		String enlace3="https://d10mhq06fikmnr.cloudfront.net/catalog/product/h/u/hunter_rev2_main_rgb-min_4.png";
-//		String enlace4="https://www.info-computer.com/65105-large_default/-pc-gaming-i5-9400-29-ghz-8gb-ddr4-ssd-480-gb-w10-home-oferta.jpg";
-//		String enlace5="https://www.info-computer.com/78122-large_default/pc-gaming-amd-ryzen-9-5900x-32-gb-ddr4-2-tb-1-tb-ssd-m2-rtx-3080-ti-12-gb-ddr6x-w10-home-64.jpg";
-//		
+	CommandLineRunner iniOrdenador(OrdenadoresRepo repoOrdenador) {
+
 		byte[] enlace1=imagen;
 		byte[] enlace2=imagen;
 		byte[] enlace3=imagen;
@@ -152,39 +165,42 @@ public class EjemploRestServiceJwtApplication {
 		byte[] enlace5=imagen;
 		
 		return (arg)-> {
-			serviceDisco.buscarDisco((long) 2);
-			repoOedenador.saveAll(Arrays.asList(
-					new Ordenador("Huawei MateStation B515", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace1, "Encontraras los ordenadores preparados con las mejores caracteristicas para todos los sectores" , 3, 240),
-					new Ordenador("MSI MAG Codex 5 11TG-814EU", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)17), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 562),
-					new Ordenador("Lenovo IdeaCentre 5 14IOB6", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)13), enlace1,"Pc con tales características preparado para usar en x sectores" , 3, 223),
-					new Ordenador("MasterBronze", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 245),
-					new Ordenador("MasterGold", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)15), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 842),
-					new Ordenador("HP Pavilion Desktop TP01-2000ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)16), enlace4,"Pc con tales características preparado para usar en x sectores" , 3, 643),
-					new Ordenador("Dell OptiPlex 3080", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)13), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 546),
-					new Ordenador("MasterDiamante", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 343.90),
-					new Ordenador("MasterBasic", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)12), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 223),
-					new Ordenador("Dell Vostro 3681 ", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 210.90),
-					new Ordenador("Master k32", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 214.90),
-					new Ordenador("Millenium Machine 1 Mini Soraka", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)16), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 500),
-					new Ordenador("MasterSilver Pro", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)13), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 100),
-					new Ordenador("Master mx2", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 220),
-					new Ordenador("Master mx1", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 320),
-					new Ordenador("Master xz3", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)16), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 432.90),
-					new Ordenador("HP Pavilion TP01-2001ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)17), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 110),
-					new Ordenador("Legion-Q Tracker3", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)13), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 900),
-					new Ordenador("MSI MAG Codex 5 11TG-814EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 300),
-					new Ordenador("MSI PRO DP20Z 5M-004EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 200.90),
-					new Ordenador("MSI MEG Infinite X 10TD-829EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 1200),
-					new Ordenador("MSI PRO DP20Z 5M-003EU", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)16), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 220),
-					new Ordenador("MSI MAG Infinite 11TG-1413EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)12), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 240),
-					new Ordenador("MSI MAG Codex X5 11TE-425EU", serviceRam.buscarRam((long)4), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 380),
-					new Ordenador("HP Essential M01-F1106ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)17), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 100.90),
-					new Ordenador("HP ProDesk 400 G7 CP", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)16), enlace2,"Pc con tales características preparado para usar en x sectores" , 3, 320),
-					new Ordenador("HP Z2 G5", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long)7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 300),
-					new Ordenador("HP Z1 G6", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)14), enlace4,"Pc con tales características preparado para usar en x sectores" , 3, 450),
-					new Ordenador("HP 290 G4", serviceRam.buscarRam((long)4), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)13), enlace1,"Pc con tales características preparado para usar en x sectores" , 3, 100),
-					new Ordenador("HP Z2 G5", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)14), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 240.90)));
-		};
+			if (repoOrdenador.findAll().size()==0) {
+				serviceDisco.buscarDisco((long) 2);
+				repoOrdenador.saveAll(Arrays.asList(
+						new Ordenador("Huawei MateStation B515", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace1, "Encontraras los ordenadores preparados con las mejores caracteristicas para todos los sectores" , 3, 240),
+						new Ordenador("MSI MAG Codex 5 11TG-814EU", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)17), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 562),
+						new Ordenador("Lenovo IdeaCentre 5 14IOB6", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)13), enlace1,"Pc con tales características preparado para usar en x sectores" , 3, 223),
+						new Ordenador("MasterBronze", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 245),
+						new Ordenador("MasterGold", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)15), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 842),
+						new Ordenador("HP Pavilion Desktop TP01-2000ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)16), enlace4,"Pc con tales características preparado para usar en x sectores" , 3, 643),
+						new Ordenador("Dell OptiPlex 3080", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)13), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 546),
+						new Ordenador("MasterDiamante", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 343.90),
+						new Ordenador("MasterBasic", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)12), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 223),
+						new Ordenador("Dell Vostro 3681 ", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 210.90),
+						new Ordenador("Master k32", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 214.90),
+						new Ordenador("Millenium Machine 1 Mini Soraka", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)16), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 500),
+						new Ordenador("MasterSilver Pro", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)13), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 100),
+						new Ordenador("Master mx2", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 220),
+						new Ordenador("Master mx1", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)14), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 320),
+						new Ordenador("Master xz3", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)16), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 432.90),
+						new Ordenador("HP Pavilion TP01-2001ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)17), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 110),
+						new Ordenador("Legion-Q Tracker3", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)13), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 900),
+						new Ordenador("MSI MAG Codex 5 11TG-814EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 300),
+						new Ordenador("MSI PRO DP20Z 5M-004EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)12), enlace4, "Pc con tales características preparado para usar en x sectores" , 3, 200.90),
+						new Ordenador("MSI MEG Infinite X 10TD-829EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 1200),
+						new Ordenador("MSI PRO DP20Z 5M-003EU", serviceRam.buscarRam((long)1), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)16), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 220),
+						new Ordenador("MSI MAG Infinite 11TG-1413EU", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)25), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)12), enlace2, "Pc con tales características preparado para usar en x sectores" , 3, 240),
+						new Ordenador("MSI MAG Codex X5 11TE-425EU", serviceRam.buscarRam((long)4), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)12), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 380),
+						new Ordenador("HP Essential M01-F1106ns", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)26), serviceDisco.buscarDisco((long) 7), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)17), enlace3, "Pc con tales características preparado para usar en x sectores" , 3, 100.90),
+						new Ordenador("HP ProDesk 400 G7 CP", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long) 10), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)16), enlace2,"Pc con tales características preparado para usar en x sectores" , 3, 320),
+						new Ordenador("HP Z2 G5", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)27), serviceDisco.buscarDisco((long)7), serviceGrafica.buscarGrafica((long)18), serviceFuente.buscarFuente((long)15), enlace1, "Pc con tales características preparado para usar en x sectores" , 3, 300),
+						new Ordenador("HP Z1 G6", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)23), serviceDisco.buscarDisco((long) 8), serviceGrafica.buscarGrafica((long)19), serviceFuente.buscarFuente((long)14), enlace4,"Pc con tales características preparado para usar en x sectores" , 3, 450),
+						new Ordenador("HP 290 G4", serviceRam.buscarRam((long)4), serviceProcesador.buscarProcesador((long)24), serviceDisco.buscarDisco((long) 9), serviceGrafica.buscarGrafica((long)20), serviceFuente.buscarFuente((long)13), enlace1,"Pc con tales características preparado para usar en x sectores" , 3, 100),
+						new Ordenador("HP Z2 G5", serviceRam.buscarRam((long)2), serviceProcesador.buscarProcesador((long)22), serviceDisco.buscarDisco((long) 11), serviceGrafica.buscarGrafica((long)21), serviceFuente.buscarFuente((long)14), enlace5, "Pc con tales características preparado para usar en x sectores" , 3, 240.90)));
+			
+			}
+			};
 	}
 
 }

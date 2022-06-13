@@ -17,13 +17,31 @@ public class UsuarioService {
 	@Autowired
 	private UserRepo repoUsuario;
 	
+	/**
+	 * busca un usuario por id
+	 * @param email
+	 * @return
+	 */
+	
 	public User buscarUsuario(String email) {
 		return repoUsuario.findByEmail(email).orElse(null);
 	}
 	
+	/**
+	 * busca al usuario por nombre
+	 * @param name
+	 * @return
+	 */
+	
 	public User buscarUsuarioByName(String name) {
 		return repoUsuario.findByName(name);
 	}
+	
+	/**
+	 * comprueba que el rol del usuario es administrador
+	 * @param email
+	 * @return
+	 */
 	
 	public User comprobarRolAdministrador(String email) {
 		User result = repoUsuario.findByEmail(email).orElse(null);
@@ -34,11 +52,21 @@ public class UsuarioService {
 		}
 	}
 	
-	
+	/**
+	 * listar todos los usuarios
+	 * @return
+	 */
 	
 	public List<User> findAll() {
 		return repoUsuario.findAll();
 	}
+	
+	/**
+	 * modifica el usuario
+	 * @param email
+	 * @param usuario
+	 * @return
+	 */
 	
 	public User modificarUsuario(String email, User usuario) {
 		User modificado=repoUsuario.findById(email).orElse(null);
@@ -120,6 +148,13 @@ public class UsuarioService {
 		return respuesta;
 	}
 	
+	/**
+	 * comfirma si el usuario a comprado un articulo
+	 * @param email
+	 * @param idArticulo
+	 * @return
+	 */
+	
 	public boolean usuarioTieneArticuloComprado(String email,Long idArticulo) {
 		boolean respuesta = false;
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
@@ -131,11 +166,6 @@ public class UsuarioService {
 			}
 			
 		}
-		
-		
-		
-		
-		
 		
 		return respuesta;
 	}

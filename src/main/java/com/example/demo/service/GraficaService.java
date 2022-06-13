@@ -14,9 +14,20 @@ public class GraficaService {
 	@Autowired
 	private GraficaRepo repoGrafica;
 	
+	/**
+	 * saca la grafica que le digas por la id
+	 * @param id
+	 * @return
+	 */
+	
 	public Grafica buscarGrafica(Long id) {
 		return repoGrafica.findById(id).orElse(null);
 	}
+	
+	/**
+	 * lista las graficas del repo
+	 * @return
+	 */
 	
 	public List<Grafica> findAll() {
 		return repoGrafica.findAll();

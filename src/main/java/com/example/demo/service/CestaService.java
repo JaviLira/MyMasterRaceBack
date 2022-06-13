@@ -24,13 +24,31 @@ public class CestaService {
 	@Autowired
 	private CestaRepo repoCesta;
 	
+	/**
+	 * busca una cesta en concreto
+	 * @param id
+	 * @return
+	 */
+	
 	public Cesta buscarCesta(Long id) {
 		return repoCesta.findById(id).orElse(null);
 	}
 	
+	/**
+	 * lista todas las cestas
+	 * @return
+	 */
+	
 	public List<Cesta> findAll() {
 		return repoCesta.findAll();
 	}
+	
+	/**
+	 * añade una cesta a un usuario
+	 * @param email
+	 * @param articulo
+	 * @return
+	 */
 	
 	public AbsArticulo addCarrito(String email,AbsArticulo articulo) {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
@@ -65,6 +83,13 @@ public class CestaService {
 			return articuloBase;
 		}
 	}
+	
+	/**
+	 * saca las cestas de un usuario
+	 * @param email
+	 * @return
+	 */
+	
 	public List<Cesta> getCarrito(String email){
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
 		
@@ -74,6 +99,13 @@ public class CestaService {
 			return usuario.getListaCesta();
 		}
 	}
+	
+	/**
+	 * borra una cesta del usuario
+	 * @param email
+	 * @param id
+	 * @return
+	 */
 	
 	public Cesta deleteCarrito(String email,Long id) {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
@@ -97,6 +129,14 @@ public class CestaService {
 		}	
 	}
 	
+	/**
+	 * modifica la cesta del usuario
+	 * @param email
+	 * @param id
+	 * @param cesta
+	 * @return
+	 */
+	
 	public Cesta putCesta(String email,Long id, Cesta cesta) {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
 		Cesta cestaBase=repoCesta.findById(id).orElse(null);
@@ -116,6 +156,11 @@ public class CestaService {
 			return null;
 		}
 	}
+	
+	/**
+	 * vacia la cesta del usuario
+	 * @param email
+	 */
 	
 	public void vaciarCestaUsuario(String email) {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);

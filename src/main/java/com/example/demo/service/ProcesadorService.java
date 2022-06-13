@@ -15,13 +15,30 @@ public class ProcesadorService {
 	@Autowired
 	private ProcesadorRepo repoProcesador;
 	
+	/**
+	 * saca un procesador concreto
+	 * @param id
+	 * @return
+	 */
+	
 	public Procesador buscarProcesador(Long id) {
 		return repoProcesador.findById(id).orElse(null);
 	}
 	
+	/**
+	 * lista todos procesadores
+	 * @return
+	 */
+	
 	public List<Procesador> findAll(){
 		return repoProcesador.findAll();
 	}
+	
+	/**
+	 * lista los procesadores compatibles
+	 * @param id
+	 * @return
+	 */
 	
 	public List<Procesador> listarProcesadoresCompatibles(Long id){
 		Procesador referencia=buscarProcesador(id);

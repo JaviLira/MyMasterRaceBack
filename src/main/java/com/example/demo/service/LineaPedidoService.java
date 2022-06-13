@@ -31,13 +31,31 @@ public class LineaPedidoService {
 	@Autowired
 	private ArticuloRepo repoArticulo;
 	
+	/**
+	 * saca la linaPedido que le pidas
+	 * @param id
+	 * @return
+	 */
+	
 	public LineaPedido buscarLineaPedido(Long id) {
 		return repoLienaPedido.findById(id).orElse(null);
 	}
 	
+	/**
+	 * saca todas las lineasdePedido
+	 * @return
+	 */
+	
 	public List<LineaPedido> findAll() {
 		return repoLienaPedido.findAll();
 	}
+	
+	/**
+	 * añade una linea de pedido a un pedido
+	 * @param email
+	 * @param idPedido
+	 * @return
+	 */
 	
 	public Pedido asignarLineasDePedidoA_Pedido(String email,Long idPedido){
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
@@ -61,6 +79,12 @@ public class LineaPedidoService {
 		
 		return pedido;
 	}
+	
+	/**
+	 * saca las lineas de pedido de un pedido
+	 * @param idPedido
+	 * @return
+	 */
 	
 	public List<LineaPedido> lineasPedidoDelPedido(Long idPedido){
 		Pedido pedido=repoPedido.findById(idPedido).orElse(null);

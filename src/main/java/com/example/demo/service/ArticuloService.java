@@ -16,13 +16,30 @@ public class ArticuloService {
 	@Autowired
 	private ArticuloRepo repoArticulo;
 	
+	/**
+	 * saca todos los articulos
+	 * @return
+	 */
+	
 	public List<AbsArticulo> findAll() {
 		return repoArticulo.findAll();
 	}
 	
+	/**
+	 * saca el articulo que le pases
+	 * @param id
+	 * @return
+	 */
+	
 	public AbsArticulo buscarArticulo(Long id) {
 		return repoArticulo.findById(id).orElse(null);
 	}
+	
+	/**
+	 * comprueba si la cantidad de un articulo es mayor a 1
+	 * @param id
+	 * @return
+	 */
 	
 	public boolean comprobarCantidad(Long id) {
 		boolean result=false;
@@ -33,6 +50,13 @@ public class ArticuloService {
 		return result;
 	}
 	
+	/**
+	 * actualiza el articulo que le pases si existe
+	 * @param id
+	 * @param articulo
+	 * @return
+	 */
+	
 	public AbsArticulo actualizarArticulo(Long id, AbsArticulo articulo) {
 		
 		if (repoArticulo.findById(id).orElse(null)!=null) {
@@ -41,6 +65,13 @@ public class ArticuloService {
 			return null;
 		}
 	}
+	
+	/**
+	 * desactiva un articulo
+	 * @param id
+	 * @param estado
+	 * @return
+	 */
 	
 	public AbsArticulo descartivarArticulo(Long id,String estado) {
 		AbsArticulo articulo = repoArticulo.findById(id).orElse(null);

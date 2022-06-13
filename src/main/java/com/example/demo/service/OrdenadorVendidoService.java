@@ -31,13 +31,30 @@ public class OrdenadorVendidoService {
 	@Autowired
 	private GraficaService serviceGrafica;
 	
+	/**
+	 * saca el ordenadorVendido que quieres
+	 * @param id
+	 * @return
+	 */
+	
 	public OrdenadorVendido buscarOrdenadorVendido(Long id) {
 		return repoOrdenadorVendido.findById(id).orElse(null);
 	}
 	
+	/**
+	 * lista todos los ordenadoresVendidos
+	 * @return
+	 */
+	
 	public List<OrdenadorVendido> findAll() {
 		return repoOrdenadorVendido.findAll();
 	}
+	
+	/**
+	 * crea un ordenador vendido
+	 * @param ordenadorV
+	 * @return
+	 */
 	
 	public OrdenadorVendido addOrdenadorVendido(OrdenadorVendido ordenadorV) {
 		OrdenadorVendido confirmar=confirmarExistencia(ordenadorV);
@@ -62,11 +79,23 @@ public class OrdenadorVendidoService {
 		}
 	}
 	
+	/**
+	 * borra un ordenador vendido
+	 * @param ordenadorV
+	 * @return
+	 */
+	
 	public OrdenadorVendido deleteOrdenadorVendido(Long ordenadorV) {
 		OrdenadorVendido ordenador=repoOrdenadorVendido.findById(ordenadorV).orElse(null);
 		repoOrdenadorVendido.deleteById(ordenadorV);
 		return ordenador;
 	}
+	
+	/**
+	 * confirma si el ordenador vendido aun existe
+	 * @param ordenador
+	 * @return
+	 */
 	
 	public OrdenadorVendido confirmarExistencia(OrdenadorVendido ordenador) {
 		List<OrdenadorVendido> listaOrdenadoresCreados=repoOrdenadorVendido.findAll();

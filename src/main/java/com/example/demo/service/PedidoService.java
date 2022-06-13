@@ -24,13 +24,30 @@ public class PedidoService {
 	@Autowired
 	private UserRepo repoUsuario;
 	
+	/**
+	 * busca el pedido que quieras
+	 * @param id
+	 * @return
+	 */
+	
 	public Pedido buscarPedido(Long id) {
 		return repoPedido.findById(id).orElse(null);
 	}
 	
+	/**
+	 * saca todos los pedidos
+	 * @return
+	 */
+	
 	public List<Pedido> findAll() {
 		return repoPedido.findAll();
 	}
+	
+	/**
+	 * lista todos los pedidos de un usuario
+	 * @param email
+	 * @return
+	 */
 	
 	public List<Pedido> listaPedidosUsuario(String email) {
 		User usuario= repoUsuario.findByEmail(email).orElse(null);
@@ -41,6 +58,12 @@ public class PedidoService {
 		}
 	}
 	
+	/**
+	 * lista pedidos del usuario por el nombre del usuario
+	 * @param name
+	 * @return
+	 */
+	
 	public List<Pedido> listaPedidosUsuarioByName(String name) {
 		User usuario= repoUsuario.findByName(name);
 		if (usuario!=null) {
@@ -49,6 +72,13 @@ public class PedidoService {
 			return null;
 		}
 	}
+	
+	/**
+	 * Crea un pedido en el usuario
+	 * @param email
+	 * @param pedido
+	 * @return
+	 */
 	
 	public Pedido crearPedido(String email,Pedido pedido) {
 		if(comprobarPedido(pedido)) {
@@ -78,6 +108,12 @@ public class PedidoService {
 			return null;
 		}
 	}
+	
+	/**
+	 * Comprueba que todos los valores del pedido tiene datos
+	 * @param p1
+	 * @return
+	 */
 
 	public boolean comprobarPedido(Pedido p1) {
 		if(		p1.getDireccion()==null || 
@@ -97,6 +133,14 @@ public class PedidoService {
 			return true;
 		}
 	}
+	
+	/**
+	 * Modifica el pedido del usuario
+	 * @param pedido
+	 * @param name
+	 * @param idPedido
+	 * @return
+	 */
 	
 	public Pedido modificarPedido(Pedido pedido, String name,Long idPedido) {
 		

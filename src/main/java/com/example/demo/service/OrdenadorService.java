@@ -37,38 +37,85 @@ public class OrdenadorService {
 	@Autowired
 	private DiscoRepo repoDisco;
 	
+	/**
+	 * saca el ordenador que quieres
+	 * @param id
+	 * @return
+	 */
+	
 	public Ordenador buscarOrdenador(Long id) {
 		return repoOrdenador.findById(id).orElse(null);
 	}
 	
+	/**
+	 * lista todos los ordenadores
+	 * @return
+	 */
+	
 	public List<Ordenador> findAll() {
 		return repoOrdenador.findAll();
 	}
+	
+	/**
+	 * saca el procesador de un ordenador
+	 * @param id
+	 * @return
+	 */
 
 	public Procesador sacarProcesador(Long id) {
 		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
 		return ordenador.getProcesador();
 	}
 	
+	/**
+	 * saca la ram de un ordenador
+	 * @param id
+	 * @return
+	 */
+	
 	public Ram sacarRam(Long id) {
 		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
 		return ordenador.getRam();
 	}
+	
+	/**
+	 * saca el dosco de un ordenador
+	 * @param id
+	 * @return
+	 */
 	
 	public Disco sacarDisco(Long id) {
 		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
 		return ordenador.getDiscoduro();
 	}
 	
+	/**
+	 * saca la grafica de un ordenador
+	 * @param id
+	 * @return
+	 */
+	
 	public Grafica sacarGrafica(Long id) {
 		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
 		return ordenador.getGrafica();
 	}
 	
+	/**
+	 * saca la fuente de un ordenador
+	 * @param id
+	 * @return
+	 */
+	
 	public Fuente sacarFuente(Long id) {
 		Ordenador ordenador=repoOrdenador.findById(id).orElse(null);
 		return ordenador.getFuente();
 	}
+	
+	/**
+	 * crea un ordenador
+	 * @param ordenador
+	 * @return
+	 */
 	
 	public Ordenador crearOrdenador(Ordenador ordenador) {
 		if (ordenador.getCantidad()>=1 
@@ -108,6 +155,13 @@ public class OrdenadorService {
 		}
 		return null;
 	}
+	
+	/**
+	 * edita un ordenador
+	 * @param id
+	 * @param ordenador
+	 * @return
+	 */
 	
 	public Ordenador editOrdenador(Long id, Ordenador ordenador) {
 		Ordenador ordenadorEdit= repoOrdenador.findById(id).orElse(null);
@@ -149,8 +203,6 @@ public class OrdenadorService {
 			repoOrdenador.save(ordenadorEdit);
 			
 			return ordenadorEdit;
-			
-			
 		}else {
 			return null;
 		}

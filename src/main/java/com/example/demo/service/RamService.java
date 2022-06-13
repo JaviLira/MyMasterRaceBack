@@ -15,13 +15,29 @@ public class RamService {
 	@Autowired
 	private RamRepo repoRam;
 	
+	/**
+	 * lista todas las rams
+	 */
+	
 	public List<Ram> findAll() {
 		return repoRam.findAll();
 	}
 	
+	/**
+	 * saca una ram concreta
+	 * @param id
+	 * @return
+	 */
+	
 	public Ram buscarRam(Long id) {
 		return repoRam.findById(id).orElse(null);
 	}
+	
+	/**
+	 * lista las rams compatibles
+	 * @param id
+	 * @return
+	 */
 	
 	public List<Ram> listarRamsCompatibles(Long id){
 		Ram referencia=buscarRam(id);
@@ -110,6 +126,12 @@ public class RamService {
 			return null;
 		}
 	}
+	
+	/**
+	 * borra una ram
+	 * @param id
+	 * @return
+	 */
 	
 	public Ram deleteRam(Long id) {
 		return repoRam.findById(id).orElse(null);

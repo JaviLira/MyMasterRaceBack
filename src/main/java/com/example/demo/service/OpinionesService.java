@@ -27,13 +27,32 @@ public class OpinionesService {
 	@Autowired
 	private ArticuloRepo repoArticulo;
 	
+	/**
+	 * Busca una opinion
+	 * @param id
+	 * @return
+	 */
+	
 	public Opiniones buscarOpiniones(Long id) {
 		return repoOpiniones.findById(id).orElse(null);
 	}
 	
+	/**
+	 * saca todas la opiniones
+	 * @return
+	 */
+	
 	public List<Opiniones> findAll() {
 		return repoOpiniones.findAll();
 	}
+	
+	/**
+	 * crea una poinion
+	 * @param opinion
+	 * @param idArticulo
+	 * @param email
+	 * @return
+	 */
 	
 	public Opiniones crearOpinion(Opiniones opinion, Long idArticulo,String email) {
 		User usuario=repoUsuario.findByEmail(email).orElse(null);
@@ -46,15 +65,19 @@ public class OpinionesService {
 			nuevaOpinion.setUsuario(usuario);
 		
 			repoOpiniones.save(nuevaOpinion);
-			
 			return nuevaOpinion;
-		
 		}else {
 			return null;
 		}
 		
 
 	}
+	
+	/**
+	 * Saca las opiniones de un articulo
+	 * @param id
+	 * @return
+	 */
 
 	public List<Opiniones> listaDeComentariosDeUnArticulo(Long id){
 		List<Opiniones> listaOpiniones=repoOpiniones.findAll();
@@ -67,11 +90,17 @@ public class OpinionesService {
 			}
 			return listaOpinionesDelArticulo;
 		}else {
-			
 			return null;
 		}
 		
 	}
+	
+	/**
+	 * Comprueba si el usuario ya a comentado ese articulo
+	 * @param idArticulo
+	 * @param email
+	 * @return
+	 */
 	
 	public boolean usuarioYaComentadoArticulo(Long idArticulo,String email) {
 		List<Opiniones> listaOpiniones=repoOpiniones.findAll();
@@ -83,9 +112,6 @@ public class OpinionesService {
 				respuesta= true;
 			}
 		}
-		
-		
-		
 		return respuesta;
 	}
 	

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ComentarioExeption extends RuntimeException{
 	
 	/**
-	 * 
+	 * error con el comentario
 	 */
 	private static final long serialVersionUID = 6921872424277956690L;
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class PedidoFormatNotFoundExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * Error con algun valor del pedido
 	 */
 	private static final long serialVersionUID = 17771401311324885L;
 

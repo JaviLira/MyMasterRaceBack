@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UsuarioNoHaCompradoEseArticuloExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * No puede comentar porque no ha comprado el articulo
 	 */
 	private static final long serialVersionUID = -3575073917132086760L;
 

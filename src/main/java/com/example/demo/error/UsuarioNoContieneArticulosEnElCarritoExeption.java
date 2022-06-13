@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UsuarioNoContieneArticulosEnElCarritoExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * el carrito del usuario esta vacio
 	 */
 	private static final long serialVersionUID = 4639053746464395995L;
 

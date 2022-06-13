@@ -8,7 +8,7 @@ public class ArticuloNullExeption extends RuntimeException{
 
 
 	/**
-	 * 
+	 * El articulo es nulo o no esta completo
 	 */
 	private static final long serialVersionUID = 356667847841866930L;
 

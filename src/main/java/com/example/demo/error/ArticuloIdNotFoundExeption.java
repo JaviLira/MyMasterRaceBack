@@ -8,7 +8,7 @@ public class ArticuloIdNotFoundExeption extends RuntimeException{
 
 
 	/**
-	 * 
+	 * No se puede encontrar el articulo con una id concreta
 	 */
 	private static final long serialVersionUID = -5962841244154326365L;
 

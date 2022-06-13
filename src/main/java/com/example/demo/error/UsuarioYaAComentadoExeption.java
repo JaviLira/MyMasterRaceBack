@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UsuarioYaAComentadoExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * No puede comentar porque ya ha comentado ese articulo
 	 */
 	private static final long serialVersionUID = -4991965656114287661L;
 

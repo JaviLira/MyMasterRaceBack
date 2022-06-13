@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ComponenteNoActivoNotFoundExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * El componente esta inactivo
 	 */
 	private static final long serialVersionUID = -8468207531572450493L;
 

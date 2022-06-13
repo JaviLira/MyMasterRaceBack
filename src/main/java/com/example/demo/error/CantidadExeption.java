@@ -8,7 +8,7 @@ public class CantidadExeption extends RuntimeException{
 
 
 	/**
-	 * 
+	 * No quedan mas unidades de este producto
 	 */
 	private static final long serialVersionUID = 8939307636517772891L;
 

@@ -8,7 +8,7 @@ public class ComponenteNotFoundExeption extends RuntimeException{
 
 
 	/**
-	 * 
+	 * Un componente no existe en la base de datos
 	 */
 	private static final long serialVersionUID = 1099744240002192914L;
 

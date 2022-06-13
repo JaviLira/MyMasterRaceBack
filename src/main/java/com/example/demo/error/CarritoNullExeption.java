@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class CarritoNullExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * El carrito no tiene articulos
 	 */
 	private static final long serialVersionUID = 2215044373849339104L;
 

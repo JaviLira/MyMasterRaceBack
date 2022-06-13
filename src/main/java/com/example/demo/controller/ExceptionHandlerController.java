@@ -16,6 +16,12 @@ import com.example.demo.error.ComponenteNotFoundExeption;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
+	/**
+	 * El estado del articulo no es true o false
+     * @param ex
+     * @return
+     * @throws Exception
+	 */
 	
     @ExceptionHandler(EstadoExeption.class)
     public ResponseEntity<ApiError> EstadoExeption(EstadoExeption ex) throws Exception {
@@ -26,6 +32,13 @@ public class ExceptionHandlerController {
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	}
     
+	/**
+	 * No se puede encontrar el articulo con una id concreta
+     * @param ex
+     * @return
+     * @throws Exception
+	 */
+    
     @ExceptionHandler(ArticuloIdNotFoundExeption.class)
     public ResponseEntity<ApiError> ArticuloIdNotFoundExeption(ArticuloIdNotFoundExeption ex) throws Exception {
     	ApiError e = new ApiError();
@@ -35,6 +48,13 @@ public class ExceptionHandlerController {
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	}
     
+	/**
+	 * Un componente no existe en la base de datos
+     * @param ex
+     * @return
+     * @throws Exception
+	 */
+    
     @ExceptionHandler(ComponenteNotFoundExeption.class)
     public ResponseEntity<ApiError> ComponenteNotFoundExeption(ComponenteNotFoundExeption ex) throws Exception {
     	ApiError e = new ApiError();
@@ -43,6 +63,13 @@ public class ExceptionHandlerController {
     	e.setFecha(LocalDateTime.now());	
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	}
+    
+	/**
+	 * El componente esta inactivo
+     * @param ex
+     * @return
+     * @throws Exception
+	 */
     
     @ExceptionHandler(ComponenteNoActivoNotFoundExeption.class)
     public ResponseEntity<ApiError> ComponenteNoActivoNotFoundExeption(ComponenteNoActivoNotFoundExeption ex) throws Exception {

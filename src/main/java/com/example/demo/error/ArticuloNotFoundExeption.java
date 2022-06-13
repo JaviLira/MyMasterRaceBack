@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ArticuloNotFoundExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * No se puede encontrar el articulo con esa id
 	 */
 	private static final long serialVersionUID = -3253593958328409278L;
 

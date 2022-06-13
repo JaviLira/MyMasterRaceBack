@@ -8,7 +8,7 @@ public class UsuarioTieneEsePedidoExeption extends RuntimeException{
 
 
 	/**
-	 * 
+	 * El usuario no tiene un peido con esa id
 	 */
 	private static final long serialVersionUID = -4956545383942638523L;
 

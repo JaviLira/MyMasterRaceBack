@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class EstadoExeption extends RuntimeException{
 
 	/**
-	 * 
+	 * El estado del articulo no es true o false
 	 */
 	private static final long serialVersionUID = 4885631932773979434L;
 

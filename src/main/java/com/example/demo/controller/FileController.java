@@ -23,6 +23,13 @@ public class FileController {
 	
 	@Autowired
 	ArticuloService servicioArticulo;
+	
+	/**
+	 * añade un imagen a un articulo
+	 * @param file
+	 * @param id
+	 * @return
+	 */
 
 	@PostMapping("articulo/{id}/file")
 	public ResponseEntity<FileMessage> postProcesador(@RequestBody MultipartFile file,@PathVariable Long id) {

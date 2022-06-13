@@ -158,6 +158,8 @@ public class PedidoService {
 			
 			if ("Entregado".equals(pedido.getEstado())) {
 				pedidoEdit.setFechaPackEntrega(date);
+			}else {
+				pedidoEdit.setFechaPackEntrega(null);
 			}
 			
 			repoPedido.save(pedidoEdit);

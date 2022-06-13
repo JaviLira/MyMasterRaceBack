@@ -179,12 +179,15 @@ public class UsuarioService {
 		}else {
 			if ("ADMIN".equals(rol)) {
 				usuarioEdit.setRol(Roles.ROLE_ADMIN);
+				repoUsuario.save(usuarioEdit);
 				return usuarioEdit;
 			}else if("EMPLOYEE".equals(rol)){
 				usuarioEdit.setRol(Roles.ROLE_EMPLOYEE);
+				repoUsuario.save(usuarioEdit);
 				return usuarioEdit;
 			}else if("USER".equals(rol)) {
 				usuarioEdit.setRol(Roles.ROLE_USER);
+				repoUsuario.save(usuarioEdit);
 				return usuarioEdit;
 			}else {
 				return null;

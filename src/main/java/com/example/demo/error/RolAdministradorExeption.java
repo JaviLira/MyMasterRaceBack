@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class RolAdministradorExeption extends RuntimeException{
 
 
-	/**
-	 * 
-	 */
+    /**
+     * salta si el rol no es administrador
+     */
 	private static final long serialVersionUID = -6882418255334351428L;
 
 	public RolAdministradorExeption() {

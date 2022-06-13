@@ -86,7 +86,10 @@ public class AuthController {
         }
     }
     
-    
+    /**
+     * validar que tiene token
+     * @return
+     */
   @GetMapping("/validarToken")
     public ResponseEntity<User> validarToken() {
     	try {
@@ -97,6 +100,11 @@ public class AuthController {
 			throw new TokenNoValidoExeption();
 		}
     }
+  
+  /**
+   * validar que tiene token y es administrador
+   * @return
+   */
   
   @GetMapping("/validarRolAdministrador")
   public ResponseEntity<User> validarRolAdministrador() {
@@ -109,6 +117,11 @@ public class AuthController {
 			throw new TokenNoValidoExeption();
 		}
   }
+  
+  /**
+   * debuelve el usuario por el email
+   * @return
+   */
     
     @GetMapping("/auth/email/{email}")
     public ResponseEntity<User> comprobarEmail(@PathVariable String email) {
@@ -121,6 +134,11 @@ public class AuthController {
 		}
     	
     }
+    
+    /**
+     * validar que el email y el username no estan en uso
+     * @return
+     */
     
     @GetMapping("/auth/email")
     public User comprobarEmail(
@@ -139,7 +157,12 @@ public class AuthController {
     
     
     
-    
+    /**
+     * salta si el rol no es administrador
+     * @param ex
+     * @return
+     * @throws Exception
+     */
     
     @ExceptionHandler(RolAdministradorExeption.class)
     public ResponseEntity<ApiError> RolAdministradorExeption(RolAdministradorExeption ex) throws Exception {
@@ -151,6 +174,16 @@ public class AuthController {
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	} 
     
+    /**
+     * 
+	 * Esta excepcion solo se deberia de ver cuando el usuario que quiere registrarse usa un email que ya esta usando 
+	 * otro usuario en la base de datos
+	 *
+     * @param ex
+     * @return
+     * @throws Exception
+     */
+    
     @ExceptionHandler(ExisteUsuarioNotFoundExeption.class)
     public ResponseEntity<ApiError> registrarError(ExisteUsuarioNotFoundExeption ex) throws Exception {
     	ApiError e = new ApiError();
@@ -160,6 +193,10 @@ public class AuthController {
     	
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	} 
+    
+	/**
+	 * Esta excepcion solo se deberia de ver cuando el usuario que estas buscando no existe
+	 */
     
     @ExceptionHandler(UserNotFoundExeption.class)
     public ResponseEntity<ApiError> usuarioNoEncontrado(UserNotFoundExeption ex) throws Exception {
@@ -171,6 +208,10 @@ public class AuthController {
     	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	} 
     
+	/**
+	 * Esta excepcion solo se deberia de ver cuando la contraseña del usuario no es valida
+	 */
+    
     @ExceptionHandler(ContrasenaNotFoundExeption.class)
     public ResponseEntity<ApiError> contrasenaError(ContrasenaNotFoundExeption ex) throws Exception {
     	ApiError e = new ApiError();
@@ -180,6 +221,10 @@ public class AuthController {
     	
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	} 
+    
+	/**
+	 * Esta excepcion solo se deberia de ver cuando el token no es valido
+	 */
     
     @ExceptionHandler(TokenNoValidoExeption.class)
     public ResponseEntity<ApiError> tokenNoValido(TokenNoValidoExeption ex) throws Exception {

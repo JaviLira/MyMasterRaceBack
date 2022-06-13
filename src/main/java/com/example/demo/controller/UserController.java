@@ -894,6 +894,24 @@ public class UserController {
     }
     
     /**
+     * modifica el rol del usuario
+     * @param id
+     * @param usuario
+     * @param rol
+     * @return
+     */
+    
+    @PutMapping("/usuario/{id}")
+    public ResponseEntity <User> putUsuarioId(@PathVariable String id,@RequestBody User usuario,@RequestParam(required=false) String rol) {
+    	User result=serviceUsuario.cambiarRol(id,rol);
+    	if (result==null) {
+    		throw new UserNotFoundExeption(id);
+		}else {
+			return ResponseEntity.ok(result);
+		}
+    }
+    
+    /**
      * saca al usuario por su token
      * @return
      */

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.LineaPedido;
 import com.example.demo.model.Pedido;
+import com.example.demo.model.Roles;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepo;
 
@@ -168,6 +169,27 @@ public class UsuarioService {
 		}
 		
 		return respuesta;
+	}
+	
+	public User cambiarRol(String idUsuario,String rol) {
+		User usuarioEdit = repoUsuario.findById(idUsuario).orElse(null);
+		
+		if (rol==null || "".equals(rol) || usuarioEdit==null) {
+			return null;
+		}else {
+			if ("ADMIN".equals(rol)) {
+				usuarioEdit.setRol(Roles.ROLE_ADMIN);
+				return usuarioEdit;
+			}else if("EMPLOYEE".equals(rol)){
+				usuarioEdit.setRol(Roles.ROLE_EMPLOYEE);
+				return usuarioEdit;
+			}else if("USER".equals(rol)) {
+				usuarioEdit.setRol(Roles.ROLE_USER);
+				return usuarioEdit;
+			}else {
+				return null;
+			}
+		}
 	}
 	
 	

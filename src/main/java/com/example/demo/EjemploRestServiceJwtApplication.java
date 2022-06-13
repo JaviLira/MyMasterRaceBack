@@ -94,12 +94,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniRam(RamRepo repoRam) {
 		return (arg)-> {
 			if (repoRam.findAll().size()==0) {
-				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
-					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
-					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
+				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
+					new Ram("Kingston HyperX",imagen,"",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
+					new Ram("Kingston HyperX",imagen,"",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
+					new Ram("Kingston FURY",imagen,"",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
+					new Ram("Kingston FURY",imagen,"",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
+					new Ram("Kingston FURY",imagen,"",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
 			}
 
 		};
@@ -109,11 +109,11 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniDisco(DiscoRepo repoDisco) {
 		return (arg)-> {
 			if (repoDisco.findAll().size()==0) {
-				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 45.65, "HDD", 1000,"sata3"),
-					new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 60.65, "HDD", 2000,"sata3"),
-					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 42.32, "SSD", 480,"sata3"),
-					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 80.90, "SSD", 1000,"sata3"),
-					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 140.60, "SSD", 2000,"sata3")));
+				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
+					new Disco("Seagate BarraCuda",imagen,"",6, 60.65, "HDD", 2000,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 42.32, "SSD", 480,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 80.90, "SSD", 1000,"sata3"),
+					new Disco("Kingston A400",imagen,"",6, 140.60, "SSD", 2000,"sata3")));
 			}
 
 		};
@@ -123,12 +123,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniFuente(FuenteRepo repoFuente) {
 		return (arg)-> {
 			if (repoFuente.findAll().size()==0) {
-				repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 75.90, "80 Plus Gold", 650),
-					new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 89.90, "80 Plus Silver",850),
-					new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 105.90, "80 Plus Gold", 1050),
-					new Fuente("Corsair RM750",imagen,"Las fuentes de alimentación totalmente modulares CORSAIR RM Series proporcionan una potencia eficiente con certificación 80 PLUS Gold a su PC, con un funcionamiento prácticamente silencioso.",6, 90.90, "80 Plus Gold", 750),
-					new Fuente("Corsair RM850",imagen,"Las fuentes de alimentación totalmente modulares CORSAIR RM Series proporcionan una potencia eficiente con certificación 80 PLUS Gold a su PC, con un funcionamiento prácticamente silencioso.",6, 120.90, "80 Plus Gold", 850),
-					new Fuente("Be Quiet! Dark Power Pro 12",imagen,"La be quiet! Dark Power Pro 12 de 1500W  con eficiencia 80 PLUS® Titanium y rendimiento de máxima categoría gracias al control totalmente digital y el concepto de ventilador sin armazón.",6 , 500.90, "80 Plus Titanium", 1500)));
+				repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"",6, 75.90, "80 Plus Gold", 650),
+					new Fuente("Nfortec Sagitta",imagen,"",6, 89.90, "80 Plus Silver",850),
+					new Fuente("Nfortec Sagitta",imagen,"",6, 105.90, "80 Plus Gold", 1050),
+					new Fuente("Corsair RM750",imagen,"",6, 90.90, "80 Plus Gold", 750),
+					new Fuente("Corsair RM850",imagen,"",6, 120.90, "80 Plus Gold", 850),
+					new Fuente("Be Quiet! Dark Power Pro 12",imagen,"",6 , 500.90, "80 Plus Titanium", 1500)));
 			}
 
 		};
@@ -138,10 +138,10 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniGrafica(GraficaRepo repoGrafica) {
 		return (arg)-> {
 			if (repoGrafica.findAll().size()==0) {
-				repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"RTX.  IT’S ON. Disfruta de los mayores éxitos de ventas de hoy como nunca antes con la fidelidad visual del trazado de rayos en tiempo real y el rendimiento definitivo de DLSS con tecnología de IA.",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Asus Dual OC EVO",imagen,"Al ofrecer la última experiencia de juego NVIDIA Turing ? en su forma más pura, el ASUS Dual GeForce® RTX 2080 SUPER ? EVO V2 combina el rendimiento y la simplicidad como ningún otro. Aprovechando las tecnologías de enfriamiento avanzadas derivadas de las tarjetas gráficas emblemáticas, la Dual opta por la sustancia sobre el estilo, la elección perfecta para una construcción bien equilibrada. Abróchate el cinturón y disfruta de la destreza de los juegos de vanguardia.",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Sapphire PULSE",imagen,"Las tarjetas gráficas AMD Radeon RX 6600 cuentan con tecnologías de diseño e ingeniería líderes en su clase para ofrecer las velocidades de cuadro ultra altas que exigen las pantallas de alta frecuencia de actualización más recientes.",6 , 490.90, "AMD", "RX 6600"),
-					new Grafica("PowerColor FIGHTER",imagen,"Presentamos las tarjetas gráficas AMD Radeon ™ RX 6000 Series, con la revolucionaria arquitectura AMD RDNA ™ 2, diseñada para brindar un rendimiento ultra alto, una resolución ultra alta y juegos visualmente impresionantes para todos. ",6 , 480.90, "AMD", "RX 6600")));
+				repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Asus Dual OC EVO",imagen,"",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Sapphire PULSE",imagen,"",6 , 490.90, "AMD", "RX 6600"),
+					new Grafica("PowerColor FIGHTER",imagen,"",6 , 480.90, "AMD", "RX 6600")));
 			}
 
 		};
@@ -151,12 +151,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniProcesador(ProcesadorRepo repoProcesador) {
 		return (arg)-> {
 			if (repoProcesador.findAll().size()==0) {
-				repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"Cuando cuentas con la arquitectura de procesadores más avanzada del mundo para jugadores y creadores de contenido, las posibilidades son infinitas. Sin lugar a dudas, los procesadores para computadoras de escritorio AMD Ryzen™ serie 5000 elevan el nivel de expectativa para jugadores y artistas por igual.",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
-					new Procesador("AMD Ryzen 7 5700G",imagen,"Cuando cuentas con la arquitectura de procesadores más avanzada del mundo para jugadores y creadores de contenido, las posibilidades son infinitas. Sin lugar a dudas, los procesadores para computadoras de escritorio AMD Ryzen™ serie 5000 elevan el nivel de expectativa para jugadores y artistas por igual.",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
-					new Procesador("Intel Core i7-12700K",imagen,"Procesador de escritorio desbloqueado Intel® Core ™ i7-12700K de 12.ª generación. Con Intel® Turbo Boost Max Technology 3.0 y compatibilidad con PCIe Gen 4.0, los procesadores de escritorio Intel® Core ™ desbloqueados de 12.ª generación están optimizados para jugadores entusiastas y creadores serios y ayudan a ofrecer overclocking de alto rendimiento para un impulso adicional.",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
-					new Procesador("Intel Core i5-12400F",imagen,"Procesadores Intel® Core™ de 12ª generación: una generación como ninguna otra antes. Con una nueva arquitectura híbrida de rendimiento sin precedentes, los procesadores Intel® Core™ de 12ª generación ofrecen una combinación única de núcleos de rendimiento y eficiencia (núcleo P y núcleo E). Y eso significa gozar de rendimiento en el mundo real, un resultado escalado intuitivamente para adaptarse a cualquier cosa que estés haciendo.",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
-					new Procesador("Intel Core i7-11700K",imagen,"Procesador de escritorio desbloqueado Intel® Core ™ i7-11700K de 11.ª generación. Con Intel® Turbo Boost Max Technology 3.0 y compatibilidad con PCIe Gen 4.0, los procesadores de escritorio Intel® Core ™ desbloqueados de 11ª generación están optimizados para jugadores entusiastas y creadores serios y ayudan a ofrecer overclocking de alto rendimiento para un impulso adicional.",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
-					new Procesador("Intel Core 5-10400",imagen,"Los nuevos procesadores Intel® Core™ de 10? generación ofrecen mejoras de rendimiento notables para conseguir una productividad mejorada y un entretenimiento impresionante, incluyendo hasta 5,3 GHz, Intel® Wi-Fi 6 (Gig+), tecnología Thunderbolt™ 3, HDR 4K, optimización de sistema inteligente y mucho más.",6 , 160.80, "Intel", "Core 5-10400", "1200")));
+				repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
+					new Procesador("AMD Ryzen 7 5700G",imagen,"",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
+					new Procesador("Intel Core i7-12700K",imagen,"",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
+					new Procesador("Intel Core i5-12400F",imagen,"",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
+					new Procesador("Intel Core i7-11700K",imagen,"",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
+					new Procesador("Intel Core 5-10400",imagen,"",6 , 160.80, "Intel", "Core 5-10400", "1200")));
 			}
 
 		};

@@ -72,7 +72,7 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 					User usuario = repoUsuario.findByEmail("javi@gmail.com").orElse(null);
 					usuario.setRol(Roles.ROLE_ADMIN);
 					
-					repoUsuario.saveAll(Arrays.asList(new User("pepito", "pepito@gmail.com", "C/pepi Nº3", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+					repoUsuario.saveAll(Arrays.asList(new User("pepito", "pepito@gmail.com", "C/pepi Nº3", "222444777", codificador.encode("pepito"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("juan", "juan@gmail.com", "C/juan Nº30 1ºA", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("pepe", "pepe@gmail.com", "C/pepe", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("antonio", "antonio@gmail.com", "C/antonio", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
@@ -94,12 +94,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniRam(RamRepo repoRam) {
 		return (arg)-> {
 			if (repoRam.findAll().size()==0) {
-				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"Ram tope chula",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
-					new Ram("Kingston HyperX",imagen,"",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
-					new Ram("Kingston HyperX",imagen,"",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
-					new Ram("Kingston FURY",imagen,"",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
-					new Ram("Kingston FURY",imagen,"",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
-					new Ram("Kingston FURY",imagen,"",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
+				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
+					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
+					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
 			}
 
 		};

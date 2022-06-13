@@ -138,10 +138,10 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniGrafica(GraficaRepo repoGrafica) {
 		return (arg)-> {
 			if (repoGrafica.findAll().size()==0) {
-				repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Asus Dual OC EVO",imagen,"",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
-					new Grafica("Sapphire PULSE",imagen,"",6 , 490.90, "AMD", "RX 6600"),
-					new Grafica("PowerColor FIGHTER",imagen,"",6 , 480.90, "AMD", "RX 6600")));
+				repoGrafica.saveAll(Arrays.asList(new Grafica("MSI VENTUS 3X OC",imagen,"RTX.  IT’S ON. Disfruta de los mayores éxitos de ventas de hoy como nunca antes con la fidelidad visual del trazado de rayos en tiempo real y el rendimiento definitivo de DLSS con tecnología de IA.",6 , 880.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Asus Dual OC EVO",imagen,"Al ofrecer la última experiencia de juego NVIDIA Turing ? en su forma más pura, el ASUS Dual GeForce® RTX 2080 SUPER ? EVO V2 combina el rendimiento y la simplicidad como ningún otro. Aprovechando las tecnologías de enfriamiento avanzadas derivadas de las tarjetas gráficas emblemáticas, la Dual opta por la sustancia sobre el estilo, la elección perfecta para una construcción bien equilibrada. Abróchate el cinturón y disfruta de la destreza de los juegos de vanguardia.",6 , 910.70, "Nvidia", "RTX 3070 Ti"),
+					new Grafica("Sapphire PULSE",imagen,"Las tarjetas gráficas AMD Radeon RX 6600 cuentan con tecnologías de diseño e ingeniería líderes en su clase para ofrecer las velocidades de cuadro ultra altas que exigen las pantallas de alta frecuencia de actualización más recientes.",6 , 490.90, "AMD", "RX 6600"),
+					new Grafica("PowerColor FIGHTER",imagen,"Presentamos las tarjetas gráficas AMD Radeon ™ RX 6000 Series, con la revolucionaria arquitectura AMD RDNA ™ 2, diseñada para brindar un rendimiento ultra alto, una resolución ultra alta y juegos visualmente impresionantes para todos. ",6 , 480.90, "AMD", "RX 6600")));
 			}
 
 		};

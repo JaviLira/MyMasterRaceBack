@@ -97,9 +97,9 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 				repoRam.saveAll(Arrays.asList(new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 41.90, "DDR4", "DIMM", 8, "1x8"),
 					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 62.90, "DDR4", "DIMM", 8, "2x8"),
 					new Ram("Kingston HyperX",imagen,"La memoria HyperX de Kingston, diseñada y probada para ofrecer un rendimiento extremo, soporta sin dificultad las demandas más exigentes de cualquier profesional creativo o aficionado a los juegos electrónicos o a la informática de PC.",6, 100.90, "DDR4", "DIMM", 8, "4x8"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
-					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 60.90,  "DDR4", "DIMM", 16, "1x16"),
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 99.90,  "DDR4", "DIMM", 16, "2x16"),
+					new Ram("Kingston FURY",imagen,"La memoria para PC FURY Beast DDR4 de Kingston ofrece un potente aumento de rendimiento para juegos, edición de vídeo y renderización con velocidades de hasta 3733 MHz.",6, 140.23,  "DDR4", "DIMM", 16, "4x16")));
 			}
 
 		};
@@ -109,11 +109,11 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniDisco(DiscoRepo repoDisco) {
 		return (arg)-> {
 			if (repoDisco.findAll().size()==0) {
-				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
-					new Disco("Seagate BarraCuda",imagen,"",6, 60.65, "HDD", 2000,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 42.32, "SSD", 480,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 80.90, "SSD", 1000,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 140.60, "SSD", 2000,"sata3")));
+				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 45.65, "HDD", 1000,"sata3"),
+					new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 60.65, "HDD", 2000,"sata3"),
+					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 42.32, "SSD", 480,"sata3"),
+					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 80.90, "SSD", 1000,"sata3"),
+					new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 140.60, "SSD", 2000,"sata3")));
 			}
 
 		};

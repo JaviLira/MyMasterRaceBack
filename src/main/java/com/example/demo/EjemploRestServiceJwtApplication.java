@@ -109,11 +109,11 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniDisco(DiscoRepo repoDisco) {
 		return (arg)-> {
 			if (repoDisco.findAll().size()==0) {
-				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"",6, 45.65, "HDD", 1000,"sata3"),
-					new Disco("Seagate BarraCuda",imagen,"",6, 60.65, "HDD", 2000,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 42.32, "SSD", 480,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 80.90, "SSD", 1000,"sata3"),
-					new Disco("Kingston A400",imagen,"",6, 140.60, "SSD", 2000,"sata3")));
+				repoDisco.saveAll(Arrays.asList(new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 45.65, "HDD", 1000,"sata3"),
+						new Disco("Seagate BarraCuda",imagen,"Su fiabilidad inquebrantable está basada en más de 20 años de innovación BarraCuda.",6, 60.65, "HDD", 2000,"sata3"),
+						new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 42.32, "SSD", 480,"sata3"),
+						new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 80.90, "SSD", 1000,"sata3"),
+						new Disco("Kingston A400",imagen,"La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.",6, 140.60, "SSD", 2000,"sata3")));
 			}
 
 		};

@@ -76,7 +76,7 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 							new User("juan", "juan@gmail.com", "C/juan Nº30 1ºA", "666444777", codificador.encode("juan"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("pepe", "pepe@gmail.com", "C/pepe", "222444777", codificador.encode("pepe"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("antonio", "antonio@gmail.com", "C/antonio", "222444777", codificador.encode("antonio"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
-							new User("angustin", "angustin@gmail.com", "C/agustin", "222444777", codificador.encode("angustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
+							new User("agustin", "agustin@gmail.com", "C/agustin", "222444777", codificador.encode("agustin"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("alba", "alba@gmail.com", "C/alba", "222444777", codificador.encode("alba"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("isa", "isa@gmail.com", "C/isa", "222444777", codificador.encode("isa"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),
 							new User("marrueco", "marrueco@gmail.com", "C/marruecos", "222444777", codificador.encode("marrueco"),"visa","756","8888666677774444","Francisco Javier Lira Sánchez", "03/25"),

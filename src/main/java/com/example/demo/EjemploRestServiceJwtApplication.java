@@ -151,12 +151,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniProcesador(ProcesadorRepo repoProcesador) {
 		return (arg)-> {
 			if (repoProcesador.findAll().size()==0) {
-				repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"Cuando cuentas con la arquitectura de procesadores más avanzada del mundo para jugadores y creadores de contenido, las posibilidades son infinitas. Sin lugar a dudas, los procesadores para computadoras de escritorio AMD Ryzen™ serie 5000 elevan el nivel de expectativa para jugadores y artistas por igual.",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
-						new Procesador("AMD Ryzen 7 5700G",imagen,"Cuando cuentas con la arquitectura de procesadores más avanzada del mundo para jugadores y creadores de contenido, las posibilidades son infinitas. Sin lugar a dudas, los procesadores para computadoras de escritorio AMD Ryzen™ serie 5000 elevan el nivel de expectativa para jugadores y artistas por igual.",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
-						new Procesador("Intel Core i7-12700K",imagen,"Procesador de escritorio desbloqueado Intel® Core ™ i7-12700K de 12.ª generación. Con Intel® Turbo Boost Max Technology 3.0 y compatibilidad con PCIe Gen 4.0, los procesadores de escritorio Intel® Core ™ desbloqueados de 12.ª generación están optimizados para jugadores entusiastas y creadores serios y ayudan a ofrecer overclocking de alto rendimiento para un impulso adicional.",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
-						new Procesador("Intel Core i5-12400F",imagen,"Procesadores Intel® Core™ de 12ª generación: una generación como ninguna otra antes. Con una nueva arquitectura híbrida de rendimiento sin precedentes, los procesadores Intel® Core™ de 12ª generación ofrecen una combinación única de núcleos de rendimiento y eficiencia (núcleo P y núcleo E). Y eso significa gozar de rendimiento en el mundo real, un resultado escalado intuitivamente para adaptarse a cualquier cosa que estés haciendo.",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
-						new Procesador("Intel Core i7-11700K",imagen,"Procesador de escritorio desbloqueado Intel® Core ™ i7-11700K de 11.ª generación. Con Intel® Turbo Boost Max Technology 3.0 y compatibilidad con PCIe Gen 4.0, los procesadores de escritorio Intel® Core ™ desbloqueados de 11ª generación están optimizados para jugadores entusiastas y creadores serios y ayudan a ofrecer overclocking de alto rendimiento para un impulso adicional.",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
-						new Procesador("Intel Core 5-10400",imagen,"Los nuevos procesadores Intel® Core™ de 10? generación ofrecen mejoras de rendimiento notables para conseguir una productividad mejorada y un entretenimiento impresionante, incluyendo hasta 5,3 GHz, Intel® Wi-Fi 6 (Gig+), tecnología Thunderbolt™ 3, HDR 4K, optimización de sistema inteligente y mucho más.",6 , 160.80, "Intel", "Core 5-10400", "1200")));
+				repoProcesador.saveAll(Arrays.asList(new Procesador("AMD Ryzen 5 5600G",imagen,"",6 , 237.60, "AMD", "Ryzen 5 5600G", "AM4"),
+					new Procesador("AMD Ryzen 7 5700G",imagen,"",6 , 328.90, "AMD", "Ryzen 7 5700G", "AM4"),
+					new Procesador("Intel Core i7-12700K",imagen,"",6 , 440.60, "Intel", "Core i7-12700K", "1700"),
+					new Procesador("Intel Core i5-12400F",imagen,"",6 , 187.60, "Intel", "Core i5-12400F", "1700"),
+					new Procesador("Intel Core i7-11700K",imagen,"",6 , 343.60, "Intel", "Core i7-11700K", "1200"),
+					new Procesador("Intel Core 5-10400",imagen,"",6 , 160.80, "Intel", "Core 5-10400", "1200")));
 			}
 
 		};

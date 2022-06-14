@@ -123,12 +123,12 @@ public class EjemploRestServiceJwtApplication extends SpringBootServletInitializ
 	CommandLineRunner iniFuente(FuenteRepo repoFuente) {
 		return (arg)-> {
 			if (repoFuente.findAll().size()==0) {
-				repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"",6, 75.90, "80 Plus Gold", 650),
-					new Fuente("Nfortec Sagitta",imagen,"",6, 89.90, "80 Plus Silver",850),
-					new Fuente("Nfortec Sagitta",imagen,"",6, 105.90, "80 Plus Gold", 1050),
-					new Fuente("Corsair RM750",imagen,"",6, 90.90, "80 Plus Gold", 750),
-					new Fuente("Corsair RM850",imagen,"",6, 120.90, "80 Plus Gold", 850),
-					new Fuente("Be Quiet! Dark Power Pro 12",imagen,"",6 , 500.90, "80 Plus Titanium", 1500)));
+				repoFuente.saveAll(Arrays.asList(new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 75.90, "80 Plus Gold", 650),
+						new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 89.90, "80 Plus Silver",850),
+						new Fuente("Nfortec Sagitta",imagen,"Os presentamos Nfortec Sagitta, la nueva fuente de alimentación modular RGB con certificación 80 Plus Gold, disponible en diferentes niveles, desde el modelo de 650w hasta el más potente de 1050w.",6, 105.90, "80 Plus Gold", 1050),
+						new Fuente("Corsair RM750",imagen,"Las fuentes de alimentación totalmente modulares CORSAIR RM Series proporcionan una potencia eficiente con certificación 80 PLUS Gold a su PC, con un funcionamiento prácticamente silencioso.",6, 90.90, "80 Plus Gold", 750),
+						new Fuente("Corsair RM850",imagen,"Las fuentes de alimentación totalmente modulares CORSAIR RM Series proporcionan una potencia eficiente con certificación 80 PLUS Gold a su PC, con un funcionamiento prácticamente silencioso.",6, 120.90, "80 Plus Gold", 850),
+						new Fuente("Be Quiet! Dark Power Pro 12",imagen,"La be quiet! Dark Power Pro 12 de 1500W  con eficiencia 80 PLUS® Titanium y rendimiento de máxima categoría gracias al control totalmente digital y el concepto de ventilador sin armazón.",6 , 500.90, "80 Plus Titanium", 1500)));
 			}
 
 		};

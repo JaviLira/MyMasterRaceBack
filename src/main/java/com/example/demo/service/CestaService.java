@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.error.CantidadExeption;
+import com.example.demo.error.CantidadNegativaExeption;
 import com.example.demo.model.AbsArticulo;
 import com.example.demo.model.Cesta;
 import com.example.demo.model.User;
@@ -149,6 +151,12 @@ public class CestaService {
 		}
 		
 		if (existe) {
+			if (cestaBase.getArticulo().getCantidad()<=cesta.getCantidad()) {
+				throw new CantidadExeption();
+			}
+			if (cesta.getCantidad()<0) {
+				throw new CantidadNegativaExeption();
+			}
 			cestaBase.setCantidad(cesta.getCantidad());
 			repoCesta.save(cestaBase);
 			return cestaBase;

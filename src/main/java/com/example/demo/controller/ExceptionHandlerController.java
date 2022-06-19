@@ -12,6 +12,7 @@ import com.example.demo.error.EstadoExeption;
 import com.example.demo.error.ArticuloIdNotFoundExeption;
 import com.example.demo.error.ComponenteNoActivoNotFoundExeption;
 import com.example.demo.error.ComponenteNotFoundExeption;
+import com.example.demo.error.CantidadNegativaExeption;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -73,6 +74,15 @@ public class ExceptionHandlerController {
     
     @ExceptionHandler(ComponenteNoActivoNotFoundExeption.class)
     public ResponseEntity<ApiError> ComponenteNoActivoNotFoundExeption(ComponenteNoActivoNotFoundExeption ex) throws Exception {
+    	ApiError e = new ApiError();
+    	e.setEstado(HttpStatus.BAD_REQUEST);
+    	e.setMensaje(ex.getMessage());
+    	e.setFecha(LocalDateTime.now());	
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
+    
+    @ExceptionHandler(CantidadNegativaExeption.class)
+    public ResponseEntity<ApiError> CantidadNegativaExeption(CantidadNegativaExeption ex) throws Exception {
     	ApiError e = new ApiError();
     	e.setEstado(HttpStatus.BAD_REQUEST);
     	e.setMensaje(ex.getMessage());
